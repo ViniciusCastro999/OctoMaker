@@ -11,8 +11,9 @@ Bio:
 ```
 Sites profissionais que trazem clientes
 ✦ Bonitos, rápidos e com WhatsApp
+✦ Aparecem no Google
 ✦ Prontos em poucos dias
-👇 Veja os modelos e peça seu orçamento
+👇 Modelos e orçamento
 ```
 
 ## Posts
