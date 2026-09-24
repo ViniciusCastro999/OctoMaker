@@ -20,7 +20,7 @@ Cada pasta tem as imagens e o arquivo legenda.txt. Publique na ordem dos número
 
 | Pasta | Formato | Observação |
 |---|---|---|
-| 01 - Apresentacao | Carrossel com 7 slides | Fixe no topo do perfil. Suba os slides na ordem 1 a 7 |
+| 01 - Apresentacao | Carrossel com 6 slides | Fixe no topo do perfil. Suba os slides na ordem 1 a 6 |
 | 02 - Reels moeda | Reels (vídeo em loop) | Marque "compartilhar também no feed" e use uma música instrumental |
 | 03 a 07 | Post único | Um a cada 2 ou 3 dias |
 
