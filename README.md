@@ -1,6 +1,6 @@
 # OctoMaker
 
-Sites profissionais, rápidos e com WhatsApp integrado.
+Criação de sites profissionais em Pouso Alegre, MG. Rápidos e com WhatsApp integrado.
 
 ## Conteúdo
 
