@@ -34,6 +34,9 @@
   .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); box-shadow: none; }
   .btn.ghost:hover { border-color: var(--blue); box-shadow: 0 0 24px #3d7bff44; }
   .btn i { font-size: 20px; }
+  .navbtns { display: flex; gap: 10px; }
+  .btn.ig:hover { border-color: #e1306c; box-shadow: 0 0 24px #e1306c55; }
+  .btn.ig i { background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); -webkit-background-clip: text; background-clip: text; color: transparent; }
   /* hero */
   .hero { padding: 80px 0 70px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 40px; align-items: center; min-height: calc(100vh - 76px); }
   .eyebrow { font: 600 14px var(--mono); color: var(--yellow); display: inline-flex; align-items: center; gap: 8px; }
@@ -113,6 +116,7 @@
     .hero, .projects { grid-template-columns: 1fr; } .hero { min-height: auto; } .coinwrap .om-coin { transform: scale(.72); }
     .steps { grid-template-columns: 1fr 1fr; } .steps::before { display: none; }
     .brand img { height: 38px; } .brand { font-size: 18px; }
+    .navbtns .btn span { display: none; } .navbtns .btn { padding: 12px 14px; }
   }
 </style>
 </head>
@@ -121,7 +125,10 @@
 
 <nav id="nav"><div class="wrap">
   <a href="#" class="brand"><img src="assets/octomaker-moeda-frente.png" alt=""><span>octo<b>maker</b>_</span></a>
-  <a class="btn ghost" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site."><i class="ph-fill ph-whatsapp-logo" style="color:#25D366"></i>WhatsApp</a>
+  <div class="navbtns">
+    <a class="btn ghost ig" href="https://instagram.com/octomaker_" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph-bold ph-instagram-logo"></i><span>Instagram</span></a>
+    <a class="btn ghost" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site."><i class="ph-fill ph-whatsapp-logo" style="color:#25D366"></i><span>WhatsApp</span></a>
+  </div>
 </div></nav>
 
 <div class="wrap">
@@ -249,11 +256,14 @@
       <div class="om-coin" data-size="130" data-mode="spin" style="margin:0 auto 26px"></div>
       <h2 style="margin-top:6px">Vamos fazer o seu?</h2>
       <p>Conte sobre o seu negócio pelo WhatsApp. Respondemos com uma proposta de preço e prazo.</p>
-      <a class="btn" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site."><i class="ph-fill ph-whatsapp-logo"></i>Falar no WhatsApp</a>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site."><i class="ph-fill ph-whatsapp-logo"></i>Falar no WhatsApp</a>
+        <a class="btn ghost ig" href="https://instagram.com/octomaker_" target="_blank" rel="noopener"><i class="ph-bold ph-instagram-logo"></i>Seguir no Instagram</a>
+      </div>
     </div>
   </section>
 
-  <footer>octomaker_ · sites &amp; apps sob medida</footer>
+  <footer>octomaker_ · sites &amp; apps sob medida · <a href="https://instagram.com/octomaker_" target="_blank" rel="noopener" style="color:var(--text)">@octomaker_</a></footer>
 </div>
 
 <a class="wa" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site." aria-label="WhatsApp"><i class="ph-fill ph-whatsapp-logo"></i></a>

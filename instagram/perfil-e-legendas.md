@@ -2,24 +2,36 @@
 
 ## Perfil
 
-**Nome de usuário:** @octomaker.dev
-Alternativas, caso esteja ocupado: @octomaker.sites · @octomakerbr · @octomaker.web
+**Nome de usuário:** @octomaker_
 
-**Nome (aparece em negrito e ajuda na busca):**
+**Nome (aparece em negrito e entra na busca do Instagram):**
 OctoMaker · Criação de Sites
 
-**Bio (147 caracteres):**
+**Bio (142 caracteres):**
 ```
-Sites profissionais para pequenas empresas
-Nutricionistas, psicólogos, consultórios e lojas
-Com WhatsApp e agendamento online
-Peça seu orçamento 👇
+Sites profissionais para pequenos negócios
+✦ Nutris, psicólogos, lojas e estúdios
+✦ Pronto em poucos dias, com WhatsApp
+👇 Portfólio e orçamento
 ```
 
-**Link:** https://wa.me/5535984220874?text=Ol%C3%A1%21%20Vi%20o%20Instagram%20da%20OctoMaker%20e%20quero%20um%20or%C3%A7amento%20para%20o%20meu%20site.
-(abre o seu WhatsApp com a mensagem já escrita. Quando o portfólio estiver publicado, dá para usar o link dele.)
+Outras opções, se preferir:
+```
+Seu negócio com um site bonito e rápido
+✦ Aparece no Google e recebe clientes no WhatsApp
+👇 Veja os modelos e peça seu orçamento
+```
+```
+Criamos sites para pequenos negócios
+✦ Consultórios, lojas e estúdios
+✦ Do orçamento ao site no ar, sem complicação
+👇 Portfólio
+```
 
-**Foto de perfil:** `marca/logo/octomaker-icone.png` (o quadrado azul com o polvo)
+**Link:** https://octomaker.com.br
+(o portfólio já tem botões de WhatsApp com mensagem pronta)
+
+**Foto de perfil:** `instagram/perfil-instagram.png` (1080 x 1080, feita para o corte redondo do Instagram)
 
 **Categoria:** Serviço de design de sites
 
@@ -43,7 +55,7 @@ Criamos sites profissionais para pequenas empresas: nutricionistas, psicólogos,
 
 Nosso trabalho é simples: você conta como funciona o seu negócio e a gente entrega um site bonito, rápido e fácil de usar, com botão de WhatsApp e tudo que seu cliente precisa para te encontrar.
 
-Quer um site para o seu negócio? Chama no direct ou no link da bio.
+Quer um site para o seu negócio? Chama no direct ou acesse octomaker.com.br.
 
 #criacaodesites #sitesprofissionais #pequenasempresas #empreendedorismo #marketingdigital #sitesparaempresas
 ```
@@ -114,6 +126,21 @@ Seu site tem tudo isso? ✅
 Se faltou algum item, seu site pode estar perdendo clientes. A gente pode ajudar. Manda um direct.
 
 #checklist #sitesprofissionais #dicasdemarketing #psicologos #nutricionistas #lojavirtual
+```
+
+### Post 6 · Vídeo da moeda (Reels)
+Arquivo: `post-6-moeda.mp4` (6 segundos, 1080 x 1350, em loop)
+
+Publique como Reels e marque "Compartilhar também no feed". Use uma música instrumental dos áudios em alta.
+
+```
+Esse é o nosso símbolo 🐙
+
+Um polvo tem oito braços e faz várias coisas ao mesmo tempo. Aqui é igual: design, site, WhatsApp, Google e suporte num lugar só.
+
+Quer um site assim para o seu negócio? Acesse octomaker.com.br ou chama no direct.
+
+#octomaker #criacaodesites #sitesprofissionais #pequenosnegocios #identidadevisual #branding
 ```
 
 ---

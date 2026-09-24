@@ -1,5 +1,5 @@
 // OctoMaker 3D coin: <div class="om-coin" data-size="360" data-mode="drag|spin"></div>
-// drag: hold and spin horizontally with inertia, then it settles on a face. spin: turns slowly by itself.
+// drag: hold and spin horizontally with inertia, then it settles on a face. spin: turns slowly by itself. static: angle set via el.omSetAngle().
 (function () {
   const base = document.currentScript.src.replace(/octomaker-coin\.js.*$/, '');
   const INSET = 6.41, RADIUS = 3.94, LAYERS = 16;
@@ -49,6 +49,8 @@
       el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
     }
 
+    el.omSetAngle = a => paint(a);   // used to render videos frame by frame
+    if (mode === 'static') { paint(0); return; }
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !running) { running = true; requestAnimationFrame(loop); } }).observe(el);
     function loop(now) {
       if (!visible) { running = false; return; }
