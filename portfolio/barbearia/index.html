@@ -76,7 +76,10 @@
   .gallery figure img { width: 120%; height: 100%; object-fit: cover; }
   .gallery figcaption { position: absolute; left: 24px; bottom: 20px; font-family: "Bebas Neue"; font-size: 40px; text-shadow: 0 2px 20px #000; }
   .split2 { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
-  .frame { aspect-ratio: 4/5; border-radius: 300px 300px 16px 16px; overflow: hidden; position: relative; }
+  .framewrap { position: relative; }
+  .framewrap::before { content: ""; position: absolute; inset: 0; border: 1.5px solid var(--gold); transform: translate(22px, 22px); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .framewrap:hover::before { transform: translate(-14px, -14px); }
+  .frame { aspect-ratio: 4/5; overflow: hidden; position: relative; }
   .frame img { width: 100%; height: 125%; object-fit: cover; position: absolute; top: -12%; }
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
   .stats b { font-family: "Bebas Neue"; font-size: 76px; color: var(--gold); font-weight: 400; display: block; line-height: 1; }
@@ -167,7 +170,7 @@
 </section>
 
 <section id="casa"><div class="wrap split2">
-  <div class="frame clip"><img class="par" src="https://images.unsplash.com/photo-1610475680335-dafab5475150?auto=format&fit=crop&w=1000&q=80" alt="Cadeiras da barbearia"></div>
+  <div class="framewrap"><div class="frame clip"><img class="par" src="https://images.unsplash.com/photo-1610475680335-dafab5475150?auto=format&fit=crop&w=1000&q=80" alt="Cadeiras da barbearia"></div></div>
   <div>
     <p class="label reveal"><i data-lucide="store"></i>A casa</p>
     <h2 class="bebas title"><span class="line"><span>Desde</span></span><span class="line"><span>2012</span></span></h2>

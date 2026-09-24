@@ -9,13 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
+<script defer src="assets/octomaker-coin.js"></script>
 <style>
   :root { --g900: #0e1015; --g800: #161a22; --line: #2b3140; --blue: #3d7bff; --yellow: #ffd000; --text: #eef2f8; --muted: #8d97ab; --mono: "JetBrains Mono", Menlo, monospace; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--g900); color: var(--text); font-family: Inter, sans-serif; overflow-x: hidden; }
   body::before { content: ""; position: fixed; inset: 0; background-image: radial-gradient(#5a647833 1.5px, transparent 1.5px); background-size: 32px 32px; pointer-events: none; }
-  .spot { position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(#3d7bff22, transparent 65%); pointer-events: none; left: 0; top: 0; transform: translate(-50%, -50%); z-index: 0; transition: opacity .3s; }
+  .spot { position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(#3d7bff22, transparent 65%); pointer-events: none; left: -300px; top: -300px; z-index: 0; will-change: transform; }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
   nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: #0e1015b3; border-bottom: 1px solid transparent; transition: border-color .4s; }
@@ -44,9 +45,7 @@
   .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
   .in-up { opacity: 0; transform: translateY(30px); animation: inup .9s cubic-bezier(.2,.8,.2,1) forwards; }
   @keyframes inup { to { opacity: 1; transform: none; } }
-  .logo3d { perspective: 900px; }
-  .logo3d img { width: 100%; max-width: 420px; display: block; margin: auto; transition: transform .2s ease-out; animation: floaty 6s ease-in-out infinite; filter: drop-shadow(0 30px 60px #3d7bff33); }
-  @keyframes floaty { 50% { translate: 0 -16px; } }
+  .coinwrap { display: grid; place-items: center; padding-bottom: 40px; }
   /* marquee */
   .stack { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 22px 0; position: relative; z-index: 1; }
   .stack .track { display: flex; width: max-content; gap: 56px; animation: marquee 30s linear infinite; }
@@ -62,8 +61,9 @@
   .proj { perspective: 1200px; }
   .proj .card { background: var(--g800); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; transition: transform .25s ease-out, border-color .3s, box-shadow .3s; transform-style: preserve-3d; height: 100%; display: flex; flex-direction: column; }
   .proj:hover .card { border-color: var(--blue); box-shadow: 0 30px 80px #3d7bff2a; }
-  .shot { aspect-ratio: 16/10; overflow: hidden; position: relative; border-bottom: 1px solid var(--line); background-size: 100% auto; background-position: top center; background-repeat: no-repeat; transition: background-position 5s cubic-bezier(.45,0,.55,1); }
-  .proj:hover .shot { background-position: bottom center; }
+  .shot { aspect-ratio: 16/10; overflow: hidden; position: relative; border-bottom: 1px solid var(--line); background: #0e1015; }
+  .shot .page { position: absolute; left: 0; top: 0; width: 100%; height: auto; transform: translateY(0); transition: transform 5s cubic-bezier(.45,0,.55,1); will-change: transform; }
+  .proj:hover .shot .page { transform: translateY(var(--end, 0)); }
   .bar { position: absolute; top: 0; left: 0; right: 0; height: 30px; background: #0e1015d9; backdrop-filter: blur(6px); display: flex; align-items: center; gap: 6px; padding: 0 12px; font: 11px var(--mono); color: var(--muted); }
   .bar i { width: 9px; height: 9px; border-radius: 50%; background: #3a4152; font-style: normal; }
   .bar i:nth-child(1) { background: #ff5f57; } .bar i:nth-child(2) { background: #febc2e; } .bar i:nth-child(3) { background: #28c840; }
@@ -110,7 +110,7 @@
   @keyframes ping { to { transform: scale(1.7); opacity: 0; } }
   .wa:hover { transform: scale(1.1) rotate(-8deg); }
   @media (max-width: 860px) {
-    .hero, .projects { grid-template-columns: 1fr; } .hero { min-height: auto; } .logo3d img { max-width: 260px; }
+    .hero, .projects { grid-template-columns: 1fr; } .hero { min-height: auto; } .coinwrap .om-coin { transform: scale(.72); }
     .steps { grid-template-columns: 1fr 1fr; } .steps::before { display: none; }
     .brand img { height: 38px; } .brand { font-size: 18px; }
   }
@@ -120,7 +120,7 @@
 <div class="spot"></div>
 
 <nav id="nav"><div class="wrap">
-  <a href="#" class="brand"><img src="assets/octomaker-simbolo-animado.svg" alt=""><span>octo<b>maker</b>_</span></a>
+  <a href="#" class="brand"><img src="assets/octomaker-moeda-frente.png" alt=""><span>octo<b>maker</b>_</span></a>
   <a class="btn ghost" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site."><i class="ph-fill ph-whatsapp-logo" style="color:#25D366"></i>WhatsApp</a>
 </div></nav>
 
@@ -135,7 +135,7 @@
         <a class="btn ghost" href="#projetos"><i class="ph ph-squares-four"></i>Ver projetos</a>
       </div>
     </div>
-    <div class="logo3d in-up" style="animation-delay:.3s"><img id="logo3d" src="assets/octomaker-simbolo-animado.svg" alt=""></div>
+    <div class="coinwrap in-up" style="animation-delay:.3s"><div class="om-coin" data-size="380" data-mode="drag"></div></div>
   </header>
 </div>
 
@@ -146,6 +146,10 @@
     <span><img src="https://cdn.simpleicons.org/bootstrap/8d97ab" alt="">Bootstrap</span>
     <span><img src="https://cdn.simpleicons.org/vuedotjs/8d97ab" alt="">Vue</span>
     <span><img src="https://cdn.simpleicons.org/greensock/8d97ab" alt="">GSAP</span>
+    <span><img src="https://cdn.simpleicons.org/react/8d97ab" alt="">React</span>
+    <span><img src="https://cdn.simpleicons.org/framer/8d97ab" alt="">Framer Motion</span>
+    <span><img src="https://cdn.simpleicons.org/swiper/8d97ab" alt="">Swiper</span>
+    <span><img src="https://cdn.simpleicons.org/daisyui/8d97ab" alt="">DaisyUI</span>
     <span><img src="https://cdn.simpleicons.org/javascript/8d97ab" alt="">JavaScript</span>
     <span><img src="https://cdn.simpleicons.org/html5/8d97ab" alt="">HTML</span>
     <span><img src="https://cdn.simpleicons.org/css/8d97ab" alt="">CSS</span>
@@ -155,34 +159,62 @@
 <div class="wrap">
   <section id="projetos">
     <div class="eyebrow reveal"><i class="ph-bold ph-browsers"></i>// projetos de demonstração</div>
-    <h2 class="reveal">4 negócios, 4 estilos</h2>
+    <h2 class="reveal">8 negócios, 8 estilos</h2>
     <div class="projects">
       <a class="proj reveal" href="nutricionista/"><div class="card">
-        <div class="shot" style="background-image:url(thumbs/nutricionista-full.jpg)"><div class="bar"><i></i><i></i><i></i><em>liviacampos.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="shot"><img class="page" src="thumbs/nutricionista-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>liviacampos.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
         <div class="info"><span class="kind"><i class="ph-fill ph-leaf"></i>Nutricionista</span><h3>Lívia Campos</h3>
           <p>Visual leve e acolhedor. Preços que mudam entre presencial e online, receitas, depoimentos automáticos e perguntas frequentes.</p>
           <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/tailwindcss/8fb0ff" alt="">Tailwind CSS</span><span class="tag fw"><img src="https://cdn.simpleicons.org/alpinedotjs/8fb0ff" alt="">Alpine.js</span><span class="tag">Orgânico</span></div>
           <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
       </div></a>
       <a class="proj reveal" href="psicologa/" style="transition-delay:.12s"><div class="card">
-        <div class="shot" style="background-image:url(thumbs/psicologa-full.jpg)"><div class="bar"><i></i><i></i><i></i><em>anamoura.psi.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="shot"><img class="page" src="thumbs/psicologa-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>anamoura.psi.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
         <div class="info"><span class="kind"><i class="ph-fill ph-brain"></i>Psicóloga</span><h3>Ana Moura</h3>
           <p>Estilo editorial e calmo. Rolagem suave, efeito parallax e agendamento com escolha de horário.</p>
           <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/bootstrap/8fb0ff" alt="">Bootstrap 5</span><span class="tag fw">AOS</span><span class="tag fw">Lenis</span><span class="tag">Editorial</span></div>
           <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
       </div></a>
       <a class="proj reveal" href="loja/"><div class="card">
-        <div class="shot" style="background-image:url(thumbs/loja-full.jpg)"><div class="bar"><i></i><i></i><i></i><em>ateliebarro.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="shot"><img class="page" src="thumbs/loja-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>ateliebarro.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
         <div class="info"><span class="kind"><i class="ph-fill ph-storefront"></i>Loja</span><h3>Ateliê Barro</h3>
           <p>Loja divertida e colorida. Filtro de produtos, produto que voa para a sacola e pedido enviado pelo WhatsApp.</p>
           <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/vuedotjs/8fb0ff" alt="">Vue 3</span><span class="tag">Neo brutalismo</span><span class="tag">Catálogo</span></div>
           <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
       </div></a>
       <a class="proj reveal" href="barbearia/" style="transition-delay:.12s"><div class="card">
-        <div class="shot" style="background-image:url(thumbs/barbearia-full.jpg)"><div class="bar"><i></i><i></i><i></i><em>navalhabarbearia.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="shot"><img class="page" src="thumbs/barbearia-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>navalhabarbearia.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
         <div class="info"><span class="kind"><i class="ph-fill ph-scissors"></i>Barbearia</span><h3>Navalha</h3>
           <p>Escuro e elegante. Tela de abertura, galeria horizontal, foto que segue o cursor e botões magnéticos.</p>
           <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/greensock/8fb0ff" alt="">GSAP</span><span class="tag fw">ScrollTrigger</span><span class="tag fw">Lenis</span><span class="tag">Premium</span></div>
+          <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
+      </div></a>
+      <a class="proj reveal" href="sebo/"><div class="card">
+        <div class="shot"><img class="page" src="thumbs/sebo-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>tracasebo.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="info"><span class="kind"><i class="ph-fill ph-books"></i>Sebo de livros</span><h3>Traça</h3>
+          <p>Clima de livraria antiga. Busca no catálogo, filtro animado e reserva de livros enviada pelo WhatsApp.</p>
+          <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/react/8fb0ff" alt="">React</span><span class="tag fw"><img src="https://cdn.simpleicons.org/framer/8fb0ff" alt="">Framer Motion</span><span class="tag">Vintage</span></div>
+          <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
+      </div></a>
+      <a class="proj reveal" href="fotografo/" style="transition-delay:.12s"><div class="card">
+        <div class="shot"><img class="page" src="thumbs/fotografo-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>rafaelnogueira.foto</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="info"><span class="kind"><i class="ph-fill ph-camera"></i>Fotógrafo</span><h3>Rafael Nogueira</h3>
+          <p>Editorial e minimalista. Carrossel em tela cheia, galeria filtrável com zoom e reserva de data.</p>
+          <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/swiper/8fb0ff" alt="">Swiper</span><span class="tag fw">PhotoSwipe</span><span class="tag fw">Motion</span><span class="tag">Editorial</span></div>
+          <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
+      </div></a>
+      <a class="proj reveal" href="sobrancelhas/"><div class="card">
+        <div class="shot"><img class="page" src="thumbs/sobrancelhas-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>arcobrow.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="info"><span class="kind"><i class="ph-fill ph-sparkle"></i>Sobrancelhas e visagismo</span><h3>Arco Brow</h3>
+          <p>Delicado e elegante. Antes e depois, guia de formato do rosto e agendamento em 3 passos.</p>
+          <div class="tags"><span class="tag fw"><img src="https://cdn.simpleicons.org/tailwindcss/8fb0ff" alt="">Tailwind CSS</span><span class="tag fw"><img src="https://cdn.simpleicons.org/daisyui/8fb0ff" alt="">DaisyUI</span><span class="tag">Beleza</span></div>
+          <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
+      </div></a>
+      <a class="proj reveal" href="tatuador/" style="transition-delay:.12s"><div class="card">
+        <div class="shot"><img class="page" src="thumbs/tatuador-full.jpg" alt="" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>tintanegra.tattoo</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+        <div class="info"><span class="kind"><i class="ph-fill ph-drop"></i>Tatuador</span><h3>Tinta Negra</h3>
+          <p>Escuro e intenso. Tela de abertura, carrossel arrastável e orçamento com estimativa de preço.</p>
+          <div class="tags"><span class="tag fw">Anime.js</span><span class="tag fw">Embla</span><span class="tag">Grunge</span></div>
           <span class="open">Abrir site <i class="ph-bold ph-arrow-up-right"></i></span></div>
       </div></a>
     </div>
@@ -214,7 +246,7 @@
 
   <section>
     <div class="cta reveal">
-      <img src="assets/octomaker-simbolo-animado.svg" alt="">
+      <div class="om-coin" data-size="130" data-mode="spin" style="margin:0 auto 26px"></div>
       <h2 style="margin-top:6px">Vamos fazer o seu?</h2>
       <p>Conte sobre o seu negócio pelo WhatsApp. Respondemos com uma proposta de preço e prazo.</p>
       <a class="btn" data-wa="Olá! Vi o portfólio da OctoMaker e quero um orçamento para o meu site."><i class="ph-fill ph-whatsapp-logo"></i>Falar no WhatsApp</a>
@@ -235,7 +267,7 @@
   for (let k = 0; k < 4; k++) track.appendChild(tpl.content.cloneNode(true));
 
   // typing effect
-  const words = ['nutricionistas', 'psicólogos', 'consultórios', 'pequenas lojas', 'barbearias', 'o seu negócio'];
+  const words = ['nutricionistas', 'psicólogos', 'fotógrafos', 'pequenas lojas', 'tatuadores', 'sebos', 'barbearias', 'o seu negócio'];
   const el = document.getElementById('typed'); let w = 0, i = words[0].length, del = true;
   (function type() {
     const word = words[w];
@@ -251,12 +283,11 @@
   new IntersectionObserver(([e]) => e.isIntersecting && document.getElementById('steps').style.setProperty('--p', 1), { threshold: .5 }).observe(document.getElementById('steps'));
 
   // spotlight + 3D logo follow the mouse
-  const spot = document.querySelector('.spot'), logo = document.getElementById('logo3d');
-  addEventListener('mousemove', e => {
-    spot.style.left = e.clientX + 'px'; spot.style.top = e.clientY + 'px';
-    const rx = (e.clientY / innerHeight - .5) * -14, ry = (e.clientX / innerWidth - .5) * 18;
-    logo.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-  });
+  const spot = document.querySelector('.spot'); let sx = 0, sy = 0, spotQueued = false;
+  addEventListener('mousemove', e => { sx = e.clientX; sy = e.clientY; if (!spotQueued) { spotQueued = true; requestAnimationFrame(() => { spot.style.transform = `translate3d(${sx}px, ${sy}px, 0)`; spotQueued = false; }); } }, { passive: true });
+
+  // how far each screenshot scrolls on hover
+  document.querySelectorAll('.shot .page').forEach(img => { const set = () => img.style.setProperty('--end', `-${img.offsetHeight - img.parentElement.offsetHeight}px`); img.complete ? set() : img.addEventListener('load', set); addEventListener('resize', set); });
 
   // 3D tilt on project cards
   document.querySelectorAll('.proj').forEach(p => {

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tinta Negra · Tattoo Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/embla-carousel@8.3.1/embla-carousel.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/embla-carousel-autoplay@8.3.1/embla-carousel-autoplay.umd.js"></script>
+<style>
+  :root { --bg: #0b0b0b; --panel: #151515; --line: #262626; --red: #e11d2e; --bone: #ede6dc; --muted: #8a847c; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body { background: var(--bg); color: var(--bone); font-family: "Space Mono", monospace; }
+  body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 200; opacity: .08;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); animation: grain .6s steps(3) infinite; }
+  @keyframes grain { 33% { transform: translate(-3%, 2%); } 66% { transform: translate(2%, -3%); } }
+  @media (pointer: fine) { body, a, button, label, input, select { cursor: none; } }
+  a { color: inherit; text-decoration: none; }
+  .anton { font-family: Anton, sans-serif; font-weight: 400; letter-spacing: .01em; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+  .dot, .ring { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 300; border-radius: 50%; }
+  .dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--red); }
+  .ring { width: 42px; height: 42px; margin: -21px 0 0 -21px; border: 1px solid var(--red); transition: width .3s, height .3s, margin .3s, background .3s; }
+  .ring.big { width: 80px; height: 80px; margin: -40px 0 0 -40px; background: #e11d2e22; }
+  @media (pointer: coarse) { .dot, .ring { display: none; } }
+  .loader { position: fixed; inset: 0; z-index: 250; background: var(--bg); display: grid; place-items: center; }
+  .loader h2 { font-family: Anton; font-size: clamp(60px, 12vw, 180px); overflow: hidden; line-height: 1; }
+  .loader h2 span { display: inline-block; }
+  .loader .bar { position: absolute; left: 0; bottom: 0; height: 6px; background: var(--red); width: 0; }
+  nav { position: fixed; inset: 0 0 auto; z-index: 60; mix-blend-mode: difference; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 84px; }
+  nav .logo { font: 26px Anton; letter-spacing: .06em; display: flex; align-items: center; gap: 10px; }
+  nav .links { display: flex; gap: 30px; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; }
+  nav .links a:hover { color: var(--red); }
+  .btn { display: inline-flex; align-items: center; gap: 12px; background: var(--red); color: #fff; padding: 18px 30px; font: 700 14px "Space Mono"; text-transform: uppercase; letter-spacing: .1em; border: 0; position: relative; overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% 70%, 92% 100%, 0 100%); }
+  .btn::before { content: ""; position: absolute; inset: 0; background: var(--bone); transform: translateX(-101%); transition: transform .45s cubic-bezier(.7,0,.2,1); }
+  .btn:hover::before { transform: none; }
+  .btn:hover { color: #111; }
+  .btn > * { position: relative; }
+  .hero { height: 100vh; min-height: 680px; position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+  .hero .bg { position: absolute; inset: 0; background: url(https://images.unsplash.com/photo-1552627019-947c3789ffb5?auto=format&fit=crop&w=2000&q=80) center/cover; filter: grayscale(.4) contrast(1.1); transform: scale(1.2); }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, #0b0b0b99, #0b0b0b22 40%, #0b0b0b 96%), radial-gradient(circle at 80% 30%, #e11d2e44, transparent 60%); }
+  .hero .wrap { position: relative; z-index: 2; width: 100%; padding-bottom: 60px; }
+  .hero h1 { font-family: Anton; font-size: clamp(90px, 17vw, 270px); line-height: .82; text-transform: uppercase; }
+  .hero h1 .ln { display: block; overflow: hidden; }
+  .hero h1 .ch { display: inline-block; }
+  .hero h1 .red { color: var(--red); }
+  .hero .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-top: 26px; }
+  .fade { opacity: 0; }
+  .scramble { font-size: 15px; letter-spacing: .15em; color: var(--muted); }
+  .scramble b { color: var(--bone); }
+  .band { background: var(--red); color: #111; transform: rotate(-2deg) scale(1.05); margin: 30px 0; padding: 18px 0; overflow: hidden; white-space: nowrap; }
+  .band .track { display: inline-flex; gap: 40px; font: 44px Anton; text-transform: uppercase; align-items: center; }
+  .band i { font-size: 26px; }
+  section { padding: 140px 0; position: relative; }
+  .kicker { color: var(--red); font-size: 13px; letter-spacing: .25em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  h2 { font: clamp(60px, 9vw, 140px)/.85 Anton; text-transform: uppercase; margin-top: 16px; }
+  .styles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 60px; }
+  .style { position: relative; height: 520px; overflow: hidden; background: var(--panel); }
+  .style img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness(.55); transform: scale(1.1); transition: filter .7s, transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .style:hover img { filter: grayscale(0) brightness(.85); transform: scale(1); }
+  .style .t { position: absolute; left: 22px; right: 22px; bottom: 22px; }
+  .style h3 { font: 44px Anton; text-transform: uppercase; }
+  .style p { color: #cfc8be; font-size: 13px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .6s, opacity .6s; }
+  .style:hover p { max-height: 90px; opacity: 1; }
+  .style .n { position: absolute; top: 18px; left: 22px; color: var(--red); font-size: 13px; }
+  .style::after { content: ""; position: absolute; inset: 0; border: 2px solid var(--red); clip-path: inset(0 100% 100% 0); transition: clip-path .7s cubic-bezier(.7,0,.2,1); }
+  .style:hover::after { clip-path: inset(0 0 0 0); }
+  .embla { overflow: hidden; margin-top: 60px; }
+  .embla__container { display: flex; gap: 20px; padding-left: 28px; }
+  .embla__slide { flex: 0 0 min(420px, 78vw); height: 560px; position: relative; overflow: hidden; }
+  .embla__slide img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; }
+  .embla__slide span { position: absolute; left: 18px; bottom: 16px; background: #0b0b0bcc; padding: 6px 10px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+  .embla-ui { display: flex; align-items: center; gap: 18px; margin-top: 30px; }
+  .embla-ui button { width: 56px; height: 56px; border: 1px solid var(--line); background: none; color: var(--bone); font-size: 18px; transition: background .3s, border-color .3s; }
+  .embla-ui button:hover { background: var(--red); border-color: var(--red); }
+  .prog { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; }
+  .prog i { position: absolute; inset: 0; background: var(--red); transform-origin: left; transform: scaleX(0); }
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 70px; position: relative; }
+  .process svg { position: absolute; top: 34px; left: 0; width: 100%; height: 4px; overflow: visible; }
+  .proc { position: relative; }
+  .proc .num { width: 70px; height: 70px; background: var(--bg); border: 2px solid var(--red); display: grid; place-items: center; font: 28px Anton; color: var(--red); transform: rotate(45deg); }
+  .proc .num b { transform: rotate(-45deg); font-weight: 400; }
+  .proc h4 { font: 30px Anton; text-transform: uppercase; margin: 26px 0 8px; }
+  .proc p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .quote { background: var(--panel); border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+  .quote .ph { position: relative; min-height: 640px; }
+  .quote .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(.3); }
+  .quote form { padding: 56px; display: grid; gap: 22px; align-content: start; }
+  .quote label.l { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .opts input { display: none; }
+  .opts span { display: inline-block; border: 1px solid var(--line); padding: 10px 16px; font-size: 13px; transition: all .25s; }
+  .opts input:checked + span { background: var(--red); border-color: var(--red); color: #fff; }
+  select, textarea { width: 100%; margin-top: 10px; background: var(--bg); color: var(--bone); border: 1px solid var(--line); padding: 14px; font: inherit; }
+  input[type=range] { width: 100%; margin-top: 14px; accent-color: var(--red); }
+  .est { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 20px; }
+  .est b { font: 52px Anton; color: var(--red); }
+  .care { max-width: 900px; }
+  .care details { border-bottom: 1px solid var(--line); padding: 26px 0; }
+  .care summary { font: 30px Anton; text-transform: uppercase; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .care summary i { color: var(--red); transition: transform .4s; }
+  .care details[open] summary i { transform: rotate(45deg); }
+  .care details p { color: var(--muted); margin-top: 14px; line-height: 1.7; }
+  footer { border-top: 1px solid var(--line); padding: 40px 0 90px; text-align: center; color: var(--muted); font-size: 13px; }
+  .wa { position: fixed; right: 24px; bottom: 24px; z-index: 50; width: 62px; height: 62px; background: var(--red); color: #fff; display: grid; place-items: center; font-size: 30px; clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%); }
+  @media (max-width: 960px) {
+    nav .links { display: none; } .styles { grid-template-columns: 1fr 1fr; } .style { height: 380px; }
+    .process { grid-template-columns: 1fr 1fr; } .process svg { display: none; } .quote { grid-template-columns: 1fr; } .quote .ph { min-height: 320px; } .quote form { padding: 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="dot"></div><div class="ring"></div>
+<div class="loader"><h2 id="ld">TINTA NEGRA</h2><div class="bar"></div></div>
+
+<nav><div class="wrap">
+  <a href="#" class="logo"><i class="fa-solid fa-droplet"></i>TINTA NEGRA</a>
+  <div class="links"><a href="#estilos">Estilos</a><a href="#trabalhos">Trabalhos</a><a href="#processo">Processo</a><a href="#orcamento">Orçamento</a></div>
+</div></nav>
+
+<header class="hero">
+  <div class="bg"></div>
+  <div class="wrap">
+    <h1><span class="ln" data-split>Arte na</span><span class="ln red" data-split>pele.</span></h1>
+    <div class="row">
+      <p class="scramble fade">ESPECIALISTA EM <b id="scr">FINE LINE</b></p>
+      <a href="#orcamento" class="btn fade"><i class="fa-solid fa-pen-nib"></i><span>Pedir orçamento</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="band"><div class="track">
+  <span>Fine line</span><i class="fa-solid fa-star-of-life"></i><span>Blackwork</span><i class="fa-solid fa-skull"></i><span>Realismo</span><i class="fa-solid fa-star-of-life"></i><span>Old school</span><i class="fa-solid fa-dragon"></i><span>Lettering</span><i class="fa-solid fa-star-of-life"></i>
+  <span>Fine line</span><i class="fa-solid fa-star-of-life"></i><span>Blackwork</span><i class="fa-solid fa-skull"></i><span>Realismo</span><i class="fa-solid fa-star-of-life"></i><span>Old school</span><i class="fa-solid fa-dragon"></i><span>Lettering</span><i class="fa-solid fa-star-of-life"></i>
+</div></div>
+
+<section id="estilos"><div class="wrap">
+  <p class="kicker rv"><i class="fa-solid fa-layer-group"></i>Estilos</p>
+  <h2 class="rv">O que eu<br>faço</h2>
+  <div class="styles">
+    <div class="style rv-s"><img src="https://images.unsplash.com/photo-1570168983832-8989dae1522e?auto=format&fit=crop&w=700&q=80" alt=""><span class="n">01</span><div class="t"><h3>Fine line</h3><p>Traços finos e delicados. Ideal para frases, flores e símbolos.</p></div></div>
+    <div class="style rv-s"><img src="https://images.unsplash.com/photo-1759247943688-5d47a84dd615?auto=format&fit=crop&w=700&q=80" alt=""><span class="n">02</span><div class="t"><h3>Blackwork</h3><p>Preto sólido, contraste forte e desenhos marcantes.</p></div></div>
+    <div class="style rv-s"><img src="https://images.unsplash.com/photo-1543244128-30d70d41e2a9?auto=format&fit=crop&w=700&q=80" alt=""><span class="n">03</span><div class="t"><h3>Realismo</h3><p>Retratos e cenas com sombreamento detalhado.</p></div></div>
+    <div class="style rv-s"><img src="https://images.unsplash.com/photo-1597852075234-fd721ac361d3?auto=format&fit=crop&w=700&q=80" alt=""><span class="n">04</span><div class="t"><h3>Old school</h3><p>Cores fortes e contornos grossos no estilo tradicional.</p></div></div>
+  </div>
+</div></section>
+
+<section id="trabalhos" style="padding-top:0">
+  <div class="wrap"><p class="kicker rv"><i class="fa-solid fa-images"></i>Portfólio</p><h2 class="rv">Trabalhos<br>recentes</h2></div>
+  <div class="embla"><div class="embla__container">
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1547754145-ef9ff306e3f3?auto=format&fit=crop&w=800&q=80" alt=""><span>Fine line · braço</span></div>
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?auto=format&fit=crop&w=800&q=80" alt=""><span>Blackwork · costas</span></div>
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1542744383-8c330d91f4b1?auto=format&fit=crop&w=800&q=80" alt=""><span>Fine line · pulso</span></div>
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1564426622559-5af68da63b96?auto=format&fit=crop&w=800&q=80" alt=""><span>Realismo · antebraço</span></div>
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1724343163782-52276ca2e6c2?auto=format&fit=crop&w=800&q=80" alt=""><span>Sessão no estúdio</span></div>
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1513078094721-e7b6e0394a6a?auto=format&fit=crop&w=800&q=80" alt=""><span>Old school · perna</span></div>
+    <div class="embla__slide"><img src="https://images.unsplash.com/photo-1543244128-30d70d41e2a9?auto=format&fit=crop&w=800&q=80" alt=""><span>Colorido · braço</span></div>
+  </div></div>
+  <div class="wrap embla-ui"><button id="ep" aria-label="Anterior"><i class="fa-solid fa-arrow-left"></i></button><button id="en" aria-label="Próximo"><i class="fa-solid fa-arrow-right"></i></button><div class="prog"><i id="eprog"></i></div><span style="color:var(--muted);font-size:13px">ARRASTE</span></div>
+</section>
+
+<section id="processo" style="padding-top:0"><div class="wrap">
+  <p class="kicker rv"><i class="fa-solid fa-route"></i>Processo</p>
+  <h2 class="rv">Como<br>funciona</h2>
+  <div class="process">
+    <svg preserveAspectRatio="none" viewBox="0 0 100 4"><line id="pline" x1="0" y1="2" x2="100" y2="2" stroke="#e11d2e" stroke-width="2" vector-effect="non-scaling-stroke" stroke-dasharray="100" stroke-dashoffset="100" pathLength="100"/></svg>
+    <div class="proc"><div class="num"><b>1</b></div><h4>Ideia</h4><p>Você manda referências e conta onde quer a tatuagem.</p></div>
+    <div class="proc"><div class="num"><b>2</b></div><h4>Desenho</h4><p>Crio um desenho exclusivo e ajustamos juntos.</p></div>
+    <div class="proc"><div class="num"><b>3</b></div><h4>Sessão</h4><p>Material descartável, estúdio esterilizado e sem pressa.</p></div>
+    <div class="proc"><div class="num"><b>4</b></div><h4>Cuidados</h4><p>Você leva o kit de cuidados e eu acompanho a cicatrização.</p></div>
+  </div>
+</div></section>
+
+<section id="orcamento" style="padding-top:0"><div class="wrap">
+  <div class="quote rv">
+    <div class="ph"><img src="https://images.unsplash.com/photo-1608666599953-b951163495f4?auto=format&fit=crop&w=1000&q=80" alt="Estúdio Tinta Negra"></div>
+    <form id="qf" onsubmit="return false">
+      <div><p class="kicker"><i class="fa-solid fa-calculator"></i>Orçamento</p><h2 style="font-size:clamp(50px,6vw,84px)">Monte o<br>seu</h2></div>
+      <div><label class="l">Estilo</label><div class="opts">
+        <label><input type="radio" name="st" value="Fine line" data-k="1" checked><span>Fine line</span></label>
+        <label><input type="radio" name="st" value="Blackwork" data-k="1.3"><span>Blackwork</span></label>
+        <label><input type="radio" name="st" value="Realismo" data-k="1.8"><span>Realismo</span></label>
+        <label><input type="radio" name="st" value="Old school" data-k="1.4"><span>Old school</span></label>
+      </div></div>
+      <div><label class="l" for="loc">Local do corpo</label><select id="loc"><option>Braço</option><option>Antebraço</option><option>Pulso</option><option>Costas</option><option>Perna</option><option>Costela</option></select></div>
+      <div><label class="l" for="sz">Tamanho aproximado: <b id="szv" style="color:var(--bone)">8 cm</b></label><input type="range" id="sz" min="3" max="30" value="8"></div>
+      <div class="est"><span style="color:var(--muted);font-size:13px">ESTIMATIVA A PARTIR DE</span><b id="price">R$ 0</b></div>
+      <a class="btn" id="qbtn" target="_blank" style="justify-content:center"><i class="fa-brands fa-whatsapp"></i><span>Enviar pelo WhatsApp</span></a>
+    </form>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap care">
+  <p class="kicker rv"><i class="fa-solid fa-hand-holding-medical"></i>Cuidados</p>
+  <h2 class="rv" style="margin-bottom:30px">Depois da<br>sessão</h2>
+  <details class="rv" open><summary>Primeiros dias <i class="fa-solid fa-plus"></i></summary><p>Lave com sabonete neutro 3 vezes ao dia e aplique uma camada fina de pomada cicatrizante.</p></details>
+  <details class="rv"><summary>O que evitar <i class="fa-solid fa-plus"></i></summary><p>Sol, piscina e mar por 30 dias. Não coce e não retire as casquinhas.</p></details>
+  <details class="rv"><summary>Retoque grátis <i class="fa-solid fa-plus"></i></summary><p>Se precisar, o retoque é gratuito em até 60 dias.</p></details>
+</div></section>
+
+<footer>Site de demonstração criado por <b>OctoMaker</b> · Anime.js + Embla Carousel · Fotos: Unsplash</footer>
+<a class="wa" id="waF" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<script>
+  const WA = '5535984220874';
+  const DEMO = 'Olá! Vi o site de demonstração do estúdio de tatuagem no portfólio da OctoMaker e quero um site assim para o meu negócio.';
+  const wa = m => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  $('#waF').href = wa(DEMO);
+  const splitChars = el => { el.innerHTML = [...el.textContent].map(c => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join(''); return el.querySelectorAll('.ch'); };
+
+  // preloader, then hero intro
+  const ld = splitChars($('#ld'));
+  ld.forEach(c => c.style.display = 'inline-block');
+  anime.set('.hero h1 .ch', {});
+  $$('[data-split]').forEach(splitChars);
+  anime.timeline({ easing: 'easeOutExpo' })
+    .add({ targets: ld, translateY: ['110%', 0], opacity: [0, 1], delay: anime.stagger(50), duration: 900 })
+    .add({ targets: '.loader .bar', width: ['0%', '100%'], duration: 900, easing: 'easeInOutQuart' }, '-=500')
+    .add({ targets: '.loader', translateY: '-100%', duration: 900, easing: 'easeInOutQuart' })
+    .add({ targets: '.hero .bg', scale: [1.2, 1], duration: 2200 }, '-=700')
+    .add({ targets: '.hero h1 .ch', translateY: ['110%', 0], rotate: [10, 0], delay: anime.stagger(45), duration: 1100 }, '-=2000')
+    .add({ targets: '.fade', opacity: [0, 1], translateY: [30, 0], delay: anime.stagger(150), duration: 900 }, '-=700')
+    .add({ targets: 'nav', opacity: [0, 1], duration: 600, complete: () => $('.loader').remove() }, '-=900');
+
+  // scramble text cycling styles
+  const words = ['FINE LINE', 'BLACKWORK', 'REALISMO', 'OLD SCHOOL', 'LETTERING'], glyphs = '!<>-_\\/[]{}=+*^?#';
+  let wi = 0;
+  function scramble(to) {
+    const el = $('#scr'), from = el.textContent, len = Math.max(from.length, to.length); let f = 0;
+    const tick = () => {
+      let out = '', done = 0;
+      for (let i = 0; i < len; i++) { const s = i * 2, e = s + 10; if (f >= e) { out += to[i] || ''; done++; } else if (f >= s) out += glyphs[Math.floor(Math.random() * glyphs.length)]; else out += from[i] || ''; }
+      el.textContent = out; f++; if (done < len) requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  setInterval(() => scramble(words[wi = (wi + 1) % words.length]), 2600);
+
+  // marquee band
+  anime({ targets: '.band .track', translateX: ['0%', '-50%'], duration: 26000, easing: 'linear', loop: true });
+
+  // reveals on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; const t = e.target; io.unobserve(t);
+    if (t.classList.contains('styles')) anime({ targets: t.children, translateY: [140, 0], opacity: [0, 1], delay: anime.stagger(120), duration: 1300, easing: 'easeOutExpo' });
+    else if (t.classList.contains('process')) {
+      anime({ targets: '#pline', strokeDashoffset: [100, 0], duration: 1800, easing: 'easeInOutQuart' });
+      anime({ targets: '.proc', translateY: [60, 0], opacity: [0, 1], delay: anime.stagger(250, { start: 200 }), duration: 1000, easing: 'easeOutExpo' });
+      anime({ targets: '.proc .num', rotate: [-135, 45], scale: [0, 1], delay: anime.stagger(250, { start: 200 }), duration: 1200, easing: 'easeOutElastic(1, .6)' });
+    } else anime({ targets: t, translateY: [60, 0], opacity: [0, 1], duration: 1100, easing: 'easeOutExpo' });
+  }), { threshold: .15 });
+  $$('.rv').forEach(el => { el.style.opacity = 0; io.observe(el); });
+  $$('.rv-s').forEach(el => el.style.opacity = 0); io.observe($('.styles'));
+  $$('.proc').forEach(el => el.style.opacity = 0); io.observe($('.process'));
+
+  // draggable carousel with depth effect
+  const embla = EmblaCarousel($('.embla'), { loop: true, dragFree: true, align: 'start' }, [EmblaCarouselAutoplay({ delay: 2800, stopOnInteraction: false })]);
+  const slides = embla.slideNodes();
+  const depth = () => {
+    const p = embla.scrollProgress(); $('#eprog').style.transform = `scaleX(${Math.max(.05, p)})`;
+    const view = $('.embla').getBoundingClientRect();
+    slides.forEach(s => { const r = s.getBoundingClientRect(), c = (r.left + r.width / 2 - view.width / 2) / view.width; const k = Math.min(Math.abs(c), 1);
+      s.style.transform = `scale(${1 - k * .12})`; s.style.filter = `grayscale(${k}) brightness(${1 - k * .35})`; });
+  };
+  embla.on('scroll', depth).on('reInit', depth).on('select', depth); depth();
+  $('#ep').onclick = () => embla.scrollPrev(); $('#en').onclick = () => embla.scrollNext();
+
+  // quote estimator
+  const upd = () => {
+    const st = document.querySelector('input[name=st]:checked'), sz = +$('#sz').value, loc = $('#loc').value;
+    $('#szv').textContent = sz + ' cm';
+    const price = Math.round((180 + sz * sz * 4.2) * +st.dataset.k / 10) * 10;
+    const el = $('#price'), cur = +el.dataset.v || 0; el.dataset.v = price;
+    anime({ targets: { v: cur }, v: price, duration: 600, easing: 'easeOutExpo', update: a => el.textContent = 'R$ ' + Math.round(a.animations[0].currentValue).toLocaleString('pt-BR') });
+    $('#qbtn').href = wa(`${DEMO}\n\nTestei o orçamento: ${st.value}, ${loc}, cerca de ${sz} cm. Estimativa: R$ ${price.toLocaleString('pt-BR')}.`);
+  };
+  $$('#qf input, #qf select').forEach(i => i.addEventListener('input', upd)); upd();
+
+  // custom cursor
+  const dot = $('.dot'), ring = $('.ring'); let mx = 0, my = 0, rx = 0, ry = 0;
+  addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px, ${my}px)`; });
+  (function loop() { rx += (mx - rx) * .15; ry += (my - ry) * .15; ring.style.transform = `translate(${rx}px, ${ry}px)`; requestAnimationFrame(loop); })();
+  $$('a, button, .style, .embla, label, select').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('big')); el.addEventListener('mouseleave', () => ring.classList.remove('big')); });
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site do estúdio de tatuagem"></script>
+</body>
+</html>

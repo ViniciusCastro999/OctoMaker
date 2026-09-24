@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rafael Nogueira · Fotografia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+<style>
+  :root { --bg: #f7f6f3; --ink: #111; --soft: #6b6b6b; --line: #deddd8; --accent: #c8a27a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: "Inter Tight", sans-serif; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  .syne { font-family: Syne, sans-serif; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 28px; }
+  .cursor { position: fixed; left: 0; top: 0; z-index: 90; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; background: #fff; color: #111; display: grid; place-items: center; font: 600 13px Syne; letter-spacing: .1em; pointer-events: none; transform: scale(0); transition: transform .35s cubic-bezier(.3,1.4,.5,1); mix-blend-mode: normal; }
+  .cursor.on { transform: scale(1); }
+  nav { position: fixed; inset: 0 0 auto; z-index: 50; color: #fff; transition: background .5s, color .5s, padding .5s; padding: 22px 0; }
+  nav.solid { background: #f7f6f3ee; backdrop-filter: blur(10px); color: var(--ink); padding: 12px 0; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font: 800 22px Syne; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
+  .logo i { font-size: 24px; }
+  .links { display: flex; gap: 30px; font-size: 15px; }
+  .links a { opacity: .8; transition: opacity .3s; } .links a:hover { opacity: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1.5px solid currentColor; transition: background .35s, color .35s; cursor: pointer; background: none; font-family: inherit; color: inherit; }
+  .btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  nav:not(.solid) .btn:hover { background: #fff; color: #111; border-color: #fff; }
+  .btn.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .btn.dark:hover { background: var(--accent); border-color: var(--accent); }
+  .btn i { font-size: 18px; }
+  /* hero slider */
+  .hero { height: 100vh; min-height: 620px; position: relative; color: #fff; }
+  .hero .swiper { height: 100%; }
+  .hero .swiper-slide { overflow: hidden; }
+  .hero .swiper-slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform 7s ease-out; }
+  .hero .swiper-slide-active img { transform: scale(1); }
+  .hero .swiper-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #0006, #0000 40%, #000a); }
+  .cap { position: absolute; left: 0; right: 0; bottom: 110px; z-index: 5; pointer-events: none; }
+  .cap h1 { font: 800 clamp(54px, 9vw, 150px)/.9 Syne; letter-spacing: -.04em; overflow: hidden; }
+  .cap h1 span { display: inline-block; }
+  .cap p { font-size: 18px; margin-top: 18px; opacity: .9; max-width: 420px; }
+  .hero-ui { position: absolute; left: 0; right: 0; bottom: 36px; z-index: 6; }
+  .hero-ui .wrap { display: flex; align-items: center; gap: 22px; }
+  .bars { display: flex; gap: 10px; flex: 1; }
+  .bars button { flex: 1; height: 3px; background: #ffffff44; border: 0; cursor: pointer; position: relative; overflow: hidden; }
+  .bars button i { position: absolute; inset: 0; background: #fff; transform: scaleX(0); transform-origin: left; }
+  .bars button.done i { transform: scaleX(1); }
+  .bars button.active i { animation: fill 5.5s linear forwards; }
+  @keyframes fill { to { transform: scaleX(1); } }
+  .num { font: 700 15px Syne; min-width: 64px; }
+  .arrows button { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid #fff8; background: none; color: #fff; font-size: 20px; cursor: pointer; transition: background .3s, color .3s; }
+  .arrows button:hover { background: #fff; color: #111; }
+  /* statement */
+  .wrap.statement { padding: 160px 28px 120px; }
+  #stm { font: 700 clamp(30px, 4.2vw, 62px)/1.12 Syne; letter-spacing: -.02em; max-width: 1150px; }
+  .statement .w { opacity: .12; transition: opacity .2s; }
+  .label { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+  /* gallery */
+  .gal-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
+  h2 { font: 800 clamp(44px, 6vw, 92px)/.92 Syne; letter-spacing: -.04em; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; background: #fff; padding: 6px; border-radius: 999px; border: 1px solid var(--line); position: relative; }
+  .tabs button { border: 0; background: none; padding: 10px 18px; border-radius: 999px; font: 500 14px "Inter Tight"; cursor: pointer; position: relative; z-index: 1; transition: color .35s; color: var(--ink); }
+  .tabs button.on { color: #fff; }
+  .tabs .ind { position: absolute; top: 6px; bottom: 6px; background: var(--ink); border-radius: 999px; transition: left .45s cubic-bezier(.6,0,.2,1), width .45s cubic-bezier(.6,0,.2,1); }
+  .masonry { columns: 3 320px; column-gap: 18px; }
+  .masonry a { display: block; margin-bottom: 18px; border-radius: 14px; overflow: hidden; position: relative; break-inside: avoid; cursor: none; }
+  .masonry img { width: 100%; display: block; transition: transform 1s cubic-bezier(.2,.8,.2,1), filter .6s; filter: grayscale(.25); }
+  .masonry a:hover img { transform: scale(1.06); filter: none; }
+  .masonry a span { position: absolute; left: 16px; bottom: 14px; color: #fff; font: 600 14px Syne; letter-spacing: .06em; opacity: 0; transform: translateY(10px); transition: all .45s; text-shadow: 0 2px 12px #0008; }
+  .masonry a:hover span { opacity: 1; transform: none; }
+  .masonry a.hide { display: none; }
+  section { padding: 130px 0; }
+  /* packages */
+  .packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .pack { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 34px; position: relative; overflow: hidden; transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s; }
+  .pack::before { content: ""; position: absolute; inset: auto 0 0; height: 0; background: var(--ink); transition: height .6s cubic-bezier(.7,0,.2,1); z-index: 0; }
+  .pack > * { position: relative; z-index: 1; transition: color .4s; }
+  .pack:hover { transform: translateY(-8px); box-shadow: 0 30px 60px #0000001a; }
+  .pack:hover::before { height: 100%; }
+  .pack:hover > *, .pack:hover li { color: #fff; }
+  .pack i.ic { font-size: 34px; color: var(--accent) !important; }
+  .pack h3 { font: 800 28px Syne; margin: 16px 0 6px; }
+  .pack .price { font: 800 44px Syne; margin: 20px 0; }
+  .pack li { list-style: none; padding: 9px 0; border-top: 1px solid #0000000f; color: var(--soft); display: flex; gap: 10px; align-items: center; transition: color .4s; }
+  /* about */
+  .about { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+  .about .ph { border-radius: 26px; overflow: hidden; height: 640px; position: relative; }
+  .about .ph img { width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%; }
+  .about p { font-size: 19px; line-height: 1.65; color: #333; margin: 20px 0; }
+  .nums { display: flex; gap: 46px; margin-top: 34px; }
+  .nums b { font: 800 56px Syne; display: block; line-height: 1; }
+  .nums span { color: var(--soft); font-size: 14px; }
+  /* testimonials */
+  .tsw { width: 100%; max-width: 440px; margin: 0 auto; }
+  .tsw .swiper-slide { border-radius: 24px; padding: 38px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; min-height: 360px; }
+  .tsw .swiper-slide p { font: 600 22px/1.4 Syne; }
+  .tsw .who { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+  .tsw .who img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; }
+  .tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  /* booking */
+  .book { background: var(--ink); color: #fff; border-radius: 34px; padding: 80px 60px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; overflow: hidden; position: relative; }
+  .book h2 { color: #fff; }
+  .form { display: grid; gap: 14px; }
+  .form label { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+  .opts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .opts input { display: none; }
+  .opts span { border: 1px solid #ffffff44; border-radius: 999px; padding: 10px 16px; cursor: pointer; transition: all .3s; display: inline-flex; gap: 6px; align-items: center; }
+  .opts input:checked + span { background: #fff; color: #111; border-color: #fff; transform: scale(1.04); }
+  .form input[type=date] { background: transparent; border: 1px solid #ffffff44; color: #fff; padding: 14px 16px; border-radius: 14px; font: inherit; color-scheme: dark; }
+  .book .btn { color: #111; background: var(--accent); border-color: var(--accent); justify-content: center; margin-top: 8px; }
+  .book .btn:hover { background: #fff; border-color: #fff; }
+  footer { padding: 50px 0 90px; text-align: center; color: var(--soft); font-size: 14px; }
+  .wa { position: fixed; right: 24px; bottom: 24px; z-index: 40; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: #fff; display: grid; place-items: center; font-size: 30px; box-shadow: 0 10px 30px #25D36655; transition: transform .3s; }
+  .wa:hover { transform: scale(1.1) rotate(-8deg); }
+  .rv { opacity: 0; }
+  @media (max-width: 900px) {
+    .links { display: none; } .packs, .about, .tgrid, .book { grid-template-columns: 1fr; } .about .ph { height: 460px; } .book { padding: 50px 26px; }
+    .cursor { display: none; } .masonry a { cursor: pointer; }
+  }
+</style>
+</head>
+<body>
+<div class="cursor">VER</div>
+
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#"><i class="ri-camera-lens-line"></i>Rafael Nogueira</a>
+  <div class="links"><a href="#trabalhos">Trabalhos</a><a href="#pacotes">Pacotes</a><a href="#sobre">Sobre</a><a href="#agenda">Agenda</a></div>
+  <a class="btn" href="#agenda"><i class="ri-calendar-line"></i>Reservar data</a>
+</div></nav>
+
+<header class="hero">
+  <div class="swiper hero-swiper"><div class="swiper-wrapper">
+    <div class="swiper-slide" data-t="Casamentos" data-s="Histórias de amor contadas com luz natural."><img src="https://images.unsplash.com/photo-1617724975854-70b5d0cedb0a?auto=format&fit=crop&w=2000&q=80" alt=""></div>
+    <div class="swiper-slide" data-t="Ensaios" data-s="Retratos leves, sem poses forçadas."><img src="https://images.unsplash.com/photo-1619670927786-2bb2b4286da6?auto=format&fit=crop&w=2000&q=80" alt=""></div>
+    <div class="swiper-slide" data-t="Família" data-s="Momentos que passam rápido e merecem ficar."><img src="https://images.unsplash.com/photo-1778184424645-bb163491e423?auto=format&fit=crop&w=2000&q=80" alt=""></div>
+    <div class="swiper-slide" data-t="Casais" data-s="Ensaios no fim de tarde, na cidade ou no campo."><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=2000&q=80" alt=""></div>
+  </div></div>
+  <div class="cap"><div class="wrap"><h1 id="capT"><span>Casamentos</span></h1><p id="capS">Histórias de amor contadas com luz natural.</p></div></div>
+  <div class="hero-ui"><div class="wrap">
+    <span class="num" id="num">01 / 04</span>
+    <div class="bars" id="bars"></div>
+    <div class="arrows"><button id="prev" aria-label="Anterior"><i class="ri-arrow-left-line"></i></button> <button id="next" aria-label="Próxima"><i class="ri-arrow-right-line"></i></button></div>
+  </div></div>
+</header>
+
+<div class="wrap statement">
+  <p class="label"><i class="ri-sparkling-line"></i>Fotografia documental</p>
+  <p id="stm">Eu fotografo pessoas de verdade, em momentos de verdade. Sem poses duras e sem pressa. O resultado são fotos que parecem com você e que a sua família vai querer ver daqui a trinta anos.</p>
+</div>
+
+<section id="trabalhos"><div class="wrap">
+  <div class="gal-head">
+    <div class="rv"><p class="label"><i class="ri-gallery-line"></i>Portfólio</p><h2>Trabalhos<br>recentes</h2></div>
+    <div class="tabs rv" id="tabs"><span class="ind"></span>
+      <button class="on" data-f="all">Todos</button><button data-f="casamento">Casamentos</button><button data-f="ensaio">Ensaios</button><button data-f="familia">Família</button><button data-f="newborn">Newborn</button>
+    </div>
+  </div>
+  <div class="masonry" id="gallery"></div>
+</div></section>
+
+<section id="pacotes" style="padding-top:0"><div class="wrap">
+  <div class="rv"><p class="label"><i class="ri-price-tag-3-line"></i>Pacotes</p><h2 style="margin-bottom:44px">Escolha o seu</h2></div>
+  <div class="packs">
+    <div class="pack rv"><i class="ri-user-smile-line ic"></i><h3>Ensaio</h3><p style="color:var(--soft)">Individual, casal ou gestante.</p><div class="price">R$ 690</div><ul><li><i class="ri-time-line"></i>1h30 de sessão</li><li><i class="ri-image-line"></i>40 fotos editadas</li><li><i class="ri-map-pin-line"></i>1 locação</li></ul></div>
+    <div class="pack rv"><i class="ri-home-heart-line ic"></i><h3>Família</h3><p style="color:var(--soft)">Em casa ou ao ar livre.</p><div class="price">R$ 890</div><ul><li><i class="ri-time-line"></i>2h de sessão</li><li><i class="ri-image-line"></i>60 fotos editadas</li><li><i class="ri-book-open-line"></i>Mini álbum impresso</li></ul></div>
+    <div class="pack rv"><i class="ri-heart-2-line ic"></i><h3>Casamento</h3><p style="color:var(--soft)">Cerimônia e festa.</p><div class="price">R$ 4.900</div><ul><li><i class="ri-time-line"></i>Até 10h de cobertura</li><li><i class="ri-image-line"></i>Todas as fotos editadas</li><li><i class="ri-book-2-line"></i>Álbum 30x30 com 40 páginas</li></ul></div>
+  </div>
+</div></section>
+
+<section id="sobre" style="padding-top:0"><div class="wrap about">
+  <div class="ph rv"><img id="aboutImg" src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&q=80" alt="Rafael Nogueira fotografando"></div>
+  <div>
+    <p class="label rv"><i class="ri-user-3-line"></i>Sobre</p>
+    <h2 class="rv">Olá, eu sou<br>o Rafael.</h2>
+    <p class="rv">Fotógrafo há 12 anos, apaixonado por luz natural e por histórias simples. Atendo em toda a região e viajo para casamentos em qualquer lugar do Brasil.</p>
+    <div class="nums rv"><div><b data-to="12">0</b><span>anos de estrada</span></div><div><b data-to="340">0</b><span>casamentos</span></div><div><b data-to="1500">0</b><span>ensaios</span></div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap tgrid">
+  <div class="rv"><p class="label"><i class="ri-chat-quote-line"></i>Clientes</p><h2>O que<br>dizem</h2><p style="color:var(--soft);margin-top:18px">Arraste os cartões para o lado.</p></div>
+  <div class="swiper tsw rv"><div class="swiper-wrapper">
+    <div class="swiper-slide" style="background:#1b1b1b"><p>“As fotos do nosso casamento ficaram lindas. A gente nem percebia o Rafael por perto.”</p><div class="who"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" alt=""><div><b>Carla e Pedro</b><br><small>Casamento</small></div></div></div>
+    <div class="swiper-slide" style="background:#8a6a4c"><p>“Ensaio de família leve e divertido. As crianças amaram.”</p><div class="who"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80" alt=""><div><b>Juliana</b><br><small>Família</small></div></div></div>
+    <div class="swiper-slide" style="background:#3f4a45"><p>“Recebi as fotos em duas semanas, todas editadas com muito cuidado.”</p><div class="who"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" alt=""><div><b>Marcos</b><br><small>Ensaio</small></div></div></div>
+  </div></div>
+</div></section>
+
+<section id="agenda" style="padding-top:0"><div class="wrap">
+  <div class="book rv">
+    <div><p class="label" style="color:#fff9"><i class="ri-calendar-check-line"></i>Agenda 2026 e 2027</p><h2>Reserve<br>sua data.</h2><p style="opacity:.75;margin-top:20px;font-size:18px;max-width:420px">Escolha o tipo de ensaio e a data. A mensagem chega pronta no WhatsApp.</p></div>
+    <div class="form">
+      <label>Tipo</label>
+      <div class="opts" id="tipo">
+        <label><input type="radio" name="t" value="Ensaio" checked><span><i class="ri-user-smile-line"></i>Ensaio</span></label>
+        <label><input type="radio" name="t" value="Família"><span><i class="ri-home-heart-line"></i>Família</span></label>
+        <label><input type="radio" name="t" value="Casamento"><span><i class="ri-heart-2-line"></i>Casamento</span></label>
+        <label><input type="radio" name="t" value="Newborn"><span><i class="ri-baby-line"></i>Newborn</span></label>
+      </div>
+      <label for="date">Data</label>
+      <input type="date" id="date">
+      <a class="btn" id="bookBtn" target="_blank"><i class="ri-whatsapp-line"></i>Consultar disponibilidade</a>
+    </div>
+  </div>
+</div></section>
+
+<footer>Site de demonstração criado por <b>OctoMaker</b> · Swiper + PhotoSwipe + Motion · Fotos: Unsplash</footer>
+<a class="wa" id="waFloat" target="_blank" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+
+<script type="module">
+  import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js';
+  const { animate, inView, stagger, scroll } = Motion;
+  const WA = '5535984220874';
+  const DEMO = 'Olá! Vi o site de demonstração do fotógrafo no portfólio da OctoMaker e quero um site assim para o meu negócio.';
+  const wa = m => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  $('#waFloat').href = wa(DEMO);
+
+  // hero slider with progress bars and animated captions
+  const slides = $$('.hero-swiper .swiper-slide');
+  const bars = $('#bars'); slides.forEach((_, i) => bars.insertAdjacentHTML('beforeend', `<button aria-label="Foto ${i + 1}"><i></i></button>`));
+  const hero = new Swiper('.hero-swiper', { effect: 'creative', speed: 1300, loop: true, autoplay: { delay: 5500, disableOnInteraction: false },
+    creativeEffect: { prev: { translate: ['-30%', 0, -1], opacity: .4 }, next: { translate: ['100%', 0, 0] } } });
+  const paint = () => {
+    const i = hero.realIndex, s = slides[i];
+    $('#num').textContent = `${String(i + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    [...bars.children].forEach((b, k) => { b.className = k < i ? 'done' : ''; });
+    void bars.offsetWidth; bars.children[i].className = 'active';
+    $('#capT').innerHTML = [...s.dataset.t].map(c => `<span>${c}</span>`).join('');
+    animate('#capT span', { y: ['110%', '0%'], opacity: [0, 1] }, { delay: stagger(.04), duration: .8, ease: [.2, .9, .2, 1] });
+    $('#capS').textContent = s.dataset.s;
+    animate('#capS', { opacity: [0, .9], y: [20, 0] }, { delay: .4, duration: .8 });
+  };
+  hero.on('slideChange', paint); paint();
+  [...bars.children].forEach((b, k) => b.onclick = () => hero.slideToLoop(k));
+  $('#prev').onclick = () => hero.slidePrev(); $('#next').onclick = () => hero.slideNext();
+
+  // nav
+  addEventListener('scroll', () => $('#nav').classList.toggle('solid', scrollY > innerHeight - 100), { passive: true });
+
+  // statement: words light up as you scroll
+  const stm = $('#stm'); stm.innerHTML = stm.textContent.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
+  const words = $$('#stm .w');
+  scroll(p => { const n = Math.round(p * words.length * 1.25); words.forEach((w, i) => w.style.opacity = i < n ? 1 : .12); }, { target: stm, offset: ['start 85%', 'end 45%'] });
+
+  // gallery data
+  const G = [
+    ['photo-1623783356340-95375aac85ce', 'casamento', 'Casamento', 1200, 1600], ['photo-1619671030981-df6d493354bc', 'ensaio', 'Ensaio', 1200, 1500],
+    ['photo-1685580388390-576100ae9ce3', 'familia', 'Família', 1600, 1100], ['photo-1552819289-e14fbbcea868', 'newborn', 'Newborn', 1600, 1100],
+    ['photo-1612883833766-7930d960e16f', 'casamento', 'Casamento', 1200, 1500], ['photo-1701281482213-b4b02e57a7e2', 'ensaio', 'Ensaio', 1200, 1700],
+    ['photo-1601294281485-2b5a214689dc', 'familia', 'Família', 1200, 1500], ['photo-1591161555818-7b9debeccc07', 'newborn', 'Newborn', 1200, 1500],
+    ['photo-1622277430358-f4d134452e2e', 'casamento', 'Casamento', 1200, 1700], ['photo-1665074805060-764347712c37', 'ensaio', 'Ensaio', 1600, 1100],
+    ['photo-1785705568162-fc484ac41c9e', 'familia', 'Família', 1600, 1100], ['photo-1496602910407-bacda74a0fe4', 'ensaio', 'Casal', 1200, 1500],
+    ['photo-1610901158532-d246c011729e', 'newborn', 'Newborn', 1200, 1600], ['photo-1561240055-102e7eaa2961', 'casamento', 'Casal', 1600, 1100],
+  ];
+  const u = (id, w, h) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
+  $('#gallery').innerHTML = G.map(([id, c, t, w, h]) => `<a href="${u(id, w, h)}" data-pswp-width="${w}" data-pswp-height="${h}" data-c="${c}" target="_blank"><img src="${u(id, Math.round(w / 2), Math.round(h / 2))}" alt="${t}" loading="lazy"><span>${t}</span></a>`).join('');
+  const lightbox = new PhotoSwipeLightbox({ gallery: '#gallery', children: 'a:not(.hide)', pswpModule: () => import('https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js'), bgOpacity: .95 });
+  lightbox.init();
+
+  // tabs with sliding indicator
+  const ind = $('#tabs .ind');
+  const moveInd = b => { ind.style.left = b.offsetLeft + 'px'; ind.style.width = b.offsetWidth + 'px'; };
+  moveInd($('#tabs .on')); addEventListener('resize', () => moveInd($('#tabs .on')));
+  $$('#tabs button').forEach(b => b.onclick = () => {
+    $$('#tabs button').forEach(x => x.classList.toggle('on', x === b)); moveInd(b);
+    const f = b.dataset.f, items = $$('#gallery a');
+    items.forEach(a => a.classList.toggle('hide', f !== 'all' && a.dataset.c !== f));
+    animate(items.filter(a => !a.classList.contains('hide')), { opacity: [0, 1], scale: [.9, 1], y: [30, 0] }, { delay: stagger(.06), duration: .6, ease: [.2, .8, .2, 1] });
+  });
+
+  // cursor "VER" over photos
+  const cur = $('.cursor');
+  addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
+  $('#gallery').addEventListener('mouseover', e => cur.classList.toggle('on', !!e.target.closest('a')));
+  $('#gallery').addEventListener('mouseleave', () => cur.classList.remove('on'));
+
+  // reveals
+  inView('.rv', (el) => { const target = el.target || el; animate(target, { opacity: [0, 1], y: [60, 0] }, { duration: 1, ease: [.2, .8, .2, 1] }); }, { margin: '0px 0px -80px 0px' });
+  inView('#gallery', () => { animate('#gallery a', { opacity: [0, 1], y: [80, 0] }, { delay: stagger(.07), duration: .9, ease: [.2, .8, .2, 1] }); });
+  inView('.nums', () => { $$('.nums b').forEach(b => animate(0, +b.dataset.to, { duration: 2, ease: 'ease-out', onUpdate: v => b.textContent = Math.round(v).toLocaleString('pt-BR') })); });
+
+  // about parallax
+  scroll(animate('#aboutImg', { y: ['-8%', '8%'] }, { ease: 'linear' }), { target: $('#aboutImg').parentElement, offset: ['start end', 'end start'] });
+
+  // testimonials: stacked cards
+  new Swiper('.tsw', { effect: 'cards', grabCursor: true, autoplay: { delay: 4000 } });
+
+  // booking message
+  const upd = () => {
+    const t = document.querySelector('input[name=t]:checked').value, d = $('#date').value;
+    const data = d ? new Date(d + 'T12:00').toLocaleDateString('pt-BR') : 'a definir';
+    $('#bookBtn').href = wa(`${DEMO}\n\nTestei a reserva: ${t} para ${data}.`);
+  };
+  $$('input[name=t]').forEach(i => i.onchange = upd); $('#date').oninput = upd; upd();
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site do fotógrafo"></script>
+</body>
+</html>

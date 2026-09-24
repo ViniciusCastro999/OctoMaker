@@ -39,7 +39,12 @@
   .word { display: inline-block; overflow: hidden; vertical-align: top; }
   .word span { display: inline-block; transform: translateY(110%); animation: up 1s cubic-bezier(.2,.8,.2,1) forwards; }
   @keyframes up { to { transform: none; } }
-  .arch { border-radius: 400px 400px 28px 28px; overflow: hidden; aspect-ratio: 4/5; position: relative; }
+  .arch { border-radius: 50%; overflow: hidden; aspect-ratio: 1; position: relative; }
+  .ringwrap { position: relative; padding: 26px; }
+  .ringwrap::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1.5px dashed #4b3f8f66; animation: spin 40s linear infinite; }
+    .orbit { position: absolute; inset: 0; animation: spin 14s linear infinite; }
+  .orbit i { position: absolute; top: -7px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 6px #4b3f8f22; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .arch img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 18s ease-in-out infinite alternate; }
   @keyframes kenburns { from { transform: scale(1.05); } to { transform: scale(1.18) translate(-2%, 2%); } }
   .chip-float { position: absolute; background: #fff; border-radius: 1rem; padding: .9rem 1.1rem; box-shadow: 0 20px 50px #1d1b2f22; display: flex; align-items: center; gap: .7rem; font-size: .9rem; animation: bob 6s ease-in-out infinite; }
@@ -123,7 +128,7 @@
         </div>
       </div>
       <div class="col-lg-5 position-relative" data-aos="zoom-out" data-aos-duration="1400">
-        <div class="arch"><img src="https://images.unsplash.com/photo-1592621385612-4d7129426394?auto=format&fit=crop&w=900&q=80" alt="Psicóloga Ana Moura"></div>
+        <div class="ringwrap"><div class="orbit"><i></i></div><div class="arch"><img src="https://images.unsplash.com/photo-1592621385612-4d7129426394?auto=format&fit=crop&w=900&q=80" alt="Psicóloga Ana Moura"></div></div>
         <div class="chip-float" style="left:-30px;bottom:70px"><i class="bi bi-shield-lock-fill"></i><div><b>Sigilo total</b><br><small class="text-secondary">Código de ética</small></div></div>
         <div class="chip-float" style="right:-20px;top:60px;animation-delay:-3s"><i class="bi bi-camera-video-fill"></i><div><b>Online</b><br><small class="text-secondary">Para todo o Brasil</small></div></div>
       </div>

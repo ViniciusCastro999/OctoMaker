@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arco Brow Studio · Sobrancelhas e Visagismo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { blush: '#f6e7e1', nude: '#e8cfc3', rose: '#c98b7a', cocoa: '#4a2f27', mauve: '#8c5a6b', cream: '#fdf8f5' },
+    fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Poppins', 'sans-serif'] },
+  } } }
+</script>
+<style>
+  body { background: #fdf8f5; color: #4a2f27; font-family: Poppins, sans-serif; overflow-x: hidden; }
+  .ms { font-family: "Material Symbols Rounded"; font-weight: normal; font-style: normal; font-size: 1.25em; line-height: 1; display: inline-block; vertical-align: -.22em; font-variation-settings: "FILL" 1; -webkit-font-smoothing: antialiased; }
+  .shimmer { background: linear-gradient(110deg, #8c5a6b 0%, #c98b7a 30%, #e8b8a4 50%, #c98b7a 70%, #8c5a6b 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 5s linear infinite; }
+  @keyframes shimmer { to { background-position: -250% 0; } }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .7; animation: drift 14s ease-in-out infinite alternate; pointer-events: none; }
+  @keyframes drift { to { transform: translate(50px, -40px) scale(1.2); } }
+  .float { animation: float 6s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-14px); } }
+  .spin { animation: spin 16s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .rise { opacity: 0; transform: translateY(40px); animation: rise 1s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  .rv { opacity: 0; transform: translateY(50px); transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); }
+  .rv.in { opacity: 1; transform: none; }
+  .rv-l { opacity: 0; transform: translateX(-60px); transition: all 1.1s cubic-bezier(.2,.8,.2,1); } .rv-l.in { opacity: 1; transform: none; }
+  .rv-z { opacity: 0; transform: scale(.85); transition: all 1.1s cubic-bezier(.2,.8,.2,1); } .rv-z.in { opacity: 1; transform: none; }
+  .card-b { transform: rotate(8deg) translate(34px, 10px) scale(.94); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .card-f { transform: rotate(-3deg); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .duo:hover .card-b { transform: rotate(12deg) translate(70px, 16px) scale(.94); }
+  .duo:hover .card-f { transform: rotate(-5deg) translateX(-18px); }
+  .glass { background: #ffffffb3; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid #ffffffcc; }
+  .gborder { position: relative; border-radius: 28px; padding: 2px; background: conic-gradient(from var(--a), #e8cfc3, #c98b7a, #8c5a6b, #e8cfc3); animation: rot 6s linear infinite; }
+  @property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  @keyframes rot { to { --a: 360deg; } }
+  .svc { transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s, background .5s; }
+  .svc:hover { transform: translateY(-10px); box-shadow: 0 30px 60px #8c5a6b26; background: #fff; }
+  .svc:hover .svc-ic { transform: rotate(-12deg) scale(1.1); background: #8c5a6b; color: #fff; }
+  .svc-ic { transition: all .5s cubic-bezier(.3,1.5,.5,1); }
+  img-comparison-slider { --divider-width: 3px; --divider-color: #fff; --default-handle-color: #fff; border-radius: 28px; outline: none; }
+  .shape-btn.on { background: #4a2f27; color: #fff; border-color: #4a2f27; }
+  .fade-swap { animation: swap .6s cubic-bezier(.2,.8,.2,1); }
+  @keyframes swap { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .chip-opt input { display: none; }
+  .chip-opt span { transition: all .3s; }
+  .chip-opt input:checked + span { background: #4a2f27; color: #fff; border-color: #4a2f27; transform: scale(1.04); }
+  .steps .step-primary::before, .steps .step-primary::after { background: #c98b7a !important; color: #fff !important; }
+  .wa { position: fixed; right: 24px; bottom: 24px; z-index: 40; }
+</style>
+</head>
+<body>
+
+<div class="navbar fixed top-0 z-50 px-4 md:px-10 transition-all duration-500" id="nav">
+  <div class="flex-1"><a class="font-serif text-2xl font-semibold flex items-center gap-2" href="#"><span class="ms text-rose">auto_awesome</span>Arco Brow</a></div>
+  <div class="hidden md:flex gap-8 text-sm mr-6"><a href="#servicos" class="hover:text-rose transition">Serviços</a><a href="#visagismo" class="hover:text-rose transition">Visagismo</a><a href="#resultados" class="hover:text-rose transition">Resultados</a><a href="#agendar" class="hover:text-rose transition">Agendar</a></div>
+  <a href="#agendar" class="btn btn-sm md:btn-md rounded-full bg-cocoa text-white border-0 hover:bg-mauve"><span class="ms text-lg">event_available</span>Agendar</a>
+</div>
+
+<!-- HERO -->
+<header class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+  <div class="blob w-[520px] h-[520px] bg-nude -top-40 -right-40"></div>
+  <div class="blob w-[360px] h-[360px] bg-[#f3d4de] bottom-0 left-10" style="animation-delay:-5s"></div>
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-14 items-center relative">
+    <div>
+      <div class="badge badge-lg bg-white border-nude gap-2 rise"><span class="ms text-rose">star</span>4.9 · mais de 600 avaliações</div>
+      <h1 class="font-serif text-6xl md:text-8xl leading-[.9] mt-6 font-semibold">
+        <span class="block rise" style="animation-delay:.1s">Sobrancelhas</span>
+        <span class="block rise" style="animation-delay:.22s">que <em class="shimmer">valorizam</em></span>
+        <span class="block rise" style="animation-delay:.34s">o seu rosto.</span>
+      </h1>
+      <p class="text-lg text-cocoa/70 mt-6 max-w-md rise" style="animation-delay:.5s">Design personalizado com visagismo. Cada traço é pensado para o formato do seu rosto e o seu estilo.</p>
+      <div class="flex flex-wrap gap-3 mt-8 rise" style="animation-delay:.65s">
+        <a href="#agendar" class="btn btn-lg rounded-full bg-rose text-white border-0 hover:bg-mauve hover:scale-105 transition">Agendar horário<span class="ms">arrow_forward</span></a>
+        <a href="#resultados" class="btn btn-lg rounded-full btn-ghost border border-nude">Ver resultados</a>
+      </div>
+    </div>
+    <div class="relative rise" style="animation-delay:.3s">
+      <div class="duo relative aspect-[4/5]">
+        <div class="card-b absolute inset-0 rounded-[36px] overflow-hidden shadow-xl"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1636820531452-d63abb2d4008?auto=format&fit=crop&w=800&q=80" alt=""></div>
+        <div class="card-f gborder absolute inset-0" style="border-radius:36px"><div class="rounded-[34px] overflow-hidden w-full h-full"><img class="w-full h-full object-cover hover:scale-105 transition duration-1000" src="https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?auto=format&fit=crop&w=900&q=80" alt="Design de sobrancelhas"></div></div>
+      </div>
+      <div class="absolute -left-6 bottom-20 glass rounded-2xl p-4 flex items-center gap-3 shadow-xl float">
+        <div class="w-11 h-11 rounded-full bg-blush grid place-items-center text-2xl text-mauve"><span class="ms">straighten</span></div>
+        <div class="text-sm"><b>Medição com régua</b><br><span class="opacity-60">simetria perfeita</span></div>
+      </div>
+      <div class="absolute -right-4 top-16 w-32 h-32 rounded-full bg-cocoa text-white grid place-items-center">
+        <svg viewBox="0 0 120 120" class="absolute inset-0 spin"><defs><path id="c" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><text fill="#f6e7e1" style="font:500 10.5px Poppins;letter-spacing:3px"><textPath href="#c">DESIGN · HENNA · LAMINAÇÃO · </textPath></text></svg>
+        <span class="ms text-3xl">visibility</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section id="servicos" class="py-28">
+  <div class="max-w-6xl mx-auto px-5">
+    <p class="text-rose tracking-[.25em] text-xs font-semibold uppercase rv">Serviços</p>
+    <h2 class="font-serif text-5xl md:text-6xl font-semibold mt-3 rv">Escolha o seu cuidado</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12" id="svcs"></div>
+  </div>
+</section>
+
+<!-- VISAGISMO -->
+<section id="visagismo" class="py-28 bg-blush/60 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-14 items-center">
+    <div class="rv-l"><div class="rounded-[32px] overflow-hidden aspect-square"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1581003250898-36050e78fcd3?auto=format&fit=crop&w=900&q=80" alt="Visagismo"></div></div>
+    <div>
+      <p class="text-rose tracking-[.25em] text-xs font-semibold uppercase rv">Visagismo</p>
+      <h2 class="font-serif text-5xl md:text-6xl font-semibold mt-3 rv">Qual é o formato do seu rosto?</h2>
+      <p class="mt-4 text-cocoa/70 rv">Toque no formato mais parecido com o seu e veja o estilo de sobrancelha que costumamos indicar.</p>
+      <div class="flex flex-wrap gap-2 mt-8 rv" id="shapes"></div>
+      <div class="glass rounded-3xl p-7 mt-6 rv"><div id="shapeOut"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="resultados" class="py-28">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-14 items-center">
+    <div>
+      <p class="text-rose tracking-[.25em] text-xs font-semibold uppercase rv">Resultados</p>
+      <h2 class="font-serif text-5xl md:text-6xl font-semibold mt-3 rv">Arraste para comparar</h2>
+      <p class="mt-4 text-cocoa/70 rv">Design com henna feito em 40 minutos. O resultado dura em média 15 dias na pele e até 30 dias nos fios.</p>
+      <div class="stats stats-vertical sm:stats-horizontal bg-white shadow-sm mt-8 rv">
+        <div class="stat"><div class="stat-figure text-rose text-3xl"><span class="ms">groups</span></div><div class="stat-title">Clientes</div><div class="stat-value font-serif count" data-to="4800">0</div></div>
+        <div class="stat"><div class="stat-figure text-rose text-3xl"><span class="ms">favorite</span></div><div class="stat-title">Voltam</div><div class="stat-value font-serif"><span class="count" data-to="92">0</span>%</div></div>
+      </div>
+    </div>
+    <div class="rv-z">
+      <img-comparison-slider id="cmp" class="w-full aspect-[4/5] shadow-2xl">
+        <img slot="first" class="w-full h-full object-cover" style="filter:saturate(.55) contrast(.85) brightness(1.08)" src="https://images.unsplash.com/photo-1651839633408-3fccd671b832?auto=format&fit=crop&w=900&h=1125&q=80" alt="Antes">
+        <img slot="second" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1651839633408-3fccd671b832?auto=format&fit=crop&w=900&h=1125&q=80" alt="Depois">
+      </img-comparison-slider>
+      <div class="flex justify-between text-xs mt-3 opacity-60"><span>ANTES</span><span>Imagem ilustrativa</span><span>DEPOIS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="pb-28">
+  <div class="flex gap-5 overflow-hidden" id="strip"></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-24 bg-cocoa text-cream">
+  <div class="max-w-4xl mx-auto px-5 text-center">
+    <span class="ms text-6xl text-rose rv">format_quote</span>
+    <div class="relative mt-4 min-h-[190px]" id="tcar">
+      <div class="tslide absolute inset-0 flex flex-col items-center transition-all duration-700"><p class="font-serif text-3xl md:text-4xl leading-snug">Finalmente uma sobrancelha que combina comigo. A Bianca explicou cada detalhe.</p><p class="mt-6 opacity-70">Larissa · cliente há 2 anos</p></div>
+      <div class="tslide absolute inset-0 flex flex-col items-center transition-all duration-700"><p class="font-serif text-3xl md:text-4xl leading-snug">A laminação mudou minha rotina. Acordo pronta.</p><p class="mt-6 opacity-70">Fernanda · laminação</p></div>
+      <div class="tslide absolute inset-0 flex flex-col items-center transition-all duration-700"><p class="font-serif text-3xl md:text-4xl leading-snug">Ambiente lindo, atendimento pontual e resultado natural.</p><p class="mt-6 opacity-70">Patrícia · design com henna</p></div>
+    </div>
+    <div class="flex justify-center gap-2 mt-8" id="tdots"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="agendar" class="py-28 relative overflow-hidden">
+  <div class="blob w-[420px] h-[420px] bg-nude top-10 -left-40"></div>
+  <div class="max-w-3xl mx-auto px-5 relative">
+    <p class="text-rose tracking-[.25em] text-xs font-semibold uppercase text-center rv">Agendamento</p>
+    <h2 class="font-serif text-5xl md:text-6xl font-semibold mt-3 text-center rv">Reserve em 3 passos</h2>
+    <div class="glass rounded-[32px] p-6 md:p-10 mt-10 shadow-xl rv">
+      <ul class="steps w-full" id="stepsBar"><li class="step step-primary">Serviço</li><li class="step">Dia</li><li class="step">Horário</li></ul>
+      <div id="wizard" class="mt-8 min-h-[190px]"></div>
+      <div class="flex justify-between mt-8">
+        <button class="btn btn-ghost rounded-full" id="back"><span class="ms">arrow_back</span>Voltar</button>
+        <button class="btn rounded-full bg-cocoa text-white border-0 hover:bg-mauve" id="nextBtn">Continuar<span class="ms">arrow_forward</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="pb-28">
+  <div class="max-w-3xl mx-auto px-5">
+    <h2 class="font-serif text-5xl font-semibold text-center mb-10 rv">Dúvidas</h2>
+    <div class="join join-vertical w-full rv">
+      <div class="collapse collapse-plus join-item border border-nude bg-white"><input type="radio" name="faq" checked><div class="collapse-title text-lg font-medium">Quanto tempo dura o design?</div><div class="collapse-content opacity-70"><p>De 20 a 30 dias. Indicamos a manutenção a cada 3 ou 4 semanas.</p></div></div>
+      <div class="collapse collapse-plus join-item border border-nude bg-white"><input type="radio" name="faq"><div class="collapse-title text-lg font-medium">A henna mancha a pele?</div><div class="collapse-content opacity-70"><p>A cor sai da pele entre 5 e 15 dias. Nos fios dura até 30 dias.</p></div></div>
+      <div class="collapse collapse-plus join-item border border-nude bg-white"><input type="radio" name="faq"><div class="collapse-title text-lg font-medium">Posso fazer grávida?</div><div class="collapse-content opacity-70"><p>O design com pinça pode. Henna e laminação precisam de liberação médica.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center text-sm opacity-60 pb-24">Site de demonstração criado por <b>OctoMaker</b> · Tailwind CSS + DaisyUI · Fotos: Unsplash</footer>
+<a class="wa btn btn-circle btn-lg bg-[#25D366] border-0 text-white text-3xl shadow-xl hover:scale-110 transition" id="waFloat" target="_blank" aria-label="WhatsApp"><img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="" style="width:1em;height:1em;display:inline-block;vertical-align:-.15em"></a>
+
+<script>
+  const WA = '5535984220874';
+  const DEMO = 'Olá! Vi o site de demonstração do estúdio de sobrancelhas no portfólio da OctoMaker e quero um site assim para o meu negócio.';
+  const wa = m => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  $('#waFloat').href = wa(DEMO);
+
+  // services
+  const SV = [
+    ['face_retouching_natural', 'Design de sobrancelhas', 'Pinça e linha, com medição', 50, '30 min'],
+    ['brush', 'Design com henna', 'Preenche falhas e define o formato', 70, '40 min'],
+    ['air', 'Brow lamination', 'Fios alinhados e volumosos por semanas', 150, '1h'],
+    ['edit', 'Micropigmentação fio a fio', 'Resultado natural que dura até 2 anos', 590, '2h'],
+    ['face', 'Visagismo completo', 'Análise do rosto e plano de beleza', 220, '1h'],
+    ['water_drop', 'Tintura dos fios', 'Cor uniforme para fios claros', 40, '20 min'],
+  ];
+  $('#svcs').innerHTML = SV.map(([ic, t, d, p, dur], i) => `
+    <div class="svc rv rounded-3xl p-7 bg-blush/40 border border-nude" style="transition-delay:${(i % 3) * .1}s">
+      <div class="svc-ic w-14 h-14 rounded-2xl bg-white grid place-items-center text-3xl text-mauve"><span class="ms">${ic}</span></div>
+      <h3 class="font-serif text-2xl font-semibold mt-5">${t}</h3><p class="text-sm opacity-70 mt-1">${d}</p>
+      <div class="flex justify-between items-end mt-6"><span class="font-serif text-4xl font-semibold">R$ ${p}</span><span class="badge bg-white border-nude gap-1"><span class="ms">schedule</span>${dur}</span></div>
+    </div>`).join('');
+
+  // face shapes
+  const SH = {
+    Oval: ['egg', 'Quase todos os estilos combinam. Indicamos um arco suave com a cauda levemente alongada.'],
+    Redondo: ['circle', 'Arco mais marcado e ângulo definido para alongar o rosto.'],
+    Quadrado: ['crop_square', 'Curvas suaves e arredondadas para equilibrar a mandíbula marcada.'],
+    Coração: ['favorite', 'Arco baixo e arredondado para suavizar a testa mais larga.'],
+    Longo: ['crop_portrait', 'Sobrancelhas mais retas e horizontais para encurtar visualmente o rosto.'],
+  };
+  const showShape = k => {
+    $$('.shape-btn').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    $('#shapeOut').innerHTML = `<div class="fade-swap flex gap-5 items-start"><div class="w-16 h-16 rounded-2xl bg-cocoa text-white grid place-items-center text-4xl flex-none"><span class="ms">${SH[k][0]}</span></div><div><b class="font-serif text-2xl">Rosto ${k.toLowerCase()}</b><p class="opacity-70 mt-1">${SH[k][1]}</p></div></div>`;
+  };
+  $('#shapes').innerHTML = Object.entries(SH).map(([k, [ic]]) => `<button class="shape-btn btn rounded-full bg-white border-nude hover:border-cocoa" data-k="${k}"><span class="ms">${ic}</span>${k}</button>`).join('');
+  $$('.shape-btn').forEach(b => b.onclick = () => showShape(b.dataset.k)); showShape('Oval');
+
+  // gallery strip (infinite)
+  const GS = ['photo-1636820531452-d63abb2d4008', 'photo-1733145820348-042a1ae7682a', 'photo-1594715271011-63c18acf1489', 'photo-1731514798247-2d7ecb6fa45a', 'photo-1709477542170-f11ee7d471a0', 'photo-1622336889416-8d790ad807d7', 'photo-1779400883040-aa8c93853f00'];
+  const strip = $('#strip');
+  strip.innerHTML = `<div class="flex gap-5 w-max" style="animation:mq 40s linear infinite">${[...GS, ...GS].map(id => `<div class="w-72 h-96 rounded-3xl overflow-hidden flex-none group"><img class="w-full h-full object-cover group-hover:scale-110 transition duration-700" src="https://images.unsplash.com/${id}?auto=format&fit=crop&w=600&h=800&q=80" alt=""></div>`).join('')}</div>`;
+  document.head.insertAdjacentHTML('beforeend', '<style>@keyframes mq{to{transform:translateX(-50%)}} #strip:hover>div{animation-play-state:paused!important}</style>');
+
+  // testimonials auto carousel
+  const car = $('#tcar'), n = car.children.length; let ti = 0;
+  $('#tdots').innerHTML = [...Array(n)].map((_, i) => `<button class="h-2 rounded-full transition-all duration-500 ${i ? 'w-2 bg-cream/40' : 'w-8 bg-rose'}" data-i="${i}" aria-label="Depoimento ${i + 1}"></button>`).join('');
+  const goT = i => { ti = i; [...car.children].forEach((c, k) => { c.style.opacity = k === i ? 1 : 0; c.style.transform = k === i ? 'none' : 'translateY(20px)'; }); $$('#tdots button').forEach((b, k) => b.className = `h-2 rounded-full transition-all duration-500 ${k === i ? 'w-8 bg-rose' : 'w-2 bg-cream/40'}`); };
+  $$('#tdots button').forEach(b => b.onclick = () => goT(+b.dataset.i));
+  goT(0); setInterval(() => goT((ti + 1) % n), 5000);
+
+  // booking wizard
+  const days = [...Array(7)].map((_, i) => { const d = new Date(); d.setDate(d.getDate() + i + 1); return d; }).filter(d => d.getDay() !== 0);
+  const times = ['9h', '10h30', '13h', '14h30', '16h', '17h30'];
+  const st = { step: 0, svc: SV[0][1], day: days[0].toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' }), time: times[0] };
+  const opt = (name, val, label, cur) => `<label class="chip-opt"><input type="radio" name="${name}" value="${val}" ${val === cur ? 'checked' : ''}><span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-nude bg-white cursor-pointer text-sm">${label}</span></label>`;
+  const render = () => {
+    const w = $('#wizard');
+    if (st.step === 0) w.innerHTML = `<div class="fade-swap flex flex-wrap gap-2">${SV.map(s => opt('svc', s[1], `<span class="ms">${s[0]}</span>${s[1]}`, st.svc)).join('')}</div>`;
+    if (st.step === 1) w.innerHTML = `<div class="fade-swap flex flex-wrap gap-2">${days.map(d => { const v = d.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' }); return opt('day', v, v, st.day); }).join('')}</div>`;
+    if (st.step === 2) w.innerHTML = `<div class="fade-swap"><div class="flex flex-wrap gap-2">${times.map(t => opt('time', t, `<span class="ms">schedule</span>${t}`, st.time)).join('')}</div>
+      <div class="mt-6 p-5 rounded-2xl bg-blush/60 text-sm"><b>Resumo:</b> ${st.svc} · ${st.day} · <span id="sumT">${st.time}</span></div></div>`;
+    $$('#wizard input').forEach(i => i.onchange = () => { st[i.name] = i.value; if (i.name === 'time') $('#sumT').textContent = i.value; });
+    $$('#stepsBar .step').forEach((s, k) => s.classList.toggle('step-primary', k <= st.step));
+    $('#back').style.visibility = st.step ? 'visible' : 'hidden';
+    $('#nextBtn').innerHTML = st.step === 2 ? '<img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="" style="width:1em;height:1em;display:inline-block;vertical-align:-.15em">Confirmar pelo WhatsApp' : 'Continuar<span class="ms">arrow_forward</span>';
+  };
+  $('#nextBtn').onclick = () => { if (st.step < 2) { st.step++; render(); } else window.open(wa(`${DEMO}\n\nTestei o agendamento: ${st.svc}, ${st.day} às ${st.time}.`), '_blank'); };
+  $('#back').onclick = () => { st.step--; render(); };
+  render();
+
+  // nav, reveals, counters, before/after demo sweep
+  addEventListener('scroll', () => $('#nav').classList.toggle('glass', scrollY > 30), { passive: true });
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const t = e.target; t.classList.add('in'); io.unobserve(t);
+    if (t.classList.contains('count')) { const to = +t.dataset.to, t0 = performance.now(); const f = now => { const k = Math.min((now - t0) / 1800, 1); t.textContent = Math.round(to * (1 - (1 - k) ** 3)).toLocaleString('pt-BR'); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }
+    if (t.id === 'cmpWrap') sweep();
+  }), { threshold: .2 });
+  $$('.rv, .rv-l, .rv-z, .count').forEach(el => io.observe(el));
+  $('#cmp').parentElement.id = 'cmpWrap'; io.observe($('#cmpWrap'));
+  function sweep() {
+    const s = $('#cmp'); let t0 = null;
+    const f = now => { t0 ??= now; const k = (now - t0) / 2600; if (k > 1) { s.value = 50; return; } s.value = 50 + Math.sin(k * Math.PI * 2) * 35; requestAnimationFrame(f); };
+    setTimeout(() => requestAnimationFrame(f), 600);
+  }
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site do estúdio de sobrancelhas"></script>
+</body>
+</html>

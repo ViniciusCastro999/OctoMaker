@@ -22,7 +22,8 @@
           rise: { '0%': { opacity: 0, transform: 'translateY(40px)' }, '100%': { opacity: 1, transform: 'none' } },
           float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
           marquee: { to: { transform: 'translateX(-50%)' } },
-          reveal: { '0%': { clipPath: 'inset(100% 0 0 0 round 200px 200px 32px 32px)' }, '100%': { clipPath: 'inset(0 0 0 0 round 200px 200px 32px 32px)' } },
+          reveal: { '0%': { clipPath: 'circle(0% at 50% 50%)' }, '100%': { clipPath: 'circle(75% at 50% 50%)' } },
+          morph: { '0%,100%': { borderRadius: '58% 42% 55% 45% / 45% 55% 45% 55%' }, '33%': { borderRadius: '42% 58% 40% 60% / 58% 40% 60% 42%' }, '66%': { borderRadius: '50% 50% 62% 38% / 40% 62% 38% 60%' } },
           zoomout: { '0%': { transform: 'scale(1.25)' }, '100%': { transform: 'scale(1)' } },
           spin: { to: { transform: 'rotate(360deg)' } },
           shine: { '0%': { left: '-60%' }, '100%': { left: '130%' } },
@@ -32,6 +33,7 @@
           float: 'float 5s ease-in-out infinite',
           marquee: 'marquee 28s linear infinite',
           reveal: 'reveal 1.3s cubic-bezier(.7,0,.2,1) both',
+          morph: 'morph 12s ease-in-out infinite',
           zoomout: 'zoomout 1.8s cubic-bezier(.2,.8,.2,1) both',
           spinslow: 'spin 14s linear infinite',
         }
@@ -101,10 +103,10 @@
     </div>
   </div>
   <div class="relative">
-    <div class="absolute -inset-6 rounded-t-[220px] rounded-b-[40px] bg-sage-300/50 blur-2xl animate-float"></div>
-    <div class="relative rounded-t-[200px] rounded-b-[32px] overflow-hidden aspect-[4/5] animate-reveal" style="animation-delay:.2s">
+    <div class="absolute -inset-6 bg-sage-300/60 blur-2xl animate-morph" style="animation-delay:-4s"></div>
+    <div class="relative aspect-square animate-reveal" style="animation-delay:.2s"><div class="w-full h-full overflow-hidden animate-morph">
       <img class="w-full h-full object-cover animate-zoomout" style="animation-delay:.2s" src="https://images.unsplash.com/photo-1585358682246-23acb1561f6b?auto=format&fit=crop&w=900&q=80" alt="Nutricionista Lívia Campos">
-    </div>
+    </div></div>
     <div class="absolute -left-6 bottom-16 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-float">
       <div class="w-11 h-11 rounded-xl bg-sage-100 grid place-items-center text-sage-700 text-2xl"><i class="ph-fill ph-bowl-food"></i></div>
       <div class="text-sm"><b>Plano semanal</b><br><span class="text-sage-500">pronto no app</span></div>
