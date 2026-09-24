@@ -9,10 +9,10 @@
 
 Bio:
 ```
-Sites profissionais para pequenos negócios
-✦ Nutris, psicólogos, lojas e estúdios
-✦ Pronto em poucos dias, com WhatsApp
-👇 Portfólio e orçamento
+Sites profissionais que trazem clientes
+✦ Bonitos, rápidos e com WhatsApp
+✦ Prontos em poucos dias
+👇 Veja os modelos e peça seu orçamento
 ```
 
 ## Posts

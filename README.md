@@ -1,6 +1,6 @@
 # OctoMaker
 
-Sites profissionais para pequenas empresas: nutricionistas, psicólogos, consultórios e lojas.
+Sites profissionais, rápidos e com WhatsApp integrado.
 
 ## Conteúdo
 
