@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
 <style>
+  html, body { overflow-x: clip; }
   :root { --bg: #f7f6f3; --ink: #111; --soft: #6b6b6b; --line: #deddd8; --accent: #c8a27a; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--ink); font-family: "Inter Tight", sans-serif; overflow-x: hidden; }
@@ -42,7 +43,7 @@
   .hero .swiper-slide-active img { transform: scale(1); }
   .hero .swiper-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #0006, #0000 40%, #000a); }
   .cap { position: absolute; left: 0; right: 0; bottom: 110px; z-index: 5; pointer-events: none; }
-  .cap h1 { font: 800 clamp(54px, 9vw, 150px)/.9 Syne; letter-spacing: -.04em; overflow: hidden; }
+  .cap h1 { font: 800 clamp(30px, 7.6vw, 150px)/.9 Syne; letter-spacing: -.04em; overflow: hidden; white-space: nowrap; }
   .cap h1 span { display: inline-block; }
   .cap p { font-size: 18px; margin-top: 18px; opacity: .9; max-width: 420px; }
   .hero-ui { position: absolute; left: 0; right: 0; bottom: 36px; z-index: 6; }
@@ -93,7 +94,7 @@
   .about .ph { border-radius: 26px; overflow: hidden; height: 640px; position: relative; }
   .about .ph img { width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%; }
   .about p { font-size: 19px; line-height: 1.65; color: #333; margin: 20px 0; }
-  .nums { display: flex; gap: 46px; margin-top: 34px; }
+  .nums { display: flex; flex-wrap: wrap; gap: 28px 46px; margin-top: 34px; }
   .nums b { font: 800 56px Syne; display: block; line-height: 1; }
   .nums span { color: var(--soft); font-size: 14px; }
   /* testimonials */
@@ -102,7 +103,7 @@
   .tsw .swiper-slide p { font: 600 22px/1.4 Syne; }
   .tsw .who { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
   .tsw .who img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; }
-  .tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .tgrid { overflow: hidden; padding: 20px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
   /* booking */
   .book { background: var(--ink); color: #fff; border-radius: 34px; padding: 80px 60px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; overflow: hidden; position: relative; }
   .book h2 { color: #fff; }
@@ -122,6 +123,8 @@
   @media (max-width: 900px) {
     .links { display: none; } .packs, .about, .tgrid, .book { grid-template-columns: 1fr; } .about .ph { height: 460px; } .book { padding: 50px 26px; }
     .cursor { display: none; } .masonry a { cursor: pointer; }
+    .nums b { font-size: 42px; } h2 { font-size: 40px; }
+    nav .btn { font-size: 0; gap: 0; padding: 12px; } nav .btn i { font-size: 20px; } .logo { font-size: 19px; }
   }
 </style>
 </head>
