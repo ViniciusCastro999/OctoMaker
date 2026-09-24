@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="base.css"><style>
+.gbox { background:#fff; color:#202124; border-radius:999px; padding:34px 44px; display:flex; align-items:center; gap:24px; font:500 44px var(--mono); box-shadow:0 30px 80px #0008; }
+.gbox i { color:#5f6368; font-size:48px; }
+.serp { background:#fff; color:#202124; border-radius:34px; padding:26px; display:flex; flex-direction:column; gap:18px; box-shadow:0 30px 80px #0008; }
+.res { border-radius:22px; padding:24px 28px; }
+.res small { font-size:26px; color:#4d5156; } .res b { display:block; font-size:38px; color:#1a0dab; font-weight:500; margin:6px 0; } .res span { font-size:28px; color:#4d5156; display:flex; gap:6px; align-items:center; }
+.res.me { outline:5px solid var(--yellow); box-shadow:0 0 50px #ffd00088; background:#fffdf0; }
+.res.dim { opacity:.4; }
+.stars { color:#e7711b; }
+.wbtn { align-self:center; background:var(--green); color:#fff; border-radius:999px; padding:34px 56px; font:700 46px Inter; display:flex; gap:18px; align-items:center; box-shadow:0 0 60px #25D36677; }
+.wbtn i { font-size:58px; }
+.press { animation:in .6s cubic-bezier(.2,.8,.2,1) var(--d) both, press .35s ease 8.1s; }
+@keyframes press { 50% { transform:scale(.88); } }
+.chat { background:#0b141a; border:2px solid #1f2c34; border-radius:34px; padding:34px; }
+.bub { margin-left:auto; max-width:760px; background:#005c4b; border-radius:26px 26px 8px 26px; padding:26px 30px; font-size:38px; line-height:1.4; }
+.bub .meta { text-align:right; font-size:26px; color:#9fd8c8; margin-top:6px; }
+.bub .meta i { color:#8696a0; animation:blue .01s linear 9.3s forwards; }
+@keyframes blue { to { color:#53bdeb; } }
+</style></head><body><div class="brand">octo<b>maker</b>_</div>
+<section class="scene" style="--s:0s;--e:3.4s"><div class="glow"></div>
+  <h1 class="in" style="--d:.1s">Seu cliente pesquisa no <span class="b">Google</span></h1>
+  <div class="gbox in" style="--d:.5s"><i class="ph-bold ph-magnifying-glass"></i><span><span class="type" style="--n:24;--t:1.4s;--d:.9s">seu serviço perto de mim</span><span class="caret"></span></span></div>
+</section>
+<section class="scene" style="--s:3.4s;--e:6.9s">
+  <h1 class="in" style="--d:3.5s">E encontra o <span class="b">seu site</span></h1>
+  <div class="serp in" style="--d:3.8s">
+    <div class="res me pop" style="--d:4.5s"><small>seunegocio.com.br</small><b>Seu Negócio · Aberto agora</b><span><span class="stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></span> 4,9 · Agende pelo WhatsApp</span></div>
+    <div class="res dim"><small>outroresultado.com</small><b>Outro resultado</b><span>Sem site próprio</span></div>
+    <div class="res dim"><small>maisum.com</small><b>Mais um resultado</b><span>Página desatualizada</span></div>
+  </div>
+</section>
+<section class="scene" style="--s:6.9s;--e:10.4s">
+  <h1 class="in" style="--d:7s">Chama no <span class="b">WhatsApp</span> com um toque</h1>
+  <div class="wbtn press" style="--d:7.4s"><i class="ph-fill ph-whatsapp-logo"></i>Agendar pelo WhatsApp</div>
+  <div class="chat in" style="--d:8.5s"><div class="bub">Olá! Vi o site e quero agendar um horário para sexta às 14h.<div class="meta">14:02 <i class="ph-bold ph-checks"></i></div></div></div>
+</section>
+<section class="scene last" style="--s:10.4s"><div class="glow"></div>
+  <h1 class="in" style="--d:10.5s">Seu site pode fazer <span class="b">isso por você</span></h1>
+  <p class="url pop" style="--d:11.1s">octomaker.com.br</p>
+  <p class="sub in" style="--d:11.5s">Veja os modelos e peça seu orçamento</p>
+</section></body></html>

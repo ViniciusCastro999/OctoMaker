@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="base.css"><style>
+.steps { position:relative; display:flex; flex-direction:column; gap:40px; }
+.rail { position:absolute; left:48px; top:48px; bottom:60px; width:6px; background:linear-gradient(var(--yellow),var(--blue)); box-shadow:0 0 20px #ffd00066; transform-origin:top; animation:grow 5s linear .9s both; }
+@keyframes grow { from { transform:scaleY(0); } }
+.step { display:flex; gap:40px; align-items:center; position:relative; }
+.num { flex:none; width:102px; height:102px; border-radius:50%; border:6px solid var(--yellow); background:#0e1015; display:grid; place-items:center; font-size:48px; color:var(--yellow); box-shadow:0 0 34px #ffd00066; }
+.step b { font:800 54px var(--mono); display:block; } .step span { font-size:36px; color:#c3cbd9; }
+</style></head><body><div class="brand">octo<b>maker</b>_</div>
+<section class="scene" style="--s:0s;--e:7.4s">
+  <h1 class="in" style="--d:.1s">Do WhatsApp ao <span class="b">site no ar</span></h1>
+  <div class="steps"><div class="rail"></div>
+    <div class="step in" style="--d:.9s"><div class="num"><i class="ph-bold ph-chat-circle-dots"></i></div><div><b>Conversa</b><span>Você conta sobre o seu negócio.</span></div></div>
+    <div class="step in" style="--d:2.3s"><div class="num"><i class="ph-bold ph-file-text"></i></div><div><b>Proposta</b><span>Preço e prazo, sem surpresas.</span></div></div>
+    <div class="step in" style="--d:3.7s"><div class="num"><i class="ph-bold ph-paint-brush"></i></div><div><b>Criação</b><span>Você aprova cada parte.</span></div></div>
+    <div class="step in" style="--d:5.1s"><div class="num"><i class="ph-bold ph-rocket-launch"></i></div><div><b>No ar</b><span>Com domínio próprio e no Google.</span></div></div>
+  </div>
+</section>
+<section class="scene last" style="--s:7.4s"><div class="glow"></div>
+  <h1 class="in" style="--d:7.5s">Pronto em <span class="y">poucos dias</span></h1>
+  <p class="url pop" style="--d:8.2s">octomaker.com.br</p>
+  <p class="sub in" style="--d:8.6s">Chama no direct para começar</p>
+</section></body></html>
