@@ -5,15 +5,14 @@
 * { box-sizing:border-box; margin:0; padding:0; }
 html,body { width:1080px; height:1350px; overflow:hidden; }
 body { background:radial-gradient(70% 55% at 50% 45%, #1f2636, #0b0d12); color:var(--text); font-family:Inter,sans-serif; position:relative; }
-body::before { content:""; position:absolute; inset:0; background-image:radial-gradient(#5a647844 2px, transparent 2px); background-size:40px 40px; }
+body::before { display:none; }
 .page { position:relative; height:100%; padding:90px 84px; display:flex; flex-direction:column; align-items:center; }
 .top { width:100%; display:flex; justify-content:space-between; font:600 26px var(--mono); color:var(--muted); }
 .top b { color:var(--text); } .top b span { color:var(--yellow); }
 .stage { flex:1; display:grid; place-items:center; width:100%; }
-.om-coin .om-glow { animation:none !important; }
 h1 { font:800 70px/1.05 var(--mono); letter-spacing:-.03em; text-align:center; }
-h1 .b { color:var(--blue); text-shadow:0 0 36px #3d7bffaa; }
-.url { margin-top:26px; font:700 30px var(--mono); color:var(--yellow); text-shadow:0 0 24px #ffd00066; }
+h1 .b { color:var(--blue); }
+.url { margin-top:26px; font:700 30px var(--mono); color:var(--yellow); }
 </style></head><body>
 <div class="page">
   <div class="top"><b>octo<span>maker</span>_</b><span>@octomaker_</span></div>

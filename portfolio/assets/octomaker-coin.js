@@ -1,33 +1,46 @@
-// OctoMaker 3D coin: <div class="om-coin" data-size="360" data-mode="drag|spin"></div>
+// OctoMaker 3D coin: <div class="om-coin" data-size="360" data-mode="drag|spin|static"></div>
 // drag: hold and spin horizontally with inertia, then it settles on a face. spin: turns slowly by itself. static: angle set via el.omSetAngle().
 (function () {
   const base = document.currentScript.src.replace(/octomaker-coin\.js.*$/, '');
-  const INSET = 6.41, RADIUS = 3.94, LAYERS = 16;
+  // Face images are 780 units wide; the chip's outer edge is 673.2 units wide with a 62.7 unit corner radius.
+  const OUTER = 673.2 / 780, RADIUS = 62.7 / 673.2, CORNER_SEGMENTS = 10;
 
   const css = `
     .om-coin { position: relative; perspective: 1400px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
     .om-coin[data-mode=drag] { cursor: grab; } .om-coin.grabbing { cursor: grabbing; }
-    .om-coin .om-glow { position: absolute; inset: 14%; border-radius: 22%; background: radial-gradient(circle, rgba(61,123,255,.55), transparent 70%); filter: blur(28px); animation: omPulse 2.8s ease-in-out infinite; }
-    @keyframes omPulse { 0%,100% { opacity: .9; transform: scale(1); } 50% { opacity: .45; transform: scale(.92); } }
     .om-coin .om-c { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
     .om-coin .om-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
     .om-coin .om-face img { width: 100%; height: 100%; display: block; pointer-events: none; -webkit-user-drag: none; }
-    .om-coin .om-shine { position: absolute; inset: ${INSET}%; border-radius: ${RADIUS * .85}%; pointer-events: none; mix-blend-mode: screen;
-      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.22) 48%, transparent 62%); background-size: 250% 100%; }
-    .om-coin .om-layer { position: absolute; inset: ${INSET}%; background: #0f1830; box-shadow: inset 0 0 0 2px #3d7bff, 0 0 6px rgba(61,123,255,.5); }
-    .om-coin .om-hint { position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%); font: 500 12px "JetBrains Mono", Menlo, monospace; color: #8d97ab; white-space: nowrap; display: flex; gap: 8px; align-items: center; transition: opacity .6s; }
+    .om-coin .om-shine { position: absolute; pointer-events: none; mix-blend-mode: screen;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.18) 48%, transparent 62%); background-size: 250% 100%; }
+    .om-coin .om-edge { position: absolute; left: 50%; top: 50%; backface-visibility: visible;
+      background: linear-gradient(90deg, #1d3570, #5d88e4 50%, #1d3570); }
+    .om-coin .om-hint { position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%); font: 500 12px "JetBrains Mono", Menlo, monospace; color: #8d97ab; white-space: nowrap; transition: opacity .6s; }
   `;
   const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
   document.querySelectorAll('.om-coin').forEach(el => {
-    const S = +el.dataset.size || 320, mode = el.dataset.mode || 'drag', T = Math.max(6, S * .07);
+    const S = +el.dataset.size || 320, mode = el.dataset.mode || 'drag';
+    const W = S * OUTER, r = W * RADIUS, c = W / 2 - r, T = Math.max(8, S * .075), L = W - 2 * r;
     el.style.width = el.style.height = S + 'px';
-    const r = S * (1 - INSET / 50) * RADIUS / 100;
-    let layers = '';
-    for (let i = 0; i < LAYERS; i++) layers += `<i class="om-layer" style="border-radius:${r}px;transform:translateZ(${(-T / 2 + T * i / (LAYERS - 1)).toFixed(2)}px)"></i>`;
-    el.innerHTML = `<div class="om-glow"></div><div class="om-c">${layers}
-      <div class="om-face" style="transform:translateZ(${T / 2 + .5}px)"><img src="${base}octomaker-moeda-frente.png" alt="OctoMaker"><i class="om-shine" style="border-radius:${r}px"></i></div>
-      <div class="om-face" style="transform:rotateY(180deg) translateZ(${T / 2 + .5}px)"><img src="${base}octomaker-moeda-verso.png" alt=""><i class="om-shine" style="border-radius:${r}px"></i></div>
+
+    // one strip of the rim: width T (coin thickness), height h (along the outline), placed at polar angle phi around (cx, cy)
+    const strip = (cx, cy, phi, R, h) => {
+      const light = .72 + .38 * Math.cos((phi - 235) * Math.PI / 180);   // light from the top left
+      return `<i class="om-edge" style="width:${T}px;height:${h}px;margin:${-h / 2}px 0 0 ${-T / 2}px;filter:brightness(${light.toFixed(2)});
+        transform:translate(${cx}px,${cy}px) rotateZ(${phi}deg) translateX(${R}px) rotateY(90deg)"></i>`;
+    };
+    let rim = '';
+    [0, 90, 180, 270].forEach(a => { rim += strip(0, 0, a, W / 2, L + 2); });
+    const corners = [[c, c, 0], [-c, c, 90], [-c, -c, 180], [c, -c, 270]];
+    const d = 90 / CORNER_SEGMENTS, seg = 2 * r * Math.sin(d / 2 * Math.PI / 180) + 1.5;
+    corners.forEach(([cx, cy, a0]) => { for (let k = 0; k < CORNER_SEGMENTS; k++) rim += strip(cx, cy, a0 + d * (k + .5), r * Math.cos(d / 2 * Math.PI / 180), seg); });
+
+    const inset = (1 - OUTER) / 2 * 100;
+    const shine = `<i class="om-shine" style="inset:${inset}%;border-radius:${r}px"></i>`;
+    el.innerHTML = `<div class="om-c">${rim}
+      <div class="om-face" style="transform:translateZ(${T / 2}px)"><img src="${base}octomaker-moeda-frente.png" alt="OctoMaker">${shine}</div>
+      <div class="om-face" style="transform:rotateY(180deg) translateZ(${T / 2}px)"><img src="${base}octomaker-moeda-verso.png" alt="">${shine}</div>
     </div>${mode === 'drag' ? '<span class="om-hint">⟷ arraste para girar</span>' : ''}`;
     const coin = el.querySelector('.om-c'), shines = el.querySelectorAll('.om-shine'), hint = el.querySelector('.om-hint');
 

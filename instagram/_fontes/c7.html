@@ -6,7 +6,7 @@
 * { box-sizing:border-box; margin:0; padding:0; }
 html,body { width:1080px; height:1350px; overflow:hidden; }
 body { background:radial-gradient(80% 60% at 50% 35%, #232834, #0e1015); color:var(--text); font-family:Inter,sans-serif; position:relative; }
-body::before { content:""; position:absolute; inset:0; background-image:radial-gradient(#5a647855 2px, transparent 2px); background-size:40px 40px; }
+body::before { display:none; }
 .page { position:relative; height:100%; padding:84px 84px 80px; display:flex; flex-direction:column; }
 .top { display:flex; justify-content:space-between; align-items:center; font:700 28px var(--mono); }
 .brand { display:flex; align-items:center; gap:14px; color:var(--blue); }
@@ -15,10 +15,10 @@ body::before { content:""; position:absolute; inset:0; background-image:radial-g
 .swipe { color:var(--muted); font:600 24px var(--mono); display:flex; align-items:center; gap:10px; }
 .swipe i { color:var(--yellow); font-size:30px; }
 .foot { margin-top:auto; display:flex; justify-content:space-between; align-items:center; font:600 26px var(--mono); color:var(--muted); position:relative; z-index:2; }
-.foot .url { color:var(--yellow); display:flex; align-items:center; gap:10px; text-shadow:0 0 18px #ffd00055; }
+.foot .url { color:var(--yellow); display:flex; align-items:center; gap:10px; }
 h1 { font:800 88px/1.04 var(--mono); letter-spacing:-.035em; }
-h1 .b { color:var(--blue); text-shadow:0 0 36px #3d7bffaa; }
-h1 .y { color:var(--yellow); text-shadow:0 0 36px #ffd00088; }
+h1 .b { color:var(--blue); }
+h1 .y { color:var(--yellow); }
 .lead { font-size:36px; line-height:1.45; color:#c3cbd9; }
 .eyebrow { font:700 28px var(--mono); color:var(--yellow); }
 .card { background:#171b23e6; border:2px solid var(--line); border-radius:28px; padding:30px 34px; }
@@ -29,7 +29,7 @@ h1 .y { color:var(--yellow); text-shadow:0 0 36px #ffd00088; }
 <div style="margin-top:250px;text-align:center;display:flex;flex-direction:column;align-items:center">
   <h1 style="font-size:100px">Vamos fazer o <span class="b">seu</span>?</h1>
   <p class="lead" style="margin-top:24px">Veja os modelos de site em</p>
-  <p style="font:800 64px var(--mono);color:var(--yellow);text-shadow:0 0 30px #ffd00088;margin-top:10px">octomaker.com.br</p>
+  <p style="font:800 64px var(--mono);color:var(--yellow);margin-top:10px">octomaker.com.br</p>
   <p class="lead" style="margin-top:22px;font-size:32px">ou chama no direct <i class="ph-bold ph-paper-plane-tilt" style="color:var(--blue)"></i></p>
 </div>
 <div class="foot"><span>@octomaker_</span><span class="url"><i class="ph-bold ph-globe"></i>octomaker.com.br</span></div></div><svg class="trace" viewBox="0 0 1080 40"><g fill="none" stroke="#ffd000" stroke-linecap="round">

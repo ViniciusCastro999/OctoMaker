@@ -14,7 +14,7 @@
       font: 500 12px/1 "JetBrains Mono", Menlo, monospace; letter-spacing: .02em; white-space: nowrap;
       box-shadow: 0 8px 30px rgba(0,0,0,.25); transition: transform .8s cubic-bezier(.2,.9,.2,1), border-color .3s, box-shadow .3s; cursor: pointer; }
     .om-bar.show { transform: translate(-50%, 0); }
-    .om-bar:hover { border-color: #3d7bff; box-shadow: 0 0 0 4px rgba(61,123,255,.15), 0 10px 34px rgba(61,123,255,.35); }
+    .om-bar:hover { border-color: #3d7bff; }
     .om-bar img { width: 24px; height: 24px; display: block; transition: transform .5s cubic-bezier(.3,1.6,.5,1); }
     .om-bar:hover img { transform: rotate(-10deg) scale(1.12); }
     .om-bar b { color: #fff; font-weight: 700; } .om-bar b span { color: #ffd000; }
