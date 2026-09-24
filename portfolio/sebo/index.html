@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traça · Sebo e Livraria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "react": "https://esm.sh/react@18.3.1",
+  "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1",
+  "htm": "https://esm.sh/htm@3.1.1",
+  "framer-motion": "https://esm.sh/framer-motion@11.11.17?deps=react@18.3.1,react-dom@18.3.1"
+} }
+</script>
+<style>
+  :root { --paper: #f4ede1; --paper2: #ebe1cf; --ink: #2b1d14; --soft: #6e5c4d; --rust: #b4532a; --green: #2f4a3a; --line: #d9ccb6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: "Work Sans", sans-serif; overflow-x: hidden; }
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: .35; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E"); }
+  .serif { font-family: "Playfair Display", serif; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .4s, box-shadow .4s; }
+  nav.solid { background: #f4ede1ee; backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { font: 900 28px "Playfair Display"; display: flex; align-items: center; gap: 8px; }
+  .logo i { color: var(--rust); font-size: 28px; }
+  .links { display: flex; gap: 28px; font-weight: 500; }
+  .links a { position: relative; }
+  .links a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 100%; height: 2px; background: var(--rust); transform: scaleX(0); transform-origin: right; transition: transform .35s; }
+  .links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); padding: 15px 26px; border-radius: 999px; font-weight: 600; border: 0; cursor: pointer; font-family: inherit; font-size: 15px; }
+  .btn.rust { background: var(--rust); }
+  .btn.line { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn i { font-size: 20px; }
+  .bag { position: relative; }
+  .bag .count { position: absolute; top: -8px; right: -8px; background: var(--rust); color: #fff; width: 24px; height: 24px; border-radius: 50%; font-size: 12px; display: grid; place-items: center; }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 30px; padding-top: 90px; }
+  .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(56px, 8vw, 118px); line-height: .92; font-weight: 900; letter-spacing: -.02em; }
+  .hero h1 em { color: var(--rust); font-weight: 500; }
+  .hero p { font-size: 20px; color: var(--soft); max-width: 470px; margin: 26px 0 32px; line-height: 1.55; }
+  .char { display: inline-block; }
+  .stackart { position: relative; height: 560px; }
+  .stackart .ph { position: absolute; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 60px #2b1d1433; }
+  .stackart img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stamp { position: absolute; right: 10px; bottom: 30px; width: 130px; height: 130px; border-radius: 50%; background: var(--green); color: var(--paper); display: grid; place-items: center; text-align: center; font: 500 13px "Work Sans"; z-index: 5; }
+  .stamp svg { position: absolute; inset: 0; }
+  .ticker { background: var(--ink); color: var(--paper); padding: 18px 0; overflow: hidden; white-space: nowrap; }
+  .ticker .row { display: inline-flex; gap: 40px; font: italic 500 28px "Playfair Display"; }
+  .ticker i { color: var(--rust); font-style: normal; }
+  section { padding: 120px 0; }
+  section.wrap { padding: 120px 24px; }
+  .kicker { font-weight: 600; letter-spacing: .18em; text-transform: uppercase; font-size: 13px; color: var(--rust); display: flex; align-items: center; gap: 8px; }
+  h2 { font: 900 clamp(42px, 5.5vw, 74px)/1 "Playfair Display"; margin: 12px 0 18px; letter-spacing: -.02em; }
+  .tools { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; margin: 30px 0 36px; }
+  .search { display: flex; align-items: center; gap: 10px; background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 12px 20px; min-width: 300px; transition: border-color .3s, box-shadow .3s; }
+  .search:focus-within { border-color: var(--rust); box-shadow: 0 0 0 5px #b4532a22; }
+  .search input { border: 0; outline: 0; font: inherit; background: transparent; width: 100%; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; position: relative; }
+  .chip { position: relative; border: 1.5px solid var(--line); background: transparent; padding: 9px 18px; border-radius: 999px; font: 500 14px "Work Sans"; cursor: pointer; color: var(--ink); z-index: 0; }
+  .chip.on { color: var(--paper); border-color: var(--ink); }
+  .chip .pill { position: absolute; inset: -1.5px; background: var(--ink); border-radius: 999px; z-index: -1; }
+  .books { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 28px; }
+  .book { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .book .cover { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+  .book .cover img { width: 100%; height: 100%; object-fit: cover; }
+  .book .tag { position: absolute; left: 14px; top: 14px; background: var(--paper); padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .book .tag.rare { background: var(--rust); color: #fff; }
+  .book .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .book h3 { font: 700 21px "Playfair Display"; }
+  .book .author { color: var(--soft); font-size: 14px; }
+  .book .foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 14px; }
+  .book .price { font: 700 22px "Playfair Display"; }
+  .book .state { font-size: 12px; color: var(--green); display: flex; align-items: center; gap: 4px; }
+  .add { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--ink); color: var(--paper); font-size: 22px; cursor: pointer; display: grid; place-items: center; }
+  .add.done { background: var(--green); }
+  .empty { text-align: center; padding: 60px 0; color: var(--soft); font-size: 18px; grid-column: 1/-1; }
+  .sell { background: var(--green); color: var(--paper); border-radius: 36px; padding: 70px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; overflow: hidden; }
+  .sell .kicker { color: #e7b58f; }
+  .steps { display: grid; gap: 16px; }
+  .step { background: #ffffff12; border: 1px solid #ffffff22; border-radius: 20px; padding: 22px; display: flex; gap: 18px; align-items: flex-start; }
+  .step i { font-size: 30px; color: #e7b58f; }
+  .step b { font: 700 20px "Playfair Display"; display: block; margin-bottom: 4px; }
+  .step span { opacity: .8; }
+  .visit { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+  .visit .photo { border-radius: 30px; overflow: hidden; height: 520px; }
+  .visit .photo img { width: 100%; height: 115%; object-fit: cover; }
+  .info li { list-style: none; display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: center; font-size: 17px; }
+  .info li i { font-size: 24px; color: var(--rust); }
+  .stats { display: flex; gap: 40px; margin: 28px 0; }
+  .stats b { font: 900 52px "Playfair Display"; display: block; line-height: 1; }
+  .stats span { color: var(--soft); font-size: 14px; }
+  .faq { max-width: 820px; margin: 0 auto; }
+  .q { border-bottom: 1px solid var(--line); }
+  .q button { width: 100%; background: none; border: 0; text-align: left; padding: 24px 0; font: 700 22px "Playfair Display"; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--ink); }
+  .q .a { overflow: hidden; color: var(--soft); font-size: 17px; line-height: 1.6; }
+  footer { text-align: center; padding: 50px 0 80px; color: var(--soft); font-size: 14px; }
+  .drawer { position: fixed; right: 0; top: 0; bottom: 0; width: min(430px, 100%); background: var(--paper); z-index: 80; display: flex; flex-direction: column; box-shadow: -30px 0 80px #2b1d1433; }
+  .drawer header { padding: 26px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+  .drawer .list { flex: 1; overflow: auto; padding: 20px 26px; display: flex; flex-direction: column; gap: 14px; }
+  .line { display: flex; gap: 14px; align-items: center; background: #fff; border-radius: 16px; padding: 10px; }
+  .line img { width: 56px; height: 70px; object-fit: cover; border-radius: 10px; }
+  .line button { margin-left: auto; background: none; border: 0; font-size: 22px; cursor: pointer; color: var(--soft); }
+  .drawer .foot { padding: 26px; border-top: 1px solid var(--line); }
+  .shade { position: fixed; inset: 0; background: #2b1d1466; z-index: 70; backdrop-filter: blur(2px); }
+  .wa { position: fixed; right: 24px; bottom: 24px; z-index: 40; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: #fff; display: grid; place-items: center; font-size: 30px; box-shadow: 0 10px 30px #25D36655; }
+  @media (max-width: 900px) {
+    .hero, .sell, .visit { grid-template-columns: 1fr; } .links { display: none; } .stackart { height: 440px; } .sell { padding: 44px 26px; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="module">
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { createRoot } from 'react-dom/client';
+import htm from 'htm';
+import { motion, AnimatePresence, useScroll, useTransform, useInView, animate, LayoutGroup } from 'framer-motion';
+const html = htm.bind(React.createElement);
+
+const WA = '5535984220874';
+const waLink = msg => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+const DEMO = 'Olá! Vi o site de demonstração do sebo de livros no portfólio da OctoMaker e quero um site assim para o meu negócio.';
+const img = (id, w = 600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+const BOOKS = [
+  { id: 1, t: 'Dom Casmurro', a: 'Machado de Assis', g: 'Romance', p: 18, s: 'Ótimo estado', ph: 'photo-1529590003495-b2646e2718bf' },
+  { id: 2, t: 'Os Lusíadas', a: 'Luís de Camões · edição de 1950', g: 'Raridades', p: 120, s: 'Capa de couro', ph: 'photo-1534289855405-ab820a118fc1', rare: true },
+  { id: 3, t: 'O Cortiço', a: 'Aluísio Azevedo', g: 'Romance', p: 16, s: 'Bom estado', ph: 'photo-1613577553731-e102e5de62f5' },
+  { id: 4, t: 'Eu', a: 'Augusto dos Anjos', g: 'Poesia', p: 20, s: 'Ótimo estado', ph: 'photo-1491841573634-28140fc7ced7' },
+  { id: 5, t: 'Os Sertões', a: 'Euclides da Cunha', g: 'História', p: 35, s: 'Bom estado', ph: 'photo-1585521549926-ca6526bda09e' },
+  { id: 6, t: 'Iracema', a: 'José de Alencar', g: 'Romance', p: 14, s: 'Ótimo estado', ph: 'photo-1491841651911-c44c30c34548' },
+  { id: 7, t: 'Memórias Póstumas', a: 'Machado de Assis · 1ª metade do séc. XX', g: 'Raridades', p: 95, s: 'Edição antiga', ph: 'photo-1534289907116-888fe70c4806', rare: true },
+  { id: 8, t: 'Poemas Escolhidos', a: 'Gonçalves Dias', g: 'Poesia', p: 22, s: 'Bom estado', ph: 'photo-1656712440320-7c07e7fae4f6' },
+];
+const GENRES = ['Todos', 'Romance', 'Poesia', 'História', 'Raridades'];
+
+const up = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: { duration: .8, ease: [.2, .8, .2, 1] } } };
+const Reveal = ({ children, delay = 0, as = 'div', ...p }) => html`<${motion[as]} initial="hidden" whileInView="show" viewport=${{ once: true, margin: '-60px' }} variants=${up} transition=${{ delay }} ...${p}>${children}</${motion[as]}>`;
+
+function Count({ to, suffix = '' }) {
+  const ref = useRef(null), inView = useInView(ref, { once: true });
+  const [v, setV] = useState(0);
+  useEffect(() => { if (inView) animate(0, to, { duration: 1.8, ease: 'easeOut', onUpdate: x => setV(Math.round(x)) }); }, [inView]);
+  return html`<b ref=${ref}>${v.toLocaleString('pt-BR')}${suffix}</b>`;
+}
+
+function Title({ text }) {
+  let k = 0;
+  return html`<h1>${text.map((line, li) => html`<span key=${li} style=${{ display: 'block' }}>${
+    line.t.split(' ').map((word, wi) => html`<span key=${wi} style=${{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: '.22em' }}>${
+      [...word].map((c, i) => html`<${motion.span} key=${i} className="char" initial=${{ y: 90, opacity: 0, rotate: 8 }} animate=${{ y: 0, opacity: 1, rotate: 0 }}
+        transition=${{ delay: .15 + (k++) * .035 + li * .1, duration: .7, ease: [.2, .9, .2, 1] }}>${line.em ? html`<em>${c}</em>` : c}</${motion.span}>`)
+    }</span>`)
+  }</span>`)}</h1>`;
+}
+
+function Hero() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 800], [0, -120]), y2 = useTransform(scrollY, [0, 800], [0, -40]), y3 = useTransform(scrollY, [0, 800], [0, 80]);
+  const r = useTransform(scrollY, [0, 800], [0, 360]);
+  const photos = [
+    { id: 'photo-1601073283455-b152abd9abd4', st: { left: '4%', top: '6%', width: '58%', height: '62%' }, rot: -6, y: y1 },
+    { id: 'photo-1588666309990-d68f08e3d4a6', st: { right: '0%', top: '20%', width: '46%', height: '52%' }, rot: 5, y: y2 },
+    { id: 'photo-1603058817990-2b9a9abbce86', st: { left: '18%', bottom: '0%', width: '48%', height: '40%' }, rot: 3, y: y3 },
+  ];
+  return html`<header className="wrap hero">
+    <div>
+      <${motion.p} className="kicker" initial=${{ opacity: 0 }} animate=${{ opacity: 1 }} transition=${{ delay: .1 }}><i className="ti ti-map-pin"></i>Centro · desde 1998</${motion.p}>
+      <${Title} text=${[{ t: 'Livros usados' }, { t: 'com histórias', em: true }, { t: 'novas.' }]} />
+      <${motion.p} initial=${{ opacity: 0, y: 20 }} animate=${{ opacity: 1, y: 0 }} transition=${{ delay: 1.2 }}>Mais de 12 mil títulos garimpados com cuidado. Clássicos, poesia, história e raridades a partir de R$ 10.</${motion.p}>
+      <${motion.div} style=${{ display: 'flex', gap: 12, flexWrap: 'wrap' }} initial=${{ opacity: 0, y: 20 }} animate=${{ opacity: 1, y: 0 }} transition=${{ delay: 1.35 }}>
+        <${motion.a} whileHover=${{ scale: 1.05 }} whileTap=${{ scale: .95 }} className="btn rust" href="#catalogo"><i className="ti ti-books"></i>Ver catálogo</${motion.a}>
+        <${motion.a} whileHover=${{ scale: 1.05 }} whileTap=${{ scale: .95 }} className="btn line" href="#vender"><i className="ti ti-cash"></i>Vender meus livros</${motion.a}>
+      </${motion.div}>
+    </div>
+    <div className="stackart">
+      ${photos.map((p, i) => html`<${motion.div} key=${i} className="ph" style=${{ ...p.st, y: p.y }}
+        initial=${{ opacity: 0, scale: .6, rotate: 0 }} animate=${{ opacity: 1, scale: 1, rotate: p.rot }} whileHover=${{ scale: 1.04, rotate: 0, zIndex: 10 }}
+        transition=${{ delay: .4 + i * .18, type: 'spring', stiffness: 90, damping: 14 }}><img src=${img(p.id, 800)} alt="" /></${motion.div}>`)}
+      <${motion.div} className="stamp" initial=${{ scale: 0 }} animate=${{ scale: 1 }} transition=${{ delay: 1.1, type: 'spring' }}>
+        <${motion.svg} viewBox="0 0 130 130" style=${{ rotate: r }}><defs><path id="c" d="M65 65 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0"/></defs>
+          <text fill="#f4ede1" style=${{ font: '600 11px Work Sans', letterSpacing: '3px' }}><textPath href="#c">COMPRAMOS · VENDEMOS · TROCAMOS · </textPath></text></${motion.svg}>
+        <i className="ti ti-book-2" style=${{ fontSize: 34 }}></i>
+      </${motion.div}>
+    </div>
+  </header>`;
+}
+
+function Ticker() {
+  const items = ['Clássicos brasileiros', 'Poesia', 'Primeiras edições', 'Livros de arte', 'História', 'Quadrinhos antigos'];
+  const row = [...items, ...items].map((t, i) => html`<span key=${i}>${t} <i className="ti ti-asterisk"></i></span>`);
+  return html`<div className="ticker"><${motion.div} className="row" animate=${{ x: ['0%', '-50%'] }} transition=${{ duration: 28, ease: 'linear', repeat: Infinity }}>${row}</${motion.div}></div>`;
+}
+
+function Catalog({ bag, toggle }) {
+  const [q, setQ] = useState(''), [g, setG] = useState('Todos');
+  const list = useMemo(() => BOOKS.filter(b => (g === 'Todos' || b.g === g) && (b.t + b.a).toLowerCase().includes(q.toLowerCase())), [q, g]);
+  return html`<section id="catalogo" className="wrap">
+    <${Reveal}><p className="kicker"><i className="ti ti-sparkles"></i>Chegaram esta semana</p><h2>Catálogo</h2></${Reveal}>
+    <${Reveal} delay=${.1} className="tools">
+      <label className="search"><i className="ti ti-search" style=${{ fontSize: 20 }}></i><input placeholder="Buscar título ou autor" value=${q} onInput=${e => setQ(e.target.value)} /></label>
+      <${LayoutGroup}><div className="chips">${GENRES.map(x => html`<button key=${x} className=${'chip' + (g === x ? ' on' : '')} onClick=${() => setG(x)}>
+        ${g === x && html`<${motion.span} layoutId="pill" className="pill" transition=${{ type: 'spring', stiffness: 400, damping: 32 }} />`}${x}</button>`)}</div></${LayoutGroup}>
+    </${Reveal}>
+    <${motion.div} layout className="books">
+      <${AnimatePresence} mode="popLayout">
+        ${list.map((b, i) => html`<${motion.article} layout key=${b.id} className="book"
+          initial=${{ opacity: 0, scale: .85, y: 30 }} animate=${{ opacity: 1, scale: 1, y: 0 }} exit=${{ opacity: 0, scale: .85 }}
+          transition=${{ duration: .45, delay: i * .04 }} whileHover=${{ y: -10, rotate: -1, boxShadow: '0 30px 60px #2b1d1426' }}>
+          <div className="cover"><${motion.img} src=${img(b.ph)} alt=${b.t} whileHover=${{ scale: 1.1 }} transition=${{ duration: .6 }} /><span className=${'tag' + (b.rare ? ' rare' : '')}>${b.g}</span></div>
+          <div className="body"><h3>${b.t}</h3><span className="author">${b.a}</span>
+            <span className="state"><i className="ti ti-circle-check"></i>${b.s}</span>
+            <div className="foot"><span className="price">R$ ${b.p}</span>
+              <${motion.button} whileTap=${{ scale: .8, rotate: -20 }} className=${'add' + (bag.includes(b.id) ? ' done' : '')} onClick=${() => toggle(b.id)} aria-label="Reservar">
+                <${AnimatePresence} mode="wait"><${motion.i} key=${bag.includes(b.id)} className=${'ti ' + (bag.includes(b.id) ? 'ti-check' : 'ti-bookmark-plus')} initial=${{ scale: 0, rotate: -90 }} animate=${{ scale: 1, rotate: 0 }} exit=${{ scale: 0 }} /></${AnimatePresence}>
+              </${motion.button}></div></div>
+        </${motion.article}>`)}
+      </${AnimatePresence}>
+      ${!list.length && html`<p className="empty">Nenhum livro encontrado. Pergunte pelo WhatsApp, a gente procura para você.</p>`}
+    </${motion.div}>
+  </section>`;
+}
+
+function Sell() {
+  const steps = [['ti-camera', 'Mande fotos', 'Tire fotos das capas e envie pelo WhatsApp.'], ['ti-receipt-2', 'Receba a proposta', 'Avaliamos em até 1 dia útil.'], ['ti-truck', 'Buscamos na sua casa', 'Para coleções acima de 50 livros.']];
+  return html`<section id="vender" className="wrap"><${Reveal} className="sell">
+    <div><p className="kicker"><i className="ti ti-refresh"></i>Seus livros valem dinheiro</p><h2>Vender ou trocar</h2>
+      <p style=${{ opacity: .85, fontSize: 18, lineHeight: 1.6, margin: '10px 0 26px' }}>Compramos bibliotecas inteiras ou poucos livros. Pagamento no Pix ou crédito para trocar na loja.</p>
+      <${motion.a} whileHover=${{ scale: 1.05 }} className="btn" style=${{ background: 'var(--paper)', color: 'var(--ink)' }} href=${waLink(DEMO)} target="_blank"><i className="ti ti-brand-whatsapp"></i>Enviar fotos dos livros</${motion.a}></div>
+    <div className="steps">${steps.map(([ic, t, d], i) => html`<${motion.div} key=${i} className="step" initial=${{ opacity: 0, x: 60 }} whileInView=${{ opacity: 1, x: 0 }} viewport=${{ once: true }} transition=${{ delay: .2 + i * .15, duration: .7 }} whileHover=${{ x: 8 }}>
+      <i className=${'ti ' + ic}></i><div><b>${t}</b><span>${d}</span></div></${motion.div}>`)}</div>
+  </${Reveal}></section>`;
+}
+
+function Visit() {
+  const ref = useRef(null), { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '0%']);
+  return html`<section className="wrap visit" ref=${ref}>
+    <${Reveal} className="photo"><${motion.img} style=${{ y }} src=${img('photo-1669362177395-f31767c3b9ed', 1200)} alt="Corredor do sebo" /></${Reveal}>
+    <div><${Reveal}><p className="kicker"><i className="ti ti-door-enter"></i>Venha garimpar</p><h2>Visite o sebo</h2></${Reveal}>
+      <${Reveal} className="stats" delay=${.1}><div><${Count} to=${12000} /><span>títulos</span></div><div><${Count} to=${26} /><span>anos</span></div><div><${Count} to=${4} /><span>andares de estante</span></div></${Reveal}>
+      <${Reveal} as="ul" className="info" delay=${.2}>
+        <li><i className="ti ti-map-pin"></i>Rua dos Livreiros, 88 · Centro</li>
+        <li><i className="ti ti-clock"></i>Segunda a sábado, das 9h às 19h</li>
+        <li><i className="ti ti-coffee"></i>Café e cantinho de leitura</li>
+      </${Reveal}></div>
+  </section>`;
+}
+
+function Faq() {
+  const [open, setOpen] = useState(0);
+  const qs = [['Vocês entregam?', 'Sim. Enviamos para todo o Brasil pelos Correios e entregamos no centro no mesmo dia.'], ['Posso reservar pelo site?', 'Pode. Marque os livros e envie a lista pelo WhatsApp. Guardamos por 3 dias.'], ['Vocês procuram livros específicos?', 'Sim. Mande o título e avisamos quando encontrarmos.']];
+  return html`<section className="wrap"><div className="faq"><${Reveal}><h2 style=${{ textAlign: 'center', marginBottom: 30 }}>Perguntas</h2></${Reveal}>
+    ${qs.map(([q, a], i) => html`<${Reveal} key=${i} delay=${i * .1} className="q"><button onClick=${() => setOpen(open === i ? -1 : i)}>${q}<${motion.i} className="ti ti-plus" animate=${{ rotate: open === i ? 45 : 0 }} /></button>
+      <${AnimatePresence} initial=${false}>${open === i && html`<${motion.div} className="a" initial=${{ height: 0, opacity: 0 }} animate=${{ height: 'auto', opacity: 1 }} exit=${{ height: 0, opacity: 0 }} transition=${{ duration: .35 }}><p style=${{ paddingBottom: 22 }}>${a}</p></${motion.div}>`}</${AnimatePresence}></${Reveal}>`)}
+  </div></section>`;
+}
+
+function Drawer({ bag, toggle, close }) {
+  const items = BOOKS.filter(b => bag.includes(b.id)), total = items.reduce((s, b) => s + b.p, 0);
+  const msg = DEMO + '\n\nTestei a reserva com estes livros:\n' + items.map(b => `• ${b.t} (R$ ${b.p})`).join('\n') + `\nTotal: R$ ${total}`;
+  return html`<${motion.div} className="shade" onClick=${close} initial=${{ opacity: 0 }} animate=${{ opacity: 1 }} exit=${{ opacity: 0 }} />
+    <${motion.aside} className="drawer" initial=${{ x: '100%' }} animate=${{ x: 0 }} exit=${{ x: '100%' }} transition=${{ type: 'spring', stiffness: 260, damping: 30 }}>
+      <header><h3 className="serif" style=${{ fontSize: 30 }}>Reservas</h3><button className="btn line" style=${{ padding: '8px 14px' }} onClick=${close}><i className="ti ti-x"></i></button></header>
+      <div className="list"><${AnimatePresence}>${items.map(b => html`<${motion.div} layout key=${b.id} className="line" initial=${{ opacity: 0, x: 40 }} animate=${{ opacity: 1, x: 0 }} exit=${{ opacity: 0, x: 60 }}>
+        <img src=${img(b.ph, 200)} alt="" /><div><b className="serif" style=${{ fontSize: 18 }}>${b.t}</b><br /><span style=${{ color: 'var(--soft)', fontSize: 14 }}>R$ ${b.p}</span></div>
+        <button onClick=${() => toggle(b.id)} aria-label="Remover"><i className="ti ti-trash"></i></button></${motion.div}>`)}</${AnimatePresence}>
+        ${!items.length && html`<p style=${{ color: 'var(--soft)', textAlign: 'center', padding: 40 }}><i className="ti ti-bookmark" style=${{ fontSize: 48, display: 'block' }}></i>Nenhum livro reservado ainda.</p>`}</div>
+      ${items.length > 0 && html`<div className="foot"><div style=${{ display: 'flex', justifyContent: 'space-between', font: '700 24px Playfair Display', marginBottom: 16 }}><span>Total</span><span>R$ ${total}</span></div>
+        <a className="btn rust" style=${{ width: '100%', justifyContent: 'center' }} href=${waLink(msg)} target="_blank"><i className="ti ti-brand-whatsapp"></i>Reservar pelo WhatsApp</a></div>`}
+    </${motion.aside}>`;
+}
+
+function App() {
+  const [bag, setBag] = useState([]), [open, setOpen] = useState(false), [solid, setSolid] = useState(false);
+  useEffect(() => { const f = () => setSolid(scrollY > 40); addEventListener('scroll', f); return () => removeEventListener('scroll', f); }, []);
+  const toggle = id => setBag(b => b.includes(id) ? b.filter(x => x !== id) : [...b, id]);
+  return html`<${React.Fragment}>
+    <${motion.nav} className=${solid ? 'solid' : ''} initial=${{ y: -80 }} animate=${{ y: 0 }} transition=${{ duration: .7 }}><div className="wrap">
+      <a className="logo" href="#"><i className="ti ti-book"></i>Traça</a>
+      <div className="links"><a href="#catalogo">Catálogo</a><a href="#vender">Vender livros</a><a href="#visite">Visite</a></div>
+      <${motion.button} whileTap=${{ scale: .9 }} className="btn bag" onClick=${() => setOpen(true)}><i className="ti ti-bookmarks"></i>Reservas
+        <${AnimatePresence}>${bag.length > 0 && html`<${motion.span} key=${bag.length} className="count" initial=${{ scale: 0 }} animate=${{ scale: [1.6, 1] }} exit=${{ scale: 0 }}>${bag.length}</${motion.span}>`}</${AnimatePresence}>
+      </${motion.button}></div></${motion.nav}>
+    <${Hero} /><${Ticker} /><${Catalog} bag=${bag} toggle=${toggle} /><${Sell} /><div id="visite"><${Visit} /></div><${Faq} />
+    <footer>Site de demonstração criado por <b>OctoMaker</b> · React + Framer Motion · Fotos: Unsplash</footer>
+    <${motion.a} className="wa" href=${waLink(DEMO)} target="_blank" aria-label="WhatsApp" initial=${{ scale: 0 }} animate=${{ scale: 1 }} transition=${{ delay: 1.6, type: 'spring' }} whileHover=${{ scale: 1.12, rotate: -10 }}><i className="ti ti-brand-whatsapp"></i></${motion.a}>
+    <${AnimatePresence}>${open && html`<${Drawer} bag=${bag} toggle=${toggle} close=${() => setOpen(false)} />`}</${AnimatePresence}>
+  </${React.Fragment}>`;
+}
+
+createRoot(document.getElementById('root')).render(html`<${App} />`);
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site do sebo de livros"></script>
+</body>
+</html>

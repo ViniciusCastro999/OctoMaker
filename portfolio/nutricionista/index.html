@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lívia Campos · Nutricionista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: '#f7f2e9', sage: { 50: '#eef3ec', 100: '#dde8d9', 300: '#a9c2a0', 500: '#6b8f5e', 700: '#3f5b36', 900: '#23331f' },
+          peach: '#f4b68f', tomato: '#e5654a'
+        },
+        fontFamily: { serif: ['Fraunces', 'serif'], sans: ['DM Sans', 'sans-serif'] },
+        keyframes: {
+          rise: { '0%': { opacity: 0, transform: 'translateY(40px)' }, '100%': { opacity: 1, transform: 'none' } },
+          float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
+          marquee: { to: { transform: 'translateX(-50%)' } },
+          reveal: { '0%': { clipPath: 'inset(100% 0 0 0 round 200px 200px 32px 32px)' }, '100%': { clipPath: 'inset(0 0 0 0 round 200px 200px 32px 32px)' } },
+          zoomout: { '0%': { transform: 'scale(1.25)' }, '100%': { transform: 'scale(1)' } },
+          spin: { to: { transform: 'rotate(360deg)' } },
+          shine: { '0%': { left: '-60%' }, '100%': { left: '130%' } },
+        },
+        animation: {
+          rise: 'rise .9s cubic-bezier(.2,.8,.2,1) both',
+          float: 'float 5s ease-in-out infinite',
+          marquee: 'marquee 28s linear infinite',
+          reveal: 'reveal 1.3s cubic-bezier(.7,0,.2,1) both',
+          zoomout: 'zoomout 1.8s cubic-bezier(.2,.8,.2,1) both',
+          spinslow: 'spin 14s linear infinite',
+        }
+      }
+    }
+  }
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+<style>
+  [x-cloak] { display: none !important; }
+  .reveal { opacity: 0; transform: translateY(50px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .btn-shine { position: relative; overflow: hidden; }
+  .btn-shine::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, #fff8, transparent); transform: skewX(-20deg); }
+  .btn-shine:hover::after { animation: shine .8s ease; }
+  @keyframes shine { to { left: 130%; } }
+  .price-pop { animation: pop .45s cubic-bezier(.2,1.6,.4,1); }
+  @keyframes pop { 0% { transform: scale(.7); opacity: 0; } 100% { transform: none; opacity: 1; } }
+</style>
+</head>
+<body class="bg-cream font-sans text-sage-900 antialiased overflow-x-hidden" x-data="{ menu:false, scrolled:false }" @scroll.window="scrolled = window.scrollY > 30">
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-40 transition-all duration-500" :class="scrolled ? 'bg-cream/85 backdrop-blur shadow-sm py-2' : 'py-5'">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <a href="#" class="font-serif text-xl font-semibold flex items-center gap-2"><i class="ph-fill ph-leaf text-sage-500 text-2xl"></i>Lívia Campos</a>
+    <nav class="hidden md:flex gap-8 text-sm font-medium">
+      <template x-for="l in [['#sobre','Sobre'],['#como','Como funciona'],['#planos','Planos'],['#duvidas','Dúvidas']]">
+        <a :href="l[0]" class="hover:text-sage-500 transition" x-text="l[1]"></a>
+      </template>
+    </nav>
+    <a href="#agendar" class="btn-shine hidden md:inline-flex items-center gap-2 bg-sage-700 text-cream px-5 py-2.5 rounded-full text-sm font-medium hover:bg-sage-900 transition"><i class="ph ph-calendar-check text-lg"></i>Agendar consulta</a>
+    <button class="md:hidden p-2 text-2xl" @click="menu=!menu" aria-label="Menu"><i class="ph" :class="menu ? 'ph-x' : 'ph-list'"></i></button>
+  </div>
+  <div x-cloak x-show="menu" x-transition.origin.top class="md:hidden px-5 pb-5 flex flex-col gap-3 text-sm font-medium bg-cream">
+    <a href="#sobre" @click="menu=false">Sobre</a><a href="#como" @click="menu=false">Como funciona</a>
+    <a href="#planos" @click="menu=false">Planos</a><a href="#duvidas" @click="menu=false">Dúvidas</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-5 pt-32 pb-20 grid md:grid-cols-2 gap-12 items-center">
+  <div>
+    <span class="animate-rise inline-flex items-center gap-2 bg-sage-100 text-sage-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+      <span class="relative flex w-2 h-2"><span class="absolute inset-0 rounded-full bg-sage-500 animate-ping"></span><span class="relative w-2 h-2 rounded-full bg-sage-500"></span></span>
+      Agenda aberta para outubro
+    </span>
+    <h1 class="font-serif text-5xl md:text-7xl leading-[1.02] mt-6">
+      <span class="block animate-rise" style="animation-delay:.1s">Comer bem</span>
+      <span class="block animate-rise" style="animation-delay:.2s">pode ser <em class="text-sage-500">leve</em></span>
+      <span class="block animate-rise" style="animation-delay:.3s">e gostoso.</span>
+    </h1>
+    <p class="animate-rise mt-6 text-lg text-sage-700 max-w-md" style="animation-delay:.45s">Planos alimentares feitos para a sua rotina, com comida de verdade e acompanhamento de perto.</p>
+    <div class="animate-rise mt-8 flex flex-wrap gap-3" style="animation-delay:.6s">
+      <a href="#agendar" class="btn-shine inline-flex items-center gap-2 bg-tomato text-white px-7 py-4 rounded-full font-medium shadow-lg shadow-tomato/30 hover:-translate-y-1 hover:shadow-xl transition"><i class="ph-bold ph-arrow-right"></i>Quero agendar</a>
+      <a href="#como" class="inline-flex items-center gap-2 px-7 py-4 rounded-full font-medium border border-sage-300 hover:bg-sage-50 transition"><i class="ph ph-play-circle text-xl"></i>Como funciona</a>
+    </div>
+    <div class="animate-rise mt-10 flex items-center gap-4" style="animation-delay:.75s">
+      <div class="flex -space-x-3">
+        <img class="w-11 h-11 rounded-full ring-4 ring-cream object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" alt="">
+        <img class="w-11 h-11 rounded-full ring-4 ring-cream object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" alt="">
+        <img class="w-11 h-11 rounded-full ring-4 ring-cream object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80" alt="">
+      </div>
+      <div class="text-sm"><div class="flex text-peach"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><b>+800 pacientes</b> atendidos</div>
+    </div>
+  </div>
+  <div class="relative">
+    <div class="absolute -inset-6 rounded-t-[220px] rounded-b-[40px] bg-sage-300/50 blur-2xl animate-float"></div>
+    <div class="relative rounded-t-[200px] rounded-b-[32px] overflow-hidden aspect-[4/5] animate-reveal" style="animation-delay:.2s">
+      <img class="w-full h-full object-cover animate-zoomout" style="animation-delay:.2s" src="https://images.unsplash.com/photo-1585358682246-23acb1561f6b?auto=format&fit=crop&w=900&q=80" alt="Nutricionista Lívia Campos">
+    </div>
+    <div class="absolute -left-6 bottom-16 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-float">
+      <div class="w-11 h-11 rounded-xl bg-sage-100 grid place-items-center text-sage-700 text-2xl"><i class="ph-fill ph-bowl-food"></i></div>
+      <div class="text-sm"><b>Plano semanal</b><br><span class="text-sage-500">pronto no app</span></div>
+    </div>
+    <div class="absolute -right-4 top-14 bg-white rounded-2xl shadow-xl p-4 text-sm animate-float" style="animation-delay:-2.5s">
+      <span class="text-sage-500 flex items-center gap-1"><i class="ph ph-target"></i>Meta do mês</span>
+      <div class="w-40 h-2 bg-sage-100 rounded-full mt-2 overflow-hidden" x-data="{w:0}" x-init="setTimeout(()=>w=75,900)"><div class="h-2 bg-sage-500 rounded-full transition-all duration-[1500ms]" :style="`width:${w}%`"></div></div>
+      <b class="block mt-2">75% concluída</b>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="bg-sage-900 text-cream py-6 overflow-hidden">
+  <div class="flex w-max animate-marquee font-serif text-2xl md:text-3xl">
+    <template x-for="n in 2">
+      <div class="flex items-center gap-10 pr-10">
+        <span>Emagrecimento</span><i class="ph-fill ph-leaf text-peach"></i><span>Nutrição esportiva</span><i class="ph-fill ph-barbell text-peach"></i>
+        <span>Gestantes</span><i class="ph-fill ph-baby text-peach"></i><span>Intolerâncias</span><i class="ph-fill ph-grains text-peach"></i><span>Reeducação alimentar</span><i class="ph-fill ph-carrot text-peach"></i>
+      </div>
+    </template>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="max-w-6xl mx-auto px-5 py-24 grid md:grid-cols-2 gap-14 items-center">
+  <div class="reveal relative" x-intersect.once="$el.classList.add('in')">
+    <div class="rounded-[2rem] overflow-hidden aspect-[4/5] group">
+      <img class="w-full h-full object-cover group-hover:scale-105 transition duration-700" src="https://images.unsplash.com/photo-1675270882554-ab6817fb44f3?auto=format&fit=crop&w=900&q=80" alt="">
+    </div>
+    <div class="absolute -bottom-6 -right-6 bg-peach rounded-3xl p-6 shadow-xl">
+      <i class="ph-fill ph-certificate text-3xl"></i><p class="font-serif text-lg mt-2">CRN 0 00000</p>
+    </div>
+  </div>
+  <div>
+    <p class="reveal text-sm font-bold uppercase tracking-widest text-sage-500" x-intersect.once="$el.classList.add('in')">Prazer, Lívia</p>
+    <h2 class="reveal font-serif text-4xl md:text-5xl mt-3" x-intersect.once="$el.classList.add('in')">Nutrição sem dieta maluca.</h2>
+    <p class="reveal mt-6 text-sage-700 text-lg" x-intersect.once="$el.classList.add('in')">Sou nutricionista clínica há 10 anos. Monto planos com os alimentos que você já gosta, respeitando sua rotina, seu orçamento e seus objetivos.</p>
+    <div class="grid grid-cols-3 gap-4 mt-10">
+      <template x-for="(s,i) in [{n:10,l:'anos de clínica',i:'ph-calendar'},{n:800,l:'pacientes',i:'ph-users-three'},{n:98,l:'% recomendam',i:'ph-heart'}]">
+        <div class="reveal bg-white rounded-2xl p-5 border border-sage-100" :style="`transition-delay:${i*120}ms`"
+             x-data="{v:0}" x-intersect.once="$el.classList.add('in'); let t=0; const f=()=>{t+=1/60; v=Math.round(s.n*Math.min(t/1.4,1)); if(t<1.4) requestAnimationFrame(f)}; f()">
+          <i class="ph-duotone text-2xl text-sage-500" :class="s.i"></i>
+          <b class="block font-serif text-3xl mt-2" x-text="(s.n===800?'+':'')+v"></b><span class="text-xs text-sage-500" x-text="s.l"></span>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como" class="bg-white py-24">
+  <div class="max-w-6xl mx-auto px-5">
+    <h2 class="reveal font-serif text-4xl md:text-5xl max-w-xl" x-intersect.once="$el.classList.add('in')">Como funciona o acompanhamento</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <template x-for="(s,i) in [
+        {t:'Primeira consulta', d:'Conversamos sobre sua rotina, gostos, exames e objetivos. Duração de 1 hora.', i:'ph-chats-circle'},
+        {t:'Plano personalizado', d:'Você recebe um plano com receitas simples e lista de compras em até 3 dias.', i:'ph-clipboard-text'},
+        {t:'Retornos e ajustes', d:'A cada 30 dias revisamos os resultados. Entre as consultas, tire dúvidas pelo WhatsApp.', i:'ph-chart-line-up'}]">
+        <div class="reveal group bg-cream rounded-3xl p-8 border border-sage-100 hover:bg-sage-900 hover:text-cream hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
+             :style="`transition-delay:${i*150}ms`" x-intersect.once="$el.classList.add('in')">
+          <div class="flex items-center justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-sage-100 text-sage-700 grid place-items-center text-3xl group-hover:bg-peach group-hover:rotate-12 transition duration-500"><i class="ph-duotone" :class="s.i"></i></div>
+            <span class="font-serif text-5xl text-sage-300 group-hover:text-peach transition" x-text="'0'+(i+1)"></span>
+          </div>
+          <h3 class="font-serif text-2xl mt-6" x-text="s.t"></h3>
+          <p class="mt-3 opacity-80" x-text="s.d"></p>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- RECEITAS -->
+<section class="max-w-6xl mx-auto px-5 py-24">
+  <div class="flex items-end justify-between flex-wrap gap-4">
+    <h2 class="reveal font-serif text-4xl md:text-5xl" x-intersect.once="$el.classList.add('in')">Receitas dos pacientes</h2>
+    <p class="reveal text-sage-700 max-w-sm" x-intersect.once="$el.classList.add('in')">Pratos simples que fazem parte dos planos. Fáceis de preparar no dia a dia.</p>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+    <template x-for="(r,i) in [
+      {img:'photo-1546069901-ba9599a7e63c', t:'Bowl de frango', m:'20 min'},
+      {img:'photo-1490645935967-10de6ba17061', t:'Ovos com legumes', m:'15 min'},
+      {img:'photo-1547592180-85f173990554', t:'Salada completa', m:'10 min'},
+      {img:'photo-1542691457-cbe4df041eb2', t:'Iogurte com frutas', m:'5 min'}]">
+      <div class="reveal group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer" :style="`transition-delay:${i*120}ms`" x-intersect.once="$el.classList.add('in')">
+        <img class="w-full h-full object-cover group-hover:scale-110 transition duration-700" :src="`https://images.unsplash.com/${r.img}?auto=format&fit=crop&w=600&q=80`" :alt="r.t">
+        <div class="absolute inset-0 bg-gradient-to-t from-sage-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 p-5 text-cream translate-y-3 group-hover:translate-y-0 transition duration-500">
+          <b class="font-serif text-xl" x-text="r.t"></b>
+          <p class="text-sm flex items-center gap-1 opacity-0 group-hover:opacity-100 transition duration-500"><i class="ph ph-timer"></i><span x-text="r.m"></span></p>
+        </div>
+      </div>
+    </template>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section id="planos" class="bg-sage-50 py-24" x-data="{ online:false }">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <h2 class="reveal font-serif text-4xl md:text-5xl" x-intersect.once="$el.classList.add('in')">Planos</h2>
+      <div class="relative bg-white rounded-full p-1 inline-flex text-sm font-medium border border-sage-100">
+        <span class="absolute top-1 bottom-1 w-[calc(50%-4px)] bg-sage-700 rounded-full transition-all duration-500" :style="online ? 'left:calc(50%)' : 'left:4px'"></span>
+        <button @click="online=false" :class="!online && 'text-cream'" class="relative px-6 py-2 rounded-full transition flex items-center gap-2"><i class="ph ph-map-pin"></i>Presencial</button>
+        <button @click="online=true" :class="online && 'text-cream'" class="relative px-6 py-2 rounded-full transition flex items-center gap-2"><i class="ph ph-video-camera"></i>Online</button>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <template x-for="(p,i) in [
+        {n:'Consulta avulsa', d:'Para quem quer orientação pontual.', pr:[250,220], f:['Avaliação completa','Plano alimentar','1 retorno em 30 dias']},
+        {n:'Trimestral', d:'Acompanhamento para ver resultado.', pr:[650,590], f:['3 consultas','Plano ajustado todo mês','Suporte pelo WhatsApp','Receitas exclusivas'], hot:true},
+        {n:'Semestral', d:'Mudança de hábito de verdade.', pr:[1190,1090], f:['6 consultas','Bioimpedância mensal','Suporte pelo WhatsApp']}]">
+        <div class="reveal rounded-3xl p-8 hover:-translate-y-2 transition duration-500 relative" :style="`transition-delay:${i*150}ms`"
+             :class="p.hot ? 'bg-sage-900 text-cream shadow-2xl md:-translate-y-4' : 'bg-white hover:shadow-xl'" x-intersect.once="$el.classList.add('in')">
+          <span x-show="p.hot" class="absolute -top-3 left-8 bg-peach text-sage-900 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1"><i class="ph-fill ph-fire"></i>MAIS ESCOLHIDO</span>
+          <h3 class="font-serif text-2xl" x-text="p.n"></h3>
+          <p class="mt-2 text-sm opacity-70" x-text="p.d"></p>
+          <p class="font-serif text-5xl mt-6">R$ <span class="inline-block price-pop" x-text="p.pr[online?1:0].toLocaleString('pt-BR')" x-effect="online; $el.classList.remove('price-pop'); void $el.offsetWidth; $el.classList.add('price-pop')"></span></p>
+          <ul class="mt-6 space-y-3 text-sm">
+            <template x-for="f in p.f"><li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-lg" :class="p.hot ? 'text-peach' : 'text-sage-500'"></i><span x-text="f"></span></li></template>
+          </ul>
+          <a href="#agendar" class="btn-shine mt-8 w-full inline-flex justify-center items-center gap-2 py-3 rounded-full font-medium transition" :class="p.hot ? 'bg-peach text-sage-900 hover:bg-white' : 'border border-sage-300 hover:bg-sage-700 hover:text-cream'">Escolher plano<i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="max-w-6xl mx-auto px-5 py-24" x-data="{ i:0, d:[
+  {t:'Perdi 9 kg sem passar fome. As receitas são fáceis e a família toda come junto.', n:'Mariana S.', r:'Paciente há 6 meses', img:'photo-1494790108377-be9c29b29330'},
+  {t:'Melhorei meu rendimento na corrida e finalmente entendi o que comer antes do treino.', n:'Rafael T.', r:'Corredor amador', img:'photo-1507003211169-0a1dd7228f2d'},
+  {t:'Atendimento carinhoso durante a gravidez. Me senti segura em cada fase.', n:'Juliana M.', r:'Gestante', img:'photo-1438761681033-6461ffad8d80'}] }"
+  x-init="setInterval(() => i = (i + 1) % d.length, 5500)">
+  <div class="reveal bg-peach/40 rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden min-h-[340px]" x-intersect.once="$el.classList.add('in')">
+    <i class="ph-fill ph-quotes absolute top-8 right-10 text-8xl text-peach"></i>
+    <template x-for="(q,k) in d" :key="k">
+      <div x-show="i===k" x-transition:enter="transition duration-700 ease-out" x-transition:enter-start="opacity-0 translate-x-10" x-transition:enter-end="opacity-100 translate-x-0"
+           x-transition:leave="transition duration-300 absolute" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-x-10">
+        <p class="font-serif text-3xl md:text-4xl leading-snug relative max-w-3xl" x-text="q.t"></p>
+        <div class="mt-8 flex items-center gap-4">
+          <img class="w-14 h-14 rounded-full object-cover" :src="`https://images.unsplash.com/${q.img}?auto=format&fit=crop&w=120&h=120&q=80`" alt="">
+          <div><b x-text="q.n"></b><br><span class="text-sage-700 text-sm" x-text="q.r"></span></div>
+        </div>
+      </div>
+    </template>
+    <div class="flex gap-2 mt-8 relative">
+      <template x-for="(_,k) in d"><button @click="i=k" :class="i===k ? 'w-10 bg-sage-900' : 'w-3 bg-sage-300'" class="h-3 rounded-full transition-all duration-500" :aria-label="'Depoimento '+(k+1)"></button></template>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="duvidas" class="max-w-3xl mx-auto px-5 pb-24" x-data="{ open:0 }">
+  <h2 class="reveal font-serif text-4xl md:text-5xl text-center" x-intersect.once="$el.classList.add('in')">Dúvidas frequentes</h2>
+  <div class="mt-10 space-y-3">
+    <template x-for="(f,k) in [
+      {q:'Aceita plano de saúde?', a:'O atendimento é particular. Emito recibo para você pedir reembolso ao seu convênio.'},
+      {q:'Como é a consulta online?', a:'Por videochamada, com o mesmo tempo e cuidado da presencial. O plano chega pelo aplicativo.'},
+      {q:'Preciso levar exames?', a:'Se tiver exames dos últimos 6 meses, traga. Se não tiver, eu peço os que forem necessários.'},
+      {q:'Vou precisar cortar tudo que gosto?', a:'Não. O plano é montado com os alimentos que você já come e gosta.'}]">
+      <div class="reveal bg-white rounded-2xl border border-sage-100 overflow-hidden" :style="`transition-delay:${k*100}ms`" x-intersect.once="$el.classList.add('in')">
+        <button @click="open = open===k ? null : k" class="w-full flex justify-between items-center p-5 text-left font-medium text-lg">
+          <span x-text="f.q"></span>
+          <span class="w-9 h-9 rounded-full grid place-items-center transition duration-500" :class="open===k ? 'bg-sage-700 text-cream rotate-45' : 'bg-sage-100'"><i class="ph-bold ph-plus"></i></span>
+        </button>
+        <div x-show="open===k" x-collapse.duration.400ms><p class="px-5 pb-5 text-sage-700" x-text="f.a"></p></div>
+      </div>
+    </template>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="agendar" class="px-5 pb-10">
+  <div class="reveal max-w-6xl mx-auto bg-sage-700 text-cream rounded-[2.5rem] p-10 md:p-16 grid md:grid-cols-2 gap-8 items-center relative overflow-hidden" x-intersect.once="$el.classList.add('in')">
+    <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-sage-500/40 animate-float"></div>
+    <div class="relative">
+      <h2 class="font-serif text-4xl md:text-5xl">Vamos começar?</h2>
+      <p class="mt-4 text-sage-100 flex items-center gap-2"><i class="ph ph-map-pin"></i>Rua das Flores, 120, sala 4</p>
+      <p class="mt-1 text-sage-100 flex items-center gap-2"><i class="ph ph-clock"></i>Segunda a sexta, das 8h às 19h</p>
+    </div>
+    <div class="flex md:justify-end relative">
+      <a href="https://wa.me/5535984220874?text=Ol%C3%A1%21%20Vi%20o%20site%20de%20demonstra%C3%A7%C3%A3o%20da%20nutricionista%20no%20portf%C3%B3lio%20da%20OctoMaker%20e%20quero%20um%20site%20assim%20para%20o%20meu%20neg%C3%B3cio." class="btn-shine bg-cream text-sage-900 px-8 py-5 rounded-full font-bold text-lg hover:scale-105 transition inline-flex items-center gap-3">
+        <i class="ph-fill ph-whatsapp-logo text-2xl text-[#25D366]"></i>Agendar pelo WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<a href="https://wa.me/5535984220874?text=Ol%C3%A1%21%20Vi%20o%20site%20de%20demonstra%C3%A7%C3%A3o%20da%20nutricionista%20no%20portf%C3%B3lio%20da%20OctoMaker%20e%20quero%20um%20site%20assim%20para%20o%20meu%20neg%C3%B3cio." class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-[#25D366] text-white grid place-items-center text-3xl shadow-xl hover:scale-110 transition" aria-label="WhatsApp">
+  <span class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40"></span><i class="ph-fill ph-whatsapp-logo relative"></i>
+</a>
+
+<footer class="text-center text-sm text-sage-500 py-10">Site de demonstração criado por <b>OctoMaker</b> · Tailwind CSS + Alpine.js · Fotos: Unsplash</footer>
+<script src="../assets/octomaker-badge.js" data-site="o site da nutricionista"></script>
+</body>
+</html>
