@@ -264,7 +264,7 @@
     $('#back').style.visibility = st.step ? 'visible' : 'hidden';
     $('#nextBtn').innerHTML = st.step === 2 ? '<img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="" style="width:1em;height:1em;display:inline-block;vertical-align:-.15em">Confirmar pelo WhatsApp' : 'Continuar<span class="ms">arrow_forward</span>';
   };
-  $('#nextBtn').onclick = () => { if (st.step < 2) { st.step++; render(); } else window.open(wa(`${DEMO}\n\nTestei o agendamento: ${st.svc}, ${st.day} às ${st.time}.`), '_blank'); };
+  $('#nextBtn').onclick = () => { if (st.step < 2) { st.step++; render(); } else { window.omTrack && omTrack('clique-whatsapp'); window.open(wa(`${DEMO}\n\nTestei o agendamento: ${st.svc}, ${st.day} às ${st.time}.`), '_blank'); } };
   $('#back').onclick = () => { st.step--; render(); };
   render();
 
@@ -285,5 +285,6 @@
   }
 </script>
 <script src="../assets/octomaker-badge.js" data-site="o site do estúdio de sobrancelhas"></script>
+<script src="../assets/octomaker-stats.js"></script>
 </body>
 </html>
