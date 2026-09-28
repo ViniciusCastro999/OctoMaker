@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garimpo · Brechó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Outfit:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
+<style>
+  :root { --cream: #f3ebdd; --paper: #fbf6ec; --ink: #2a211b; --soft: #7a6a5c; --terra: #c4562b; --mustard: #e3a92b; --olive: #5b6a3a; --pink: #eeb7a8; --line: #ddd0bb; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: Outfit, sans-serif; }
+  body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 200; opacity: .28; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E"); }
+  a { color: inherit; text-decoration: none; }
+  .ti { vertical-align: -.12em; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .serif { font-family: Gloock, serif; font-weight: 400; }
+  .hand { font-family: Caveat, cursive; }
+</style>
+<script src="../assets/octomaker-badge.js" data-site="o site do brechó" defer></script>
+</head>
+<body>
+<garimpo-app></garimpo-app>
+
+<script type="module">
+import { LitElement, html, css } from 'https://esm.sh/lit@3.2.1';
+import { repeat } from 'https://esm.sh/lit@3.2.1/directives/repeat.js';
+import autoAnimate from 'https://esm.sh/@formkit/auto-animate@0.8.2';
+
+const WA = '5535984220874';
+const DEMO = 'Olá! Vi o site de demonstração do brechó no portfólio da OctoMaker e quero um site assim para o meu negócio.';
+const wa = m => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+const img = (id, w = 700, h) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}${h ? `&h=${h}` : ''}&q=80`;
+
+const ITEMS = [
+  { id: 1, n: 'Jaqueta jeans anos 90', c: 'Jaquetas', s: 'M', p: 89, was: 260, ph: 'photo-1611312449408-fcece27cdbb7', tag: 'Levi’s' },
+  { id: 2, n: 'Vestido vermelho ciganinha', c: 'Vestidos', s: 'P', p: 69, was: 180, ph: 'photo-1557739266-ef64eca74983' },
+  { id: 3, n: 'Vestido de bolinhas', c: 'Vestidos', s: 'M', p: 75, was: 210, ph: 'photo-1653688257587-004cb9193bd4', tag: 'Retrô' },
+  { id: 4, n: 'Blusa de renda off white', c: 'Blusas', s: 'P', p: 45, was: 140, ph: 'photo-1678935908871-a72d8380baaa' },
+  { id: 5, n: 'Kit calças jeans', c: 'Jeans', s: 'G', p: 59, was: 190, ph: 'photo-1604176354204-9268737828e4' },
+  { id: 6, n: 'Tricô cru trançado', c: 'Tricôs', s: 'M', p: 65, was: 170, ph: 'photo-1641642231157-0849081598a2' },
+  { id: 7, n: 'Trench coat caramelo', c: 'Jaquetas', s: 'G', p: 129, was: 420, ph: 'photo-1648948976274-40ee85fb1712', tag: 'Achado' },
+  { id: 8, n: 'Camisetas de banda', c: 'Blusas', s: 'G', p: 39, was: 99, ph: 'photo-1647664856968-880b8eccd588' },
+];
+const CATS = ['Tudo', 'Vestidos', 'Jaquetas', 'Blusas', 'Jeans', 'Tricôs'];
+const SIZES = ['P', 'M', 'G'];
+
+class GarimpoApp extends LitElement {
+  static properties = { cat: { state: true }, sizes: { state: true }, bag: { state: true }, open: { state: true }, toast: { state: true }, scrolled: { state: true }, left: { state: true } };
+  static styles = css`
+    garimpo-app { display: block; }
+    button { font-family: inherit; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .serif { font-family: Gloock, serif; font-weight: 400; }
+    .hand { font-family: Caveat, cursive; font-weight: 600; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .4s, box-shadow .4s, padding .4s; padding: 18px 0; }
+    nav.solid { background: #f3ebddee; backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); padding: 10px 0; }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font: 400 30px Gloock, serif; display: flex; align-items: baseline; gap: 6px; }
+    .logo span { font: 600 22px Caveat, cursive; color: var(--terra); }
+    .links { display: flex; gap: 26px; font-weight: 500; }
+    .links a { position: relative; } .links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--terra); transform: scaleX(0); transition: transform .35s; transform-origin: left; }
+    .links a:hover::after { transform: scaleX(1); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); border: 0; padding: 15px 26px; border-radius: 999px; font: 600 16px Outfit; cursor: pointer; transition: transform .25s, background .25s; }
+    .btn:hover { transform: translateY(-2px) rotate(-1deg); background: var(--terra); }
+    .btn.terra { background: var(--terra); } .btn.terra:hover { background: var(--ink); }
+    .btn.line { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+    .bagbtn { position: relative; }
+    .bagbtn b { position: absolute; top: -6px; right: -6px; background: var(--mustard); color: var(--ink); width: 24px; height: 24px; border-radius: 50%; font-size: 13px; display: grid; place-items: center; animation: pop .45s cubic-bezier(.3,1.8,.5,1); }
+    @keyframes pop { from { transform: scale(0); } }
+    /* hero */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding-top: 110px; }
+    .kick { display: inline-flex; gap: 8px; align-items: center; background: var(--paper); border: 1px solid var(--line); padding: 8px 14px; border-radius: 999px; font-weight: 500; font-size: 14px; }
+    .kick i { color: var(--terra); }
+    h1 { font: 400 clamp(56px, 7.4vw, 112px)/.92 Gloock, serif; letter-spacing: -.02em; margin: 22px 0; }
+    h1 .w { display: inline-block; opacity: 0; transform: translateY(60px) rotate(4deg); animation: rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
+    h1 em { font-style: italic; color: var(--terra); }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+    .lead { font-size: 20px; color: var(--soft); line-height: 1.6; max-width: 460px; }
+    .fade { opacity: 0; animation: fin .9s ease forwards; }
+    @keyframes fin { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .collage { position: relative; height: 620px; }
+    .pola { position: absolute; background: #fff; padding: 12px 12px 46px; box-shadow: 0 24px 50px #2a211b33; transition: transform .6s cubic-bezier(.2,.8,.2,1), z-index 0s; opacity: 0; animation: drop 1s cubic-bezier(.3,1.3,.5,1) forwards; }
+    .pola img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pola .cap { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 600 24px Caveat, cursive; color: var(--ink); }
+    .pola:hover { transform: rotate(0deg) scale(1.05) !important; z-index: 10; }
+    @keyframes drop { from { opacity: 0; transform: translateY(-80px) rotate(-20deg) scale(.8); } to { opacity: 1; } }
+    .sticker { position: absolute; z-index: 12; width: 130px; height: 130px; border-radius: 50%; background: var(--mustard); display: grid; place-items: center; text-align: center; font: 400 17px/1.05 Gloock, serif; right: 4%; bottom: 8%; animation: spin 16s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* marquee */
+    .mq { background: var(--terra); color: var(--paper); padding: 16px 0; overflow: hidden; white-space: nowrap; transform: rotate(-1.5deg) scale(1.03); }
+    .mq .t { display: inline-flex; gap: 36px; font: 400 30px Gloock, serif; animation: mq 30s linear infinite; }
+    .mq .t i { color: var(--mustard); }
+    @keyframes mq { to { transform: translateX(-50%); } }
+    section { padding: 120px 0; }
+    section.wrap { padding: 120px 24px; }
+    .eye { font: 600 26px Caveat, cursive; color: var(--terra); }
+    h2 { font: 400 clamp(44px, 5.4vw, 76px)/1 Gloock, serif; letter-spacing: -.02em; margin: 6px 0 16px; }
+    .rv { opacity: 0; transform: translateY(46px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+    .rv.in { opacity: 1; transform: none; }
+    /* drop countdown */
+    .drop { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; background: var(--ink); color: var(--paper); border-radius: 30px; padding: 40px 44px; }
+    .drop p { color: #cbbfae; margin-top: 6px; }
+    .clock { display: flex; gap: 12px; }
+    .clock div { background: #3a2f27; border-radius: 16px; padding: 14px 16px; min-width: 84px; text-align: center; }
+    .clock b { display: block; font: 400 42px Gloock, serif; color: var(--mustard); }
+    .clock span { font-size: 13px; color: #cbbfae; }
+    /* filters */
+    .filters { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin: 34px 0 30px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 2px solid var(--ink); background: transparent; border-radius: 999px; padding: 8px 18px; font: 500 15px Outfit; cursor: pointer; transition: all .25s; color: var(--ink); }
+    .chip:hover { transform: translateY(-2px); }
+    .chip.on { background: var(--ink); color: var(--paper); }
+    .chip.size { width: 46px; height: 46px; padding: 0; display: grid; place-items: center; }
+    .chip.size.on { background: var(--terra); border-color: var(--terra); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 26px; }
+    .item { background: var(--paper); border-radius: 22px; overflow: hidden; border: 1px solid var(--line); transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
+    .item:hover { transform: translateY(-8px) rotate(-.6deg); box-shadow: 0 26px 50px #2a211b26; }
+    .item .ph { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+    .item .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2,.8,.2,1); }
+    .item:hover .ph img { transform: scale(1.08); }
+    .badge { position: absolute; left: 14px; top: 14px; background: var(--mustard); padding: 5px 12px; border-radius: 999px; font: 600 13px Outfit; }
+    .one { position: absolute; right: 14px; top: 14px; background: var(--paper); padding: 5px 12px; border-radius: 999px; font: 600 12px Outfit; display: flex; gap: 5px; align-items: center; }
+    .item .body { padding: 18px 20px 20px; }
+    .item h3 { font: 400 22px Gloock, serif; }
+    .meta { color: var(--soft); font-size: 14px; margin-top: 4px; }
+    .row { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+    .price b { font: 400 26px Gloock, serif; } .price s { color: var(--soft); font-size: 14px; margin-left: 8px; }
+    .add { width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--ink); color: var(--paper); font-size: 22px; cursor: pointer; display: grid; place-items: center; transition: transform .3s, background .3s; }
+    .add:hover { transform: rotate(-12deg) scale(1.08); background: var(--terra); }
+    .add.in { background: var(--olive); }
+    .empty { grid-column: 1/-1; text-align: center; padding: 50px; color: var(--soft); font-size: 18px; }
+    /* sell */
+    .sell { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .sell .ph { border-radius: 30px; overflow: hidden; aspect-ratio: 4/5; transform: rotate(-2deg); box-shadow: 0 30px 60px #2a211b26; }
+    .sell .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .how { display: grid; gap: 14px; margin: 26px 0 30px; }
+    .how div { display: flex; gap: 16px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; transition: transform .3s; }
+    .how div:hover { transform: translateX(8px); }
+    .how i { font-size: 28px; color: var(--terra); }
+    .how b { display: block; font-size: 18px; } .how span { color: var(--soft); }
+    .visit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .visit div { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 26px; }
+    .visit i { font-size: 30px; color: var(--terra); }
+    .visit b { display: block; font: 400 24px Gloock, serif; margin: 12px 0 4px; } .visit span { color: var(--soft); }
+    footer { text-align: center; color: var(--soft); padding: 30px 0 90px; font-size: 14px; }
+    /* drawer */
+    .shade { position: fixed; inset: 0; background: #2a211b66; z-index: 80; animation: fin .3s; }
+    .drawer { position: fixed; right: 0; top: 0; bottom: 0; width: min(420px, 100%); background: var(--paper); z-index: 90; display: flex; flex-direction: column; animation: slide .45s cubic-bezier(.2,.8,.2,1); }
+    @keyframes slide { from { transform: translateX(100%); } }
+    .drawer header { padding: 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+    .drawer .list { flex: 1; overflow: auto; padding: 20px 24px; display: grid; gap: 12px; align-content: start; }
+    .line { display: flex; gap: 14px; align-items: center; background: var(--cream); border-radius: 16px; padding: 10px; }
+    .line img { width: 60px; height: 74px; object-fit: cover; border-radius: 10px; }
+    .line button { margin-left: auto; background: none; border: 0; font-size: 22px; cursor: pointer; color: var(--soft); }
+    .drawer .foot { padding: 24px; border-top: 1px solid var(--line); }
+    .toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 95; background: var(--ink); color: var(--paper); padding: 14px 22px; border-radius: 999px; display: flex; gap: 10px; align-items: center; animation: tin .5s cubic-bezier(.3,1.5,.5,1); }
+    @keyframes tin { from { opacity: 0; transform: translate(-50%, 30px); } }
+    .toast i { color: var(--mustard); }
+    .wa { position: fixed; right: 24px; bottom: 24px; z-index: 60; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: grid; place-items: center; box-shadow: 0 10px 30px #0004; transition: transform .3s; }
+    .wa:hover { transform: scale(1.1) rotate(-8deg); }
+    .wa img { width: 30px; }
+    @media (max-width: 900px) {
+      .links { display: none; } .hero, .sell { grid-template-columns: 1fr; } .collage { height: 460px; }
+      .drop { grid-template-columns: 1fr; padding: 30px 24px; } .clock div { min-width: 64px; } .clock b { font-size: 30px; }
+      .visit { grid-template-columns: 1fr; }
+    }
+  `;
+
+  // Light DOM so the Tabler icon font classes (defined in the page) apply inside the component
+  createRenderRoot() {
+    if (!document.getElementById('garimpo-css')) { const st = document.createElement('style'); st.id = 'garimpo-css'; st.textContent = GarimpoApp.styles.cssText; document.head.appendChild(st); }
+    return this;
+  }
+  constructor() {
+    super();
+    this.cat = 'Tudo'; this.sizes = []; this.bag = []; this.open = false; this.toast = ''; this.scrolled = false; this.left = this.countdown();
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    addEventListener('scroll', () => this.scrolled = scrollY > 40, { passive: true });
+    setInterval(() => this.left = this.countdown(), 1000);
+  }
+  countdown() {
+    const now = new Date(), next = new Date(now);
+    next.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7 || 7)); next.setHours(18, 0, 0, 0);
+    let s = Math.max(0, Math.floor((next - now) / 1000));
+    return [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60];
+  }
+  firstUpdated() {
+    autoAnimate(this.renderRoot.querySelector('.grid'), { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+    this.renderRoot.querySelectorAll('.rv').forEach(el => io.observe(el));
+  }
+  get list() { return ITEMS.filter(x => (this.cat === 'Tudo' || x.c === this.cat) && (!this.sizes.length || this.sizes.includes(x.s))); }
+  toggleSize(s) { this.sizes = this.sizes.includes(s) ? this.sizes.filter(x => x !== s) : [...this.sizes, s]; }
+  add(x) {
+    if (this.bag.includes(x.id)) { this.bag = this.bag.filter(i => i !== x.id); return; }
+    this.bag = [...this.bag, x.id];
+    this.toast = `${x.n} está reservada para você`; clearTimeout(this._t); this._t = setTimeout(() => this.toast = '', 2400);
+  }
+  get total() { return ITEMS.filter(x => this.bag.includes(x.id)).reduce((a, x) => a + x.p, 0); }
+  get orderLink() {
+    const items = ITEMS.filter(x => this.bag.includes(x.id));
+    return wa(`${DEMO}\n\nTestei a sacola com estas peças:\n${items.map(x => `• ${x.n} (tam. ${x.s}) R$ ${x.p}`).join('\n')}\nTotal: R$ ${this.total}`);
+  }
+  words(text, start, cls = '') { return text.split(' ').map((w, i) => html`<span class="w ${cls}" style="animation-delay:${start + i * .08}s">${w}</span> `); }
+
+  render() {
+    const pad = n => String(n).padStart(2, '0');
+    const polas = [
+      { id: 'photo-1619161519929-befcb28d6384', cap: 'arara nova', st: 'left:4%;top:2%;width:52%;height:58%;transform:rotate(-7deg);animation-delay:.3s' },
+      { id: 'photo-1601036559620-3a83dfdead09', cap: 'jeans eterno', st: 'right:2%;top:10%;width:44%;height:50%;transform:rotate(6deg);animation-delay:.5s' },
+      { id: 'photo-1520006403909-838d6b92c22e', cap: 'garimpo de sábado', st: 'left:20%;bottom:0;width:50%;height:44%;transform:rotate(3deg);animation-delay:.7s' },
+    ];
+    return html`
+    <nav class=${this.scrolled ? 'solid' : ''}><div class="wrap">
+      <a class="logo" href="#">Garimpo<span>brechó</span></a>
+      <div class="links"><a href="#pecas">Peças</a><a href="#venda">Venda suas roupas</a><a href="#visite">Visite</a></div>
+      <button class="btn bagbtn" @click=${() => this.open = true}><i class="ti ti-shopping-bag"></i>Sacola${this.bag.length ? html`<b>${this.bag.length}</b>` : ''}</button>
+    </div></nav>
+
+    <header class="wrap hero">
+      <div>
+        <span class="kick fade" style="animation-delay:.1s"><i class="ti ti-recycle"></i>Moda circular em Pouso Alegre</span>
+        <h1>${this.words('Roupas com', .15)}<br>${this.words('história', .35)}<em class="w" style="animation-delay:.45s">nova</em><span class="w" style="animation-delay:.52s">.</span></h1>
+        <p class="lead fade" style="animation-delay:.7s">Peças únicas selecionadas uma a uma, lavadas e prontas para usar. Chegam novidades toda sexta.</p>
+        <div class="ctas fade" style="animation-delay:.85s">
+          <a class="btn terra" href="#pecas"><i class="ti ti-hanger"></i>Ver as peças</a>
+          <a class="btn line" href="#venda"><i class="ti ti-cash"></i>Vender minhas roupas</a>
+        </div>
+      </div>
+      <div class="collage">
+        ${polas.map(p => html`<div class="pola" style=${p.st}><img src=${img(p.id, 600, 700)} alt=""><span class="cap">${p.cap}</span></div>`)}
+        <div class="sticker">peças<br>a partir de<br>R$ 29</div>
+      </div>
+    </header>
+
+    <div class="mq"><div class="t">${[1, 2].map(() => html`<span>Vintage</span><i class="ti ti-star-filled"></i><span>Jeans</span><i class="ti ti-star-filled"></i><span>Vestidos</span><i class="ti ti-star-filled"></i><span>Peças únicas</span><i class="ti ti-star-filled"></i><span>Moda circular</span><i class="ti ti-star-filled"></i>`)}</div></div>
+
+    <section class="wrap" style="padding-bottom:0;padding-top:80px">
+      <div class="drop rv">
+        <div><span class="hand" style="font-size:26px;color:var(--mustard)">próximo drop</span><h2 style="margin:4px 0 0;color:var(--paper)">Novidades nesta sexta, 18h</h2><p>Siga no Instagram para ver as peças antes de todo mundo.</p></div>
+        <div class="clock">${['dias', 'horas', 'min', 'seg'].map((l, i) => html`<div><b>${pad(this.left[i])}</b><span>${l}</span></div>`)}</div>
+      </div>
+    </section>
+
+    <section id="pecas" class="wrap">
+      <span class="eye rv">separadas com carinho</span>
+      <h2 class="rv">As peças da semana</h2>
+      <div class="filters rv">
+        <div class="chips">${CATS.map(c => html`<button class="chip ${this.cat === c ? 'on' : ''}" @click=${() => this.cat = c}>${c}</button>`)}</div>
+        <div class="chips">${SIZES.map(s => html`<button class="chip size ${this.sizes.includes(s) ? 'on' : ''}" @click=${() => this.toggleSize(s)}>${s}</button>`)}</div>
+      </div>
+      <div class="grid">
+        ${repeat(this.list, x => x.id, x => html`
+          <article class="item">
+            <div class="ph"><img src=${img(x.ph, 600, 750)} alt=${x.n} loading="lazy">${x.tag ? html`<span class="badge">${x.tag}</span>` : ''}<span class="one"><i class="ti ti-sparkles"></i>peça única</span></div>
+            <div class="body"><h3>${x.n}</h3><div class="meta">Tamanho ${x.s} · ${x.c}</div>
+              <div class="row"><span class="price"><b>R$ ${x.p}</b><s>R$ ${x.was}</s></span>
+                <button class="add ${this.bag.includes(x.id) ? 'in' : ''}" @click=${() => this.add(x)} aria-label="Reservar ${x.n}"><i class="ti ${this.bag.includes(x.id) ? 'ti-check' : 'ti-heart'}"></i></button></div></div>
+          </article>`)}
+        ${this.list.length ? '' : html`<p class="empty">Nenhuma peça com esse filtro agora. Chegam novidades na sexta.</p>`}
+      </div>
+    </section>
+
+    <section id="venda" class="wrap sell" style="padding-top:0">
+      <div class="ph rv"><img src=${img('photo-1540221652346-e5dd6b50f3e7', 900, 1100)} alt="Arara de roupas"></div>
+      <div>
+        <span class="eye rv">desapega que a gente cuida</span>
+        <h2 class="rv">Venda suas roupas com a gente</h2>
+        <div class="how">
+          <div class="rv"><i class="ti ti-hanger"></i><p><b>Traga suas peças</b><span>De terça a sábado, sem precisar agendar.</span></p></div>
+          <div class="rv"><i class="ti ti-receipt"></i><p><b>Avaliação na hora</b><span>Você sai sabendo o valor de cada peça.</span></p></div>
+          <div class="rv"><i class="ti ti-coins"></i><p><b>Dinheiro ou crédito na loja</b><span>Crédito vale 30% a mais para gastar aqui.</span></p></div>
+        </div>
+        <a class="btn terra rv" href=${wa(DEMO)} target="_blank"><i class="ti ti-brand-whatsapp"></i>Quero vender minhas roupas</a>
+      </div>
+    </section>
+
+    <section id="visite" class="wrap" style="padding-top:0">
+      <span class="eye rv">vem garimpar</span>
+      <h2 class="rv">Visite a loja</h2>
+      <div class="visit">
+        <div class="rv"><i class="ti ti-map-pin"></i><b>Endereço</b><span>Rua das Flores, 210 · Centro</span></div>
+        <div class="rv"><i class="ti ti-clock"></i><b>Horário</b><span>Terça a sábado, das 10h às 19h</span></div>
+        <div class="rv"><i class="ti ti-truck"></i><b>Envios</b><span>Mandamos para todo o Brasil</span></div>
+      </div>
+    </section>
+
+    <footer>Site de demonstração criado por <b>OctoMaker</b> · Lit + AutoAnimate · Fotos: Unsplash</footer>
+    <a class="wa" href=${wa(DEMO)} target="_blank" aria-label="WhatsApp"><img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt=""></a>
+
+    ${this.toast ? html`<div class="toast"><i class="ti ti-heart-filled"></i>${this.toast}</div>` : ''}
+    ${this.open ? html`
+      <div class="shade" @click=${() => this.open = false}></div>
+      <aside class="drawer">
+        <header><h3 class="serif" style="font-size:30px">Sua sacola</h3><button class="chip" @click=${() => this.open = false}><i class="ti ti-x"></i></button></header>
+        <div class="list">
+          ${ITEMS.filter(x => this.bag.includes(x.id)).map(x => html`<div class="line"><img src=${img(x.ph, 160, 200)} alt=""><div><b>${x.n}</b><br><span style="color:var(--soft);font-size:14px">Tam. ${x.s} · R$ ${x.p}</span></div><button @click=${() => this.add(x)} aria-label="Remover"><i class="ti ti-trash"></i></button></div>`)}
+          ${this.bag.length ? '' : html`<p style="text-align:center;color:var(--soft);padding:40px 0"><i class="ti ti-shopping-bag" style="font-size:48px;display:block;margin-bottom:10px"></i>Toque no coração das peças para reservar.</p>`}
+        </div>
+        ${this.bag.length ? html`<div class="foot"><div style="display:flex;justify-content:space-between;font:400 26px Gloock,serif;margin-bottom:16px"><span>Total</span><span>R$ ${this.total}</span></div>
+          <a class="btn terra" style="width:100%;justify-content:center" href=${this.orderLink} target="_blank"><i class="ti ti-brand-whatsapp"></i>Reservar pelo WhatsApp</a></div>` : ''}
+      </aside>` : ''}
+    `;
+  }
+}
+customElements.define('garimpo-app', GarimpoApp);
+</script>
+<script src="../assets/octomaker-stats.js"></script>
+</body>
+</html>
