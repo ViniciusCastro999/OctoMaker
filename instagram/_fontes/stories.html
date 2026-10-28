@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>OctoMaker · Stories e capas dos destaques</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
+<link rel="stylesheet" href="base.css">
+<style>
+  .story { justify-content: center; padding-top: 330px; padding-bottom: 280px; }
+  .story .top { position: absolute; top: 190px; left: 84px; right: 84px; justify-content: center; }
+  .story h1 { font-size: 116px; }
+  .story h2 { font-size: 92px; }
+  .story .lead { font-size: 44px; }
+  .mock { position: relative; height: 640px; margin-top: 64px; }
+  .mock .browser { position: absolute; left: 0; top: 40px; width: 740px; }
+  .mock .phone { position: absolute; right: 0; top: 0; width: 290px; }
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .who .card { display: flex; align-items: center; gap: 24px; padding: 30px 32px; font-size: 36px; font-weight: 700; }
+  .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 34px 40px; justify-items: center; }
+  .grid4 .phone { width: 360px; }
+  .steps { display: flex; flex-direction: column; gap: 24px; }
+  .step { display: flex; align-items: center; gap: 44px; padding: 32px 44px; }
+  .step .num { font-size: 76px; }
+  .step h3 { font-size: 46px; margin-bottom: 8px; }
+  .step p { font-size: 32px; color: var(--muted); line-height: 1.4; }
+  .big { font-size: 300px; font-weight: 800; letter-spacing: -.06em; line-height: .9; }
+  .price { padding: 52px 56px 56px; border-color: #2B4BB8; background: linear-gradient(160deg, #0F1A3D, #0B1124 60%); }
+  .price .val { display: flex; flex-direction: column; gap: 6px; margin: 26px 0 36px; }
+  .price .val b { font-size: 200px; font-weight: 800; letter-spacing: -.06em; line-height: .9; }
+  .price .val span { font-size: 36px; color: var(--muted); font-weight: 600; }
+  .list { display: flex; flex-direction: column; gap: 22px; }
+  .list li { list-style: none; display: flex; align-items: center; gap: 26px; font-size: 38px; color: var(--text2); }
+  .list .chk { width: 56px; height: 56px; font-size: 32px; border-radius: 15px; }
+  .center { align-items: center; text-align: center; }
+  .center .btn, .center .ghost, .center .eyebrow { align-self: center; }
+  .sticker { align-self: center; width: 640px; height: 170px; border-radius: 40px; border: 4px dashed var(--line2); display: grid; place-items: center; font-size: 30px; font-weight: 600; color: var(--muted); }
+  .cover { justify-content: center; align-items: center; padding: 0; }
+  .cover .disc { width: 600px; height: 600px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; color: #fff; font-size: 300px; box-shadow: 0 60px 180px -40px rgba(31,91,255,.9); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="om" viewBox="0 0 48 48"><rect width="48" height="48" rx="13" fill="#1F5BFF"/><path d="M14.40 24.80C14.40 16.48 18.56 10.72 24 10.72S33.60 16.48 33.60 24.80Z" fill="#fff"/><circle cx="20.48" cy="19.36" r="1.76" fill="#1F5BFF"/><circle cx="27.52" cy="19.36" r="1.76" fill="#1F5BFF"/><g fill="none" stroke="#fff" stroke-width="3.20" stroke-linecap="round"><path d="M16.32 24.16C16.32 30.56 13.12 31.20 11.84 34.40"/><path d="M21.44 24.16C21.44 31.20 19.52 33.12 18.24 35.68"/><path d="M26.56 24.16C26.56 31.20 28.48 33.12 29.76 35.68"/><path d="M31.68 24.16C31.68 30.56 34.88 31.20 36.16 34.40"/></g></symbol></svg>
+
+<!-- Destaque: Sobre -->
+<section class="s story" id="sobre-1">
+  <i class="glow b" style="width:1400px;height:1400px;left:-600px;top:-600px"></i>
+  <i class="glow i" style="width:1200px;height:1200px;right:-640px;top:-200px"></i>
+  <div class="eyebrow">Criação de sites · Pouso Alegre, MG</div>
+  <h1 style="margin-top:44px">Oi! Somos a <span>OctoMaker</span></h1>
+  <p class="lead" style="margin-top:36px">Criamos sites profissionais para pequenos negócios, com WhatsApp e prontos para aparecer no Google.</p>
+  <div class="mock">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><em>liviacampos.com.br</em></div><img src="telas/nutricionista-pc.jpg" alt=""></div>
+    <div class="phone"><img src="telas/sobrancelhas-cel.jpg" alt=""></div>
+  </div>
+</section>
+
+<section class="s story" id="sobre-2">
+  <i class="glow b" style="width:1300px;height:1300px;right:-640px;top:-400px"></i>
+  <div class="eyebrow">Para quem é</div>
+  <h2 style="margin-top:44px">Para quem quer <span>mais clientes</span></h2>
+  <div class="who" style="margin-top:70px">
+    <div class="card"><span class="ico"><i class="ph-fill ph-scissors"></i></span>Barbearias</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-brain"></i></span>Psicólogos</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-leaf"></i></span>Nutricionistas</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-storefront"></i></span>Lojas</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-camera"></i></span>Fotógrafos</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-sparkle"></i></span>Estética</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-drop"></i></span>Tatuadores</div>
+    <div class="card"><span class="ico"><i class="ph-fill ph-t-shirt"></i></span>Brechós</div>
+  </div>
+  <p class="lead" style="margin-top:70px">Se o seu cliente procura você no celular, o seu negócio precisa de um site.</p>
+</section>
+
+<!-- Destaque: Projetos -->
+<section class="s story" id="projetos-1">
+  <i class="glow b" style="width:1500px;height:1300px;left:-210px;top:700px;opacity:.75"></i>
+  <div class="eyebrow">Projetos de demonstração</div>
+  <h2 style="margin-top:44px">10 negócios, <span>10 estilos</span></h2>
+  <div class="grid4" style="margin-top:70px">
+    <div class="phone"><img src="telas/psicologa-cel.jpg" alt=""></div>
+    <div class="phone"><img src="telas/barbearia-cel.jpg" alt=""></div>
+  </div>
+  <p class="lead" style="margin-top:70px">Veja todos em <b style="color:#fff">octomaker.com.br</b></p>
+</section>
+
+<!-- Destaque: Como funciona -->
+<section class="s story" id="como-1">
+  <i class="glow i" style="width:1300px;height:1300px;left:-640px;top:-500px"></i>
+  <div class="eyebrow">Como funciona</div>
+  <h2 style="margin-top:44px">Do WhatsApp ao <span>site no ar</span></h2>
+  <div class="steps" style="margin-top:56px">
+    <div class="card step"><span class="num">01</span><div><h3>Conversa</h3><p>Você conta sobre o seu negócio pelo WhatsApp.</p></div></div>
+    <div class="card step"><span class="num">02</span><div><h3>Proposta</h3><p>Preço e prazo combinados antes de começar.</p></div></div>
+    <div class="card step"><span class="num">03</span><div><h3>Criação</h3><p>Você acompanha e aprova cada parte.</p></div></div>
+    <div class="card step"><span class="num" style="color:var(--mint)">04</span><div><h3>No ar</h3><p>Seu site pronto para receber clientes.</p></div></div>
+  </div>
+</section>
+
+<section class="s story center" id="como-2">
+  <i class="glow b" style="width:1400px;height:1400px;left:-160px;top:200px"></i>
+  <i class="glow i" style="width:1100px;height:1100px;right:-560px;top:-300px"></i>
+  <div class="eyebrow">Prazo</div>
+  <h2 style="margin-top:50px">Pronto em até</h2>
+  <div class="big" style="margin-top:20px">7 dias</div>
+  <p class="lead" style="margin-top:56px;max-width:860px">Do primeiro contato ao site no ar, com a sua aprovação em cada parte.</p>
+</section>
+
+<!-- Destaque: Preço -->
+<section class="s story" id="preco-1">
+  <i class="glow b" style="width:1300px;height:1300px;right:-640px;top:300px"></i>
+  <div class="eyebrow">Quanto custa</div>
+  <h2 style="margin-top:44px">Preço simples, <span>sem surpresa</span></h2>
+  <div class="card price" style="margin-top:50px">
+    <span class="pill mint" style="font-size:24px">Mais escolhido</span>
+    <h3 style="margin-top:34px;font-size:50px">Site essencial</h3>
+    <div class="val"><span>a partir de</span><b>R$ 300</b></div>
+    <ul class="list">
+      <li><span class="chk"><i class="ph-bold ph-check"></i></span>Site de uma página, completo</li>
+      <li><span class="chk"><i class="ph-bold ph-check"></i></span>WhatsApp com mensagem pronta</li>
+      <li><span class="chk"><i class="ph-bold ph-check"></i></span>Configurado para o Google</li>
+      <li><span class="chk"><i class="ph-bold ph-check"></i></span>Pronto em até 7 dias</li>
+    </ul>
+  </div>
+  <p class="small" style="margin-top:36px;font-size:34px">Loja ou agendamento: orçamento sob medida.</p>
+</section>
+
+<!-- Destaque: Contato -->
+<section class="s story center" id="contato-1">
+  <i class="glow b" style="width:1400px;height:1400px;left:-700px;top:-500px"></i>
+  <i class="glow i" style="width:1300px;height:1300px;right:-700px;top:-300px"></i>
+  <svg style="width:190px;height:190px;align-self:center"><use href="#om"/></svg>
+  <h1 style="margin-top:60px">Vamos fazer o <span>seu site?</span></h1>
+  <p class="lead" style="margin-top:40px;max-width:860px">Conte sobre o seu negócio pelo WhatsApp. Respondemos com preço e prazo.</p>
+  <div class="btn" style="margin-top:64px;font-size:40px">(35) 98422-0874<i class="ph ph-whatsapp-logo" style="width:84px;height:84px;font-size:44px"></i></div>
+  <p class="small" style="margin-top:80px">Toque no link</p>
+  <div class="sticker" style="margin-top:24px">octomaker.com.br</div>
+</section>
+
+<!-- Capas dos destaques -->
+<section class="s story cover" id="capa-sobre"><i class="glow b" style="width:1400px;height:1400px;left:-160px;top:260px"></i><div class="disc"><i class="ph-fill ph-hand-waving"></i></div></section>
+<section class="s story cover" id="capa-projetos"><i class="glow b" style="width:1400px;height:1400px;left:-160px;top:260px"></i><div class="disc"><i class="ph-fill ph-squares-four"></i></div></section>
+<section class="s story cover" id="capa-como"><i class="glow b" style="width:1400px;height:1400px;left:-160px;top:260px"></i><div class="disc"><i class="ph-fill ph-path"></i></div></section>
+<section class="s story cover" id="capa-preco"><i class="glow b" style="width:1400px;height:1400px;left:-160px;top:260px"></i><div class="disc"><i class="ph-fill ph-tag"></i></div></section>
+<section class="s story cover" id="capa-contato"><i class="glow b" style="width:1400px;height:1400px;left:-160px;top:260px"></i><div class="disc"><i class="ph-fill ph-chat-circle-dots"></i></div></section>
+
+<script>
+  document.querySelectorAll('.story:not(.cover)').forEach(s => {
+    const top = document.createElement('div');
+    top.className = 'top';
+    top.innerHTML = '<div class="logo"><svg><use href="#om"/></svg>octomaker</div>';
+    s.prepend(top);
+  });
+</script>
+</body>
+</html>
