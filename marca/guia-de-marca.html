@@ -2,220 +2,167 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, follow">
-<link rel="icon" href="/favicon.ico" sizes="48x48">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OctoMaker · Guia de Marca</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex">
+<title>Guia de marca · OctoMaker</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --g900: #0e1015; --g800: #161a22; --g700: #1f2430; --g600: #2b3140; --line: #333a4a;
-    --blue: #3d7bff; --yellow: #ffd000; --text: #eef2f8; --muted: #8d97ab;
-    --mono: "JetBrains Mono", Menlo, monospace; --sans: Inter, system-ui, sans-serif;
-  }
+  :root { --bg: #050816; --panel: #0B1124; --line: #1C2540; --line2: #2A3557; --blue: #1F5BFF; --blue-l: #7EA0FF; --indigo: #5B3FD9; --mint: #3DDC97; --navy: #0B1A33; --text2: #DCE3F5; --text3: #C6D0E6; --muted: #9AA6C2; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--g900); color: var(--text); font-family: var(--sans); line-height: 1.6;
-    background-image: radial-gradient(#5a647833 1.5px, transparent 1.5px); background-size: 32px 32px;
-  }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-  header { padding: 56px 0 24px; }
-  header img { width: 100%; border-radius: 20px; border: 1px solid var(--line); display: block; }
-  nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; }
-  nav a { font: 500 13px var(--mono); color: var(--muted); text-decoration: none; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; }
-  nav a:hover { color: var(--yellow); border-color: var(--yellow); }
-  section { padding: 72px 0 8px; }
-  .eyebrow { font: 600 13px var(--mono); color: var(--yellow); letter-spacing: .08em; }
-  h2 { font: 800 clamp(28px, 4vw, 40px)/1.15 var(--mono); margin: 8px 0 16px; letter-spacing: -.02em; }
-  h2 .c { color: var(--blue); }
-  h3 { font: 600 17px var(--mono); margin-bottom: 8px; }
-  p.lead { font-size: 18px; color: #c8d0de; max-width: 720px; }
-  .grid { display: grid; gap: 20px; margin-top: 32px; }
-  .g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-  .g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-  .g4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .card { background: var(--g800); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
-  .card p, .card li { color: var(--muted); font-size: 15px; }
-  .card ul { padding-left: 18px; }
-  .logo-card { padding: 0; overflow: hidden; }
-  .logo-card img { width: 100%; display: block; background: var(--g900); }
-  .logo-card .cap { padding: 16px 20px; }
-  .checker { background: repeating-conic-gradient(#20242e 0% 25%, #171a21 0% 50%) 50% / 24px 24px; }
-  .swatch { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--g800); }
-  .swatch .chip { height: 120px; }
-  .swatch .info { padding: 14px 16px; }
-  .swatch b { font: 600 15px var(--mono); display: block; }
-  .swatch code { font: 13px var(--mono); color: var(--muted); }
-  .swatch small { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
-  .ratio { display: flex; height: 44px; border-radius: 12px; overflow: hidden; margin-top: 24px; font: 600 13px var(--mono); }
-  .ratio div { display: grid; place-items: center; }
-  .type-sample { font-family: var(--mono); font-weight: 800; font-size: clamp(40px, 7vw, 72px); line-height: 1; letter-spacing: -.03em; }
-  .type-sample.sans { font-family: var(--sans); font-weight: 700; letter-spacing: -.02em; }
-  .alphabet { color: var(--muted); font-size: 15px; margin-top: 12px; word-break: break-all; }
-  .do, .dont { border-radius: 14px; padding: 16px 18px; font-size: 15px; }
-  .do { background: #3d7bff14; border: 1px solid #3d7bff55; }
-  .dont { background: #ff5a5a10; border: 1px solid #ff5a5a44; }
-  .do b, .dont b { font: 600 12px var(--mono); display: block; margin-bottom: 4px; letter-spacing: .06em; }
-  .do b { color: var(--blue); } .dont b { color: #ff7a7a; }
-  .el { height: 150px; border-radius: 14px; background: var(--g900); display: grid; place-items: center; margin-bottom: 14px; border: 1px solid var(--line); overflow: hidden; }
-  /* mockups */
-  .ig { background: #fff; color: #111; border-radius: 22px; padding: 22px; font-family: -apple-system, var(--sans); }
-  .ig .top { display: flex; align-items: center; gap: 18px; }
-  .ig .av { width: 86px; height: 86px; border-radius: 50%; background: url(../instagram/perfil/perfil-instagram.png) center/cover; outline: 2px solid #ddd; outline-offset: 3px; flex: none; }
-  .ig .stats { display: flex; gap: 18px; font-size: 13px; text-align: center; }
-  .ig .stats b { display: block; font-size: 16px; }
-  .ig .user { font-weight: 700; margin-top: 14px; font-size: 14px; }
-  .ig .bio { font-size: 14px; white-space: pre-line; line-height: 1.45; }
-  .ig .link { color: #00376b; font-size: 14px; font-weight: 600; }
-  .ig .btn { margin-top: 12px; background: #efefef; border-radius: 8px; text-align: center; padding: 7px; font-weight: 600; font-size: 14px; }
-  .bcard { aspect-ratio: 1.75; border-radius: 16px; background: var(--g900); border: 1px solid var(--line); position: relative; overflow: hidden; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
-  .bcard .bg { position: absolute; inset: 0; background: url(logo/octomaker-icone.png) right -60px center/260px no-repeat; opacity: .55; }
-  .bcard > * { position: relative; }
-  .bcard .n { font: 800 22px var(--mono); }
-  .bcard .n span { color: var(--yellow); }
-  .bcard .r { font: 12px var(--mono); color: var(--muted); }
-  .bcard .ct { font: 12px/1.7 var(--mono); color: #c8d0de; }
-  .sig { background: #fff; color: #222; border-radius: 16px; padding: 22px; display: flex; gap: 16px; align-items: center; font-size: 14px; }
-  .sig img { width: 72px; height: 72px; border-radius: 12px; }
-  .sig b { font-size: 16px; } .sig .m { color: #666; } .sig a { color: #2a5fd6; text-decoration: none; }
-  footer { padding: 80px 0 48px; color: var(--muted); font: 13px var(--mono); }
+  body { background: var(--bg); color: #fff; font-family: "Plus Jakarta Sans", system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; }
+  header { position: relative; padding: 96px 0 72px; }
+  header::before, header::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+  header::before { width: 900px; height: 900px; left: 50%; top: -560px; margin-left: -760px; background: radial-gradient(circle, rgba(31,91,255,.5), rgba(31,91,255,0) 62%); }
+  header::after { width: 800px; height: 800px; left: 50%; top: -440px; margin-left: -40px; background: radial-gradient(circle, rgba(91,63,217,.45), rgba(91,63,217,0) 62%); }
+  header img { height: 64px; width: auto; }
+  h1 { font-weight: 800; font-size: clamp(40px, 6vw, 68px); letter-spacing: -.05em; line-height: 1.04; margin: 36px 0 18px; }
+  h1 span, h2 span { color: var(--blue-l); }
+  header p { max-width: 640px; font-size: 19px; color: var(--text3); }
+  section { padding: 72px 0 0; }
+  .kicker { display: block; margin-bottom: 10px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-l); }
+  h2 { font-weight: 800; font-size: clamp(30px, 4vw, 42px); letter-spacing: -.045em; line-height: 1.1; margin-bottom: 28px; }
+  h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  p, li { color: var(--muted); }
+  code { font-size: .9em; color: var(--text2); background: #131C38; padding: 2px 6px; border-radius: 6px; }
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); } .g6 { grid-template-columns: repeat(6, 1fr); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 26px; }
+  .logo-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .logo-card .art { display: grid; place-items: center; min-height: 220px; padding: 32px; }
+  .logo-card .art img { max-width: 100%; max-height: 120px; }
+  .logo-card .cap { padding: 20px 24px 24px; border-top: 1px solid var(--line); }
+  .light { background: #fff; } .dark { background: var(--bg); }
+  .swatch { display: flex; flex-direction: column; gap: 10px; }
+  .swatch div { height: 110px; border-radius: 16px; border: 1px solid var(--line); }
+  .swatch b { font-size: 15px; } .swatch span { font-size: 13px; color: var(--muted); line-height: 1.4; }
+  ul { padding-left: 18px; display: grid; gap: 8px; }
+  .do li::marker { color: var(--mint); } .dont li::marker { color: #FF7A7A; }
+  .type { display: flex; align-items: center; gap: 28px; }
+  .type .aa { font-size: 96px; font-weight: 800; letter-spacing: -.05em; line-height: 1; color: #fff; }
+  .scale { display: grid; gap: 14px; }
+  .scale div { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+  .scale small { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; padding: 7px 7px 7px 24px; border-radius: 999px; background: #fff; color: var(--navy); font-weight: 700; font-size: 16px; text-decoration: none; }
+  .btn i { width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-style: normal; font-size: 18px; }
+  .btn.ghost { padding: 0 24px; min-height: 54px; background: transparent; color: #fff; border: 1px solid var(--line2); font-weight: 600; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line2); background: rgba(11,17,36,.6); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text2); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); }
+  .demo { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .apps img { width: 100%; border-radius: 16px; border: 1px solid var(--line); }
+  .apps .avatar { width: 160px; border-radius: 50%; }
+  footer { padding: 88px 0 48px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 860px) { .g3, .g4 { grid-template-columns: repeat(2, 1fr); } .g6 { grid-template-columns: repeat(3, 1fr); } .g2 { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .g3, .g4 { grid-template-columns: 1fr; } .g6 { grid-template-columns: repeat(2, 1fr); } .type { flex-direction: column; align-items: flex-start; } }
 </style>
 </head>
 <body>
+
+<header><div class="wrap">
+  <img src="logo/octomaker-horizontal-transparente.png" alt="OctoMaker">
+  <h1>Guia de marca da <span>OctoMaker</span></h1>
+  <p>Como usar o logo, as cores e as fontes da OctoMaker no site, no Instagram e em qualquer material. A ideia é simples: profissional, clean e fácil de confiar.</p>
+</div></header>
+
 <div class="wrap">
-  <header>
-    <img src="logo/octomaker-horizontal.png" alt="Logo OctoMaker">
-    <nav>
-      <a href="#marca">01 marca</a><a href="#logo">02 logo</a><a href="#cores">03 cores</a>
-      <a href="#tipo">04 tipografia</a><a href="#elementos">05 elementos</a><a href="#voz">06 tom de voz</a><a href="#aplicacoes">07 aplicações</a>
-    </nav>
-  </header>
-
-  <section id="marca">
-    <div class="eyebrow">// 01 marca</div>
-    <h2>Sites que <span class="c">trazem clientes</span>.</h2>
-    <p class="lead">A OctoMaker cria sites e aplicativos para quem precisa de presença online sem complicação. Cuidamos do design, do código, da hospedagem e do suporte. O cliente foca no próprio negócio.</p>
+  <section>
+    <span class="kicker">Conceito</span>
+    <h2>Seu negócio <span>online</span></h2>
     <div class="grid g3">
-      <div class="card"><h3>O polvo</h3><p>Oito pernas trabalhando ao mesmo tempo. Representa uma equipe que resolve várias partes do projeto em paralelo.</p></div>
-      <div class="card"><h3>O chip</h3><p>O polvo fica dentro de um chip azul. Ele é o núcleo: tudo que o cliente precisa sai de um lugar só.</p></div>
-      <div class="card"><h3>Para quem</h3><p>Para quem quer um site bonito e funcional sem se preocupar com a parte técnica. Não rotulamos clientes nos textos: falamos do resultado.</p></div>
+      <div class="card"><h3>O "o"</h3><p>O símbolo é a letra "o" de octo, desenhada como um anel forte dentro de um quadrado azul. Funciona como ícone de aplicativo e fica nítido até em 16 px.</p></div>
+      <div class="card"><h3>O ponto verde</h3><p>O ponto menta é o sinal de "online", o mesmo das conversas no WhatsApp. É o que entregamos: o seu negócio no ar e recebendo mensagens.</p></div>
+      <div class="card"><h3>Para quem</h3><p>Donos de pequenos negócios: barbearias, psicólogas, lojas, fotógrafos. Eles querem confiança e resultado, não tecnologia. Por isso a marca não usa código, circuito nem termos técnicos.</p></div>
     </div>
   </section>
 
-  <section id="logo">
-    <div class="eyebrow">// 02 logo</div>
-    <h2>Versões do <span class="c">logo</span></h2>
-    <p class="lead">Use sempre os arquivos da pasta <code>marca/logo</code>. O logo foi feito para fundos escuros.</p>
-    <div class="grid g2">
-      <div class="card logo-card"><img src="logo/octomaker-logo-principal.png" alt=""><div class="cap"><h3>Principal</h3><p>Posts, apresentações e materiais quadrados.</p></div></div>
-      <div class="card logo-card"><img src="logo/octomaker-icone.png" alt=""><div class="cap"><h3>Ícone</h3><p>Foto de perfil em redes sociais e WhatsApp.</p></div></div>
-      <div class="card logo-card"><img src="logo/octomaker-horizontal.png" alt=""><div class="cap"><h3>Horizontal</h3><p>Cabeçalho do site, capas, assinatura de e-mail.</p></div></div>
-      <div class="card logo-card"><img class="checker" src="logo/octomaker-simbolo.png" alt=""><div class="cap"><h3>Símbolo</h3><p>Marca d'água e aplicações sobre fotos. Fundo transparente.</p></div></div>
-      <div class="card logo-card"><div class="checker" style="display:grid;place-items:center;aspect-ratio:1"><img src="logo/octomaker-mini.svg" alt="" style="width:34%;background:none"></div><div class="cap"><h3>Mini</h3><p>Versão simplificada para favicon, rodapés e tamanhos abaixo de 48 px.</p></div></div>
-      <div class="card logo-card"><div style="display:grid;place-items:center;aspect-ratio:1;background:var(--g900)"><div class="om-coin" data-size="260" data-mode="drag"></div></div><div class="cap"><h3>Moeda 3D</h3><p>Versão interativa para sites: frente com o polvo, verso com o nome. Arraste para girar. Arquivo <code>portfolio/assets/octomaker-coin.js</code>.</p></div></div>
+  <section>
+    <span class="kicker">Logo</span>
+    <h2>Versões do logo</h2>
+    <div class="grid g3">
+      <div class="card logo-card"><div class="art dark"><img src="logo/octomaker-horizontal-transparente.png" alt=""></div><div class="cap"><h3>Horizontal · fundo escuro</h3><p>Versão principal. Arquivo <code>octomaker-horizontal-transparente.png</code>.</p></div></div>
+      <div class="card logo-card"><div class="art light"><img src="logo/octomaker-horizontal-clara.png" alt=""></div><div class="cap"><h3>Horizontal · fundo claro</h3><p>Para documentos, propostas e fundos brancos. Arquivo <code>octomaker-horizontal-clara.png</code>.</p></div></div>
+      <div class="card logo-card"><div class="art" style="background:#050816"><img src="logo/octomaker-horizontal.png" alt="" style="border-radius:12px"></div><div class="cap"><h3>Com fundo</h3><p>Já vem com o fundo noite, pronto para enviar. Arquivo <code>octomaker-horizontal.png</code>.</p></div></div>
+      <div class="card logo-card"><div class="art dark"><img src="logo/octomaker-simbolo.svg" alt="" style="height:120px"></div><div class="cap"><h3>Símbolo</h3><p>Favicon, ícone de app e espaços quadrados. Arquivos <code>octomaker-simbolo.svg</code> e <code>.png</code>.</p></div></div>
+      <div class="card logo-card"><div class="art dark"><img src="logo/octomaker-perfil.png" alt="" style="height:140px;border-radius:50%"></div><div class="cap"><h3>Foto de perfil</h3><p>Instagram, WhatsApp e Google. A rede corta em círculo. Arquivos <code>octomaker-perfil.svg</code> e <code>.png</code>.</p></div></div>
+      <div class="card logo-card"><div class="art dark"><img src="logo/octomaker-mini.svg" alt="" style="height:64px"></div><div class="cap"><h3>Mini</h3><p>Versão redonda para o selo "Site feito pela octomaker" e tamanhos abaixo de 32 px.</p></div></div>
     </div>
-    <div class="grid g2">
-      <div class="card"><h3>Regras de uso</h3><ul>
-        <li>Deixe um espaço livre ao redor do logo igual à altura dos olhos do polvo.</li>
-        <li>Abaixo de 48 px use a versão Mini. Logo principal: mínimo de 160 px de largura.</li>
-        <li>Aplique sobre grafite ou preto. Em fundo claro, use o símbolo com o bloco escuro.</li>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card do"><h3>Regras de uso</h3><ul>
+        <li>Nome escrito no logo: <b>octomaker</b>, tudo minúsculo, em Plus Jakarta Sans ExtraBold.</li>
+        <li>Nos textos, escreva <b>OctoMaker</b>. O @ do Instagram continua <b>@octomaker_</b>.</li>
+        <li>Deixe em volta do logo um espaço livre igual à altura do anel.</li>
+        <li>Tamanho mínimo: 120 px de largura para o horizontal e 16 px para o símbolo.</li>
       </ul></div>
-      <div class="card"><h3>Não fazer</h3><ul>
-        <li>Trocar as cores do polvo ou do chip.</li>
-        <li>Esticar, girar ou distorcer.</li>
-        <li>Aplicar brilho, neon ou sombra colorida.</li>
-        <li>Mudar a fonte do nome.</li>
+      <div class="card dont"><h3>Não fazer</h3><ul>
+        <li>Não mude as cores do símbolo nem tire o ponto verde.</li>
+        <li>Não use o logo sobre fotos sem uma camada escura por trás.</li>
+        <li>Não estique, gire nem aplique sombra ou contorno.</li>
+        <li>Não volte com polvo de circuito, "//", "_" ou fonte de código.</li>
       </ul></div>
     </div>
   </section>
 
-  <section id="cores">
-    <div class="eyebrow">// 03 cores</div>
-    <h2>Paleta de <span class="c">cores</span></h2>
-    <p class="lead">Base escura em grafite, azul elétrico como cor principal e amarelo sinal para destaques e chamadas.</p>
-    <div class="grid g4">
-      <div class="swatch"><div class="chip" style="background:#3d7bff"></div><div class="info"><b>Azul Elétrico</b><code>#3D7BFF · rgb 61 123 255</code><small>Cor principal. Logo, títulos, links.</small></div></div>
-      <div class="swatch"><div class="chip" style="background:#ffd000"></div><div class="info"><b>Amarelo Sinal</b><code>#FFD000 · rgb 255 208 0</code><small>Destaques, botões de ação, detalhes.</small></div></div>
-      <div class="swatch"><div class="chip" style="background:#0e1015"></div><div class="info"><b>Grafite Noite</b><code>#0E1015 · rgb 14 16 21</code><small>Fundo principal.</small></div></div>
-      <div class="swatch"><div class="chip" style="background:#262b36"></div><div class="info"><b>Grafite Placa</b><code>#262B36 · rgb 38 43 54</code><small>Cards, blocos e superfícies.</small></div></div>
-      <div class="swatch"><div class="chip" style="background:#8d97ab"></div><div class="info"><b>Cinza Trilha</b><code>#8D97AB · rgb 141 151 171</code><small>Textos secundários.</small></div></div>
-      <div class="swatch"><div class="chip" style="background:#eef2f8"></div><div class="info"><b>Branco Tela</b><code>#EEF2F8 · rgb 238 242 248</code><small>Textos principais sobre o escuro.</small></div></div>
+  <section>
+    <span class="kicker">Cores</span>
+    <h2>Paleta</h2>
+    <div class="grid g6">
+      <div class="swatch"><div style="background:#050816"></div><b>Noite</b><span>#050816 · fundo</span></div>
+      <div class="swatch"><div style="background:#0B1124"></div><b>Painel</b><span>#0B1124 · cards</span></div>
+      <div class="swatch"><div style="background:#1F5BFF;border:0"></div><b>Azul</b><span>#1F5BFF · marca e ícones</span></div>
+      <div class="swatch"><div style="background:#7EA0FF;border:0"></div><b>Azul claro</b><span>#7EA0FF · destaque em texto</span></div>
+      <div class="swatch"><div style="background:#3DDC97;border:0"></div><b>Menta</b><span>#3DDC97 · só detalhes</span></div>
+      <div class="swatch"><div style="background:#5B3FD9;border:0"></div><b>Índigo</b><span>#5B3FD9 · só no brilho</span></div>
     </div>
-    <div class="ratio">
-      <div style="flex:60;background:#0e1015;border:1px solid var(--line)">60% grafite</div>
-      <div style="flex:30;background:#3d7bff">30% azul</div>
-      <div style="flex:10;background:#ffd000;color:#111">10%</div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3>Textos</h3><p>Branco #FFFFFF para títulos, #C6D0E6 para parágrafos e #9AA6C2 para textos de apoio. Bordas em #1C2540.</p></div>
+      <div class="card"><h3>O brilho</h3><p>O fundo noite ganha manchas suaves de luz azul e índigo atrás dos títulos (degradê radial que some até o transparente). Use no topo das páginas e nos blocos de chamada, nunca atrás de texto pequeno.</p></div>
     </div>
   </section>
 
-  <section id="tipo">
-    <div class="eyebrow">// 04 tipografia</div>
-    <h2>Duas <span class="c">fontes</span>, ambas gratuitas</h2>
+  <section>
+    <span class="kicker">Tipografia</span>
+    <h2>Uma fonte só</h2>
     <div class="grid g2">
-      <div class="card"><p class="eyebrow">JetBrains Mono · títulos e destaques</p><div class="type-sample" style="margin-top:14px">octomaker_</div>
-        <p class="alphabet">Aa Bb Cc Dd Ee Ff Gg 0123456789 {}&lt;/&gt;</p><p style="margin-top:12px">Fonte de programador. Use em títulos curtos, rótulos, números e no prefixo <code>//</code>.</p></div>
-      <div class="card"><p class="eyebrow">Inter · textos</p><div class="type-sample sans" style="margin-top:14px">Seu site pronto.</div>
-        <p class="alphabet">Aa Bb Cc Dd Ee Ff Gg 0123456789</p><p style="margin-top:12px">Fonte limpa e fácil de ler. Use em parágrafos, legendas e botões.</p></div>
-    </div>
-    <p style="color:var(--muted);margin-top:16px;font-size:14px">Baixe em fonts.google.com. No Canva, as duas fontes já estão disponíveis.</p>
-  </section>
-
-  <section id="elementos">
-    <div class="eyebrow">// 05 elementos gráficos</div>
-    <h2>Detalhes que dão <span class="c">identidade</span></h2>
-    <div class="grid g4">
-      <div class="card"><div class="el"><img src="logo/octomaker-moeda-frente.png" alt="" style="height:120px"></div><h3>Traço chapado</h3><p>Linhas sólidas em azul e amarelo, sem brilho e sem desfoque. Fica nítido em qualquer tamanho.</p></div>
-      <div class="card"><div class="el"><svg width="120" height="60" viewBox="0 0 120 60"><circle cx="20" cy="30" r="8" fill="none" stroke="#ffd000" stroke-width="4"/><circle cx="60" cy="30" r="5" fill="#ffd000"/><circle cx="100" cy="30" r="8" fill="none" stroke="#3d7bff" stroke-width="4"/></svg></div><h3>Pontos de sinal</h3><p>Anéis e pontos amarelos, como nas pernas do polvo.</p></div>
-      <div class="card"><div class="el" style="background-image:radial-gradient(#5a6478 1.5px,transparent 1.5px);background-size:18px 18px"></div><h3>Grade de pontos</h3><p>Textura de fundo leve, como uma placa de circuito.</p></div>
-      <div class="card"><div class="el" style="font:800 26px var(--mono)"><span><span style="color:var(--muted)">//</span> sites<span style="color:var(--yellow)">_</span></span></div><h3>Código</h3><p>Prefixo <code>//</code> em rótulos e cursor <code>_</code> no fim de títulos.</p></div>
+      <div class="card"><div class="type"><span class="aa">Aa</span><div><h3>Plus Jakarta Sans</h3><p>Gratuita no Google Fonts. Títulos em ExtraBold (800) com letras juntas (−5%). Textos em Regular (400) e Medium (500).</p></div></div></div>
+      <div class="card scale">
+        <div><span style="font-size:40px;font-weight:800;letter-spacing:-.05em;line-height:1.05;color:#fff">Título</span><small>800 · 48 a 82 px</small></div>
+        <div><span style="font-size:22px;font-weight:700;color:#fff">Subtítulo</span><small>700 · 18 a 24 px</small></div>
+        <div><span style="font-size:17px;color:var(--text3)">Texto corrido</span><small>400 · 16 a 19 px</small></div>
+        <div><span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l)">Etiqueta</span><small>700 · 13 px · maiúsculas</small></div>
+      </div>
     </div>
   </section>
 
-  <section id="voz">
-    <div class="eyebrow">// 06 tom de voz</div>
-    <h2>Simples e <span class="c">direto</span></h2>
-    <p class="lead">Falamos com quem quer um site para o próprio negócio. As pessoas querem saber o que vão receber, quanto tempo leva e como isso ajuda a conseguir clientes.</p>
+  <section>
+    <span class="kicker">Componentes</span>
+    <h2>Botões e etiquetas</h2>
+    <div class="card">
+      <div class="demo"><a class="btn" href="#">Quero meu site<i>→</i></a><a class="btn ghost" href="#">Ver projetos</a><span class="eyebrow"><span class="dot"></span>Criação de sites em Pouso Alegre</span></div>
+      <p>Botão principal: pílula branca com o círculo azul e a seta. Botão secundário: pílula com contorno. Etiqueta acima dos títulos: pílula com o ponto verde. Cards: fundo painel, borda fina e cantos de 24 px.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="kicker">Voz</span>
+    <h2>Simples e direto</h2>
     <div class="grid g3">
-      <div class="card"><h3>Frases curtas</h3><p>Uma ideia por frase. Sem enrolação.</p></div>
-      <div class="card"><h3>Fale do resultado</h3><p>Mais clientes, mais agendamentos, mais confiança. O cliente não precisa entender de tecnologia.</p></div>
-      <div class="card"><h3>Sem jargão</h3><p>Troque termos técnicos por palavras do dia a dia.</p></div>
+      <div class="card"><h3>Frases curtas</h3><p>"Sites que trazem clientes." Uma ideia por frase.</p></div>
+      <div class="card"><h3>Fale do resultado</h3><p>Clientes, WhatsApp, aparecer no Google. Não fale de framework, código ou stack.</p></div>
+      <div class="card"><h3>Sem promessa vazia</h3><p>Preço e prazo claros: a partir de R$ 300, pronto em até 7 dias.</p></div>
     </div>
+  </section>
+
+  <section class="apps">
+    <span class="kicker">Aplicações</span>
+    <h2>A marca no dia a dia</h2>
     <div class="grid g2">
-      <div class="do"><b>USE</b>Seu site pronto em poucos dias, com botão de WhatsApp e agendamento online.</div>
-      <div class="dont"><b>EVITE</b>Desenvolvemos soluções com stack moderna, SSR e deploy em edge.</div>
-      <div class="do"><b>USE</b>Seus pacientes encontram você no Google.</div>
-      <div class="dont"><b>EVITE</b>Frases de efeito com contrastes forçados ou travessões.</div>
-      <div class="dont"><b>EVITE</b>Rotular o público, como "pequenos negócios" ou listas de profissões.</div>
+      <div class="card"><img src="../og-image.jpg" alt="Imagem de compartilhamento do site"><h3 style="margin-top:16px">Compartilhamento</h3><p>Aparece quando o link do site é enviado no WhatsApp ou em redes. Fonte em <code>marca/_fontes/og-image.html</code>.</p></div>
+      <div class="card" style="display:flex;flex-direction:column;align-items:flex-start;gap:16px"><img class="avatar" src="../instagram/perfil/perfil-instagram.png" alt="Foto de perfil do Instagram"><div><h3>Instagram @octomaker_</h3><p>Foto de perfil em <code>instagram/perfil/perfil-instagram.png</code>. Os posts seguem o mesmo fundo noite com brilho, títulos grandes em branco e destaque em azul claro.</p></div></div>
     </div>
   </section>
 
-  <section id="aplicacoes">
-    <div class="eyebrow">// 07 aplicações</div>
-    <h2>A marca no <span class="c">dia a dia</span></h2>
-    <div class="grid g3">
-      <div class="ig">
-        <div class="top"><div class="av"></div><div class="stats"><div><b>5</b>posts</div><div><b>0</b>seguidores</div><div><b>0</b>seguindo</div></div></div>
-        <div class="user">OctoMaker · Criação de Sites</div>
-        <div class="bio">Sites profissionais que trazem clientes
-✦ Bonitos, rápidos e com WhatsApp
-✦ Aparecem no Google
-✦ Prontos em poucos dias
-👇 Modelos e orçamento</div>
-        <div class="link">octomaker.com.br</div>
-        <div class="btn">Enviar mensagem</div>
-      </div>
-      <div class="bcard"><div class="bg"></div>
-        <div><div class="n">octo<span>maker</span>_</div><div class="r">// sites &amp; apps sob medida</div></div>
-        <div class="ct">Seu Nome<br>(00) 00000-0000<br>@octomaker_</div>
-      </div>
-      <div class="sig"><img src="logo/octomaker-icone.png" alt=""><div><b>Seu Nome</b><div class="m">OctoMaker · Criação de Sites</div><a href="#">@octomaker_</a> · <span class="m">(00) 00000-0000</span></div></div>
-    </div>
-  </section>
-
-  <footer>octomaker_ · guia de marca v1 · 2026</footer>
+  <footer>OctoMaker · criação de sites em Pouso Alegre, MG · logos em <code>marca/logo/</code>, fontes dos PNGs em <code>marca/_fontes/</code></footer>
 </div>
-<script src="../portfolio/assets/octomaker-coin.js"></script>
 </body>
 </html>

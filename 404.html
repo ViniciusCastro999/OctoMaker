@@ -4,24 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#050816">
 <title>Página não encontrada · OctoMaker</title>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@800&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0e1015; color: #eef2f8; font-family: Inter, sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
-  img { width: 120px; }
-  h1 { font: 800 clamp(34px, 6vw, 56px) "JetBrains Mono", monospace; margin: 24px 0 10px; }
-  h1 span { color: #3d7bff; }
-  p { color: #8d97ab; font-size: 18px; margin: 0 0 30px; }
-  a { display: inline-block; background: #ffd000; color: #111; font: 600 16px "JetBrains Mono", monospace; padding: 14px 24px; border-radius: 12px; text-decoration: none; }
+  * { box-sizing: border-box; margin: 0; }
+  body { min-height: 100vh; display: grid; place-items: center; padding: 24px; overflow: hidden; position: relative; background: #050816; color: #fff; font-family: "Plus Jakarta Sans", system-ui, sans-serif; text-align: center; }
+  body::before, body::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+  body::before { width: 900px; height: 900px; left: 50%; top: -560px; margin-left: -700px; background: radial-gradient(circle, rgba(31,91,255,.55), rgba(31,91,255,0) 62%); }
+  body::after { width: 800px; height: 800px; left: 50%; top: -420px; margin-left: -80px; background: radial-gradient(circle, rgba(91,63,217,.45), rgba(91,63,217,0) 62%); }
+  main { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  svg { width: 72px; height: 72px; }
+  h1 { font-weight: 800; font-size: clamp(34px, 6vw, 56px); letter-spacing: -.05em; line-height: 1.05; }
+  h1 span { color: #7EA0FF; }
+  p { color: #C6D0E6; font-size: 18px; line-height: 1.6; max-width: 440px; }
+  a { display: inline-flex; align-items: center; gap: 14px; margin-top: 8px; padding: 7px 7px 7px 24px; border-radius: 999px; background: #fff; color: #0B1A33; font-weight: 700; font-size: 16px; text-decoration: none; }
+  a i { width: 40px; height: 40px; border-radius: 50%; background: #1F5BFF; display: grid; place-items: center; color: #fff; font-style: normal; font-size: 20px; }
 </style>
 </head>
 <body>
   <main>
-    <img src="/favicon-192x192.png" alt="OctoMaker">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="13" fill="#1F5BFF"/><circle cx="22" cy="26" r="9.5" fill="none" stroke="#fff" stroke-width="6"/><circle cx="36" cy="12" r="4.5" fill="#3DDC97"/></svg>
     <h1>Página não <span>encontrada</span></h1>
     <p>O endereço que você acessou não existe ou mudou de lugar.</p>
-    <a href="/">Ir para octomaker.com.br</a>
+    <a href="/">Ir para octomaker.com.br<i>→</i></a>
   </main>
 </body>
 </html>
