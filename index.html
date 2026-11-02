@@ -141,7 +141,15 @@
   .case .info p { font-size: 16px; color: var(--text3); }
   .case .list { margin: 6px 0 4px; }
   .case .actions { justify-content: flex-start; }
-  .projects.real { margin-top: 24px; }
+  .case + .case, .case + .case-sm { margin-top: 24px; }
+  .case.rev { grid-template-columns: 1.1fr .9fr; }
+  .case.rev .shot { order: -1; border-left: 0; border-right: 1px solid var(--line); }
+  .case-sm { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 20px 32px; padding: 26px 30px; transition: border-color .3s; }
+  .case-sm:hover { border-color: #2B4BB8; }
+  .case-sm .info { padding: 0; }
+  .case-sm .info h3 { font-size: 22px; }
+  .case-sm .thumb { aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+  .case-sm .thumb img { width: 100%; height: auto; }
   .pill { display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--mint); color: #04261A; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
   /* steps and includes */
   .steps, .includes { display: grid; gap: 20px; }
@@ -194,7 +202,9 @@
     .links { display: none; }
     .steps, .includes { grid-template-columns: repeat(2, 1fr); }
     .services { grid-template-columns: 1fr; }
-    .case { grid-template-columns: 1fr; }
+    .case, .case.rev, .case-sm { grid-template-columns: 1fr; }
+    .case.rev .shot { border-right: 0; }
+    .case-sm .thumb { order: -1; }
     .case .shot { aspect-ratio: 16 / 10; min-height: 0; border-left: 0; border-top: 1px solid var(--line); order: -1; }
   }
   @media (max-width: 760px) {
@@ -258,9 +268,9 @@
     </div>
   </div>
   <div class="wrap">
-    <a class="showcase reveal" href="portfolio/psicologa/">
-      <img src="portfolio/thumbs/psicologa.jpg" alt="Site de demonstração feito pela OctoMaker para uma psicóloga" width="1440" height="900" fetchpriority="high">
-      <span class="label"><span class="dot"></span>Projeto de demonstração · Ana Moura, psicóloga</span>
+    <a class="showcase reveal" href="https://nutriligiarezende.com.br/" target="_blank" rel="noopener">
+      <img src="portfolio/thumbs/nutriligiarezende.jpg" alt="Site da nutricionista Lígia Rezende, feito pela OctoMaker" width="1440" height="900" fetchpriority="high">
+      <span class="label"><span class="dot"></span>Cliente real · Lígia Rezende, nutricionista</span>
     </a>
   </div>
 </header>
@@ -313,7 +323,7 @@
 
   <section id="destaque">
     <div class="head reveal">
-      <div><span class="kicker">Projetos reais</span><h2>Produtos no ar, feitos <span>do zero</span></h2></div>
+      <div><span class="kicker">Projetos em destaque</span><h2>Produtos no ar, feitos <span>do zero</span></h2></div>
       <p>De um SaaS completo, com login, banco de dados e assinatura, a sites que trazem pacientes todos os dias.</p>
     </div>
     <a class="case card reveal" href="https://findbiz.com.br/" target="_blank" rel="noopener">
@@ -331,22 +341,27 @@
       </div>
       <div class="shot"><img class="page" src="portfolio/thumbs/findbiz-full.jpg" alt="Página da FindBiz, SaaS desenvolvido pela OctoMaker" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>findbiz.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
     </a>
-    <div class="projects real">
-      <a class="proj card reveal" href="https://nutriligiarezende.com.br/" target="_blank" rel="noopener">
-        <div class="shot"><img class="page" src="portfolio/thumbs/nutriligiarezende-full.jpg" alt="Site da nutricionista Lígia Rezende, feito pela OctoMaker" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>nutriligiarezende.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
-        <div class="info"><span class="kind"><i class="ph-fill ph-leaf"></i>Cliente · Nutricionista</span><h3>Lígia Rezende</h3>
-          <p>Site elegante para consultas presenciais e online, com planos de acompanhamento comparados lado a lado e agendamento direto pelo WhatsApp.</p>
-          <div class="tags"><span class="tag">No ar</span><span class="tag">Agendamento</span></div>
-          <div class="actions"><span class="open">Visitar site <i class="ph-bold ph-arrow-up-right"></i></span></div></div>
-      </a>
-      <a class="proj card reveal" href="https://psicologathamires.com.br/" target="_blank" rel="noopener">
-        <div class="shot"><img class="page" src="portfolio/thumbs/psicologathamires-full.jpg" alt="Site da psicóloga Thamires Castro, feito pela OctoMaker" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>psicologathamires.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
-        <div class="info"><span class="kind"><i class="ph-fill ph-brain"></i>Cliente · Psicóloga</span><h3>Thamires Castro</h3>
-          <p>Visual acolhedor para terapia online, com o passo a passo até a primeira sessão, temas atendidos e respostas às dúvidas mais comuns.</p>
-          <div class="tags"><span class="tag">No ar</span><span class="tag">Atendimento online</span></div>
-          <div class="actions"><span class="open">Visitar site <i class="ph-bold ph-arrow-up-right"></i></span></div></div>
-      </a>
-    </div>
+    <a class="case rev card reveal" href="https://nutriligiarezende.com.br/" target="_blank" rel="noopener">
+      <div class="info">
+        <span class="pill">Cliente real</span>
+        <span class="kind"><i class="ph-fill ph-leaf"></i>Nutricionista · Presencial e online</span>
+        <h3>Lígia Rezende</h3>
+        <p>Site completo para uma nutricionista com atendimentos em mais de 10 países. Visual elegante, que passa confiança logo na primeira tela e leva a paciente direto para o agendamento.</p>
+        <ul class="list">
+          <li><i class="ph-bold ph-check"></i>Planos de acompanhamento comparados lado a lado</li>
+          <li><i class="ph-bold ph-check"></i>Agendamento direto pelo WhatsApp</li>
+          <li><i class="ph-bold ph-check"></i>Pronto para aparecer no Google na cidade dela</li>
+        </ul>
+        <div class="actions"><span class="open">Visitar nutriligiarezende.com.br <i class="ph-bold ph-arrow-up-right"></i></span></div>
+      </div>
+      <div class="shot"><img class="page" src="portfolio/thumbs/nutriligiarezende-full.jpg" alt="Site da nutricionista Lígia Rezende, feito pela OctoMaker" loading="lazy" decoding="async"><div class="bar"><i></i><i></i><i></i><em>nutriligiarezende.com.br</em></div><span class="hint"><i class="ph ph-mouse-scroll"></i>passe o mouse</span></div>
+    </a>
+    <a class="case-sm card reveal" href="https://psicologathamires.com.br/" target="_blank" rel="noopener">
+      <div class="info"><span class="kind"><i class="ph-fill ph-brain"></i>Cliente real · Psicóloga</span><h3>Thamires Castro</h3>
+        <p>Visual acolhedor para terapia online, com o passo a passo até a primeira sessão e respostas às dúvidas mais comuns.</p>
+        <div class="actions"><span class="open">Visitar psicologathamires.com.br <i class="ph-bold ph-arrow-up-right"></i></span></div></div>
+      <div class="thumb"><img src="portfolio/thumbs/psicologathamires-full.jpg" alt="Site da psicóloga Thamires Castro, feito pela OctoMaker" loading="lazy" decoding="async"></div>
+    </a>
   </section>
 
   <section id="projetos">
