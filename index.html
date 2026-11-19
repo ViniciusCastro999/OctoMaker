@@ -412,7 +412,7 @@
     <div class="wrap">
       <div class="sec-head">
         <div><span class="kicker">Modelos</span><h2>Prefere partir<br>de um <em>estilo?</em></h2></div>
-        <p>Viu, gostou, é seu. Dez modelos de demonstração, com negócios fictícios, para você apontar e dizer: quero assim. O seu sai com a sua marca, o seu texto e as suas fotos.</p>
+        <p>Viu, gostou, é seu. Seis modelos de demonstração de setores diferentes, com negócios fictícios, para você apontar e dizer: quero assim. O seu sai com a sua marca, o seu texto e as suas fotos.</p>
       </div>
     </div>
     <div class="rail" id="rail"></div>
@@ -605,16 +605,12 @@ const words = [...man.querySelectorAll('.w')];
 
 /* ---------- models rail ---------- */
 const MODELS = [
-  ['impressao-3d', 'Camada 3D', 'Impressão 3D', 'Camada 3D (impressão 3D)'],
-  ['barbearia', 'Navalha', 'Barbearia', 'Navalha (barbearia)'],
-  ['nutricionista', 'Lívia Campos', 'Nutricionista', 'Lívia Campos (nutricionista)'],
-  ['brecho', 'Garimpo', 'Brechó', 'Garimpo (brechó)'],
-  ['tatuador', 'Tinta Negra', 'Tatuador', 'Tinta Negra (tatuador)'],
-  ['psicologa', 'Ana Moura', 'Psicóloga', 'Ana Moura (psicóloga)'],
-  ['loja', 'Ateliê Barro', 'Loja', 'Ateliê Barro (loja)'],
-  ['fotografo', 'Rafael Nogueira', 'Fotógrafo', 'Rafael Nogueira (fotógrafo)'],
-  ['sobrancelhas', 'Arco Brow', 'Sobrancelhas e visagismo', 'Arco Brow (sobrancelhas e visagismo)'],
-  ['sebo', 'Traça', 'Sebo de livros', 'Traça (sebo de livros)'],
+  ['hamburgueria', 'Brasa', 'Hamburgueria', 'Brasa (hamburgueria)'],
+  ['odontologia', 'Lumi', 'Clínica odontológica', 'Lumi (odontologia)'],
+  ['imobiliaria', 'Horizonte', 'Imobiliária', 'Horizonte (imobiliária)'],
+  ['academia', 'Pulso', 'Academia', 'Pulso (academia)'],
+  ['advocacia', 'Prado & Martins', 'Escritório de advocacia', 'Prado & Martins (advocacia)'],
+  ['cafeteria', 'Grão', 'Cafeteria', 'Grão (cafeteria)'],
 ];
 const rail = document.getElementById('rail');
 rail.innerHTML = MODELS.map(([slug, name, niche, model], i) => `

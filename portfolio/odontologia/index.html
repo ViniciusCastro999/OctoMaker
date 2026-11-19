@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<title>Lumi · Odontologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<style>
+  :root { --bg: #F5F9FC; --white: #fff; --navy: #0B2545; --navy2: #1B3A63; --aqua: #2EC4D6; --aqua-l: #D8F5F8; --mute: #5D7089; --line: #DCE6EF; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body { background: var(--bg); color: var(--navy); font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .sora { font-family: Sora, sans-serif; letter-spacing: -.04em; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+  nav { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .3s, box-shadow .3s; }
+  nav.solid { background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 82px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: Sora; font-weight: 700; font-size: 24px; }
+  .logo svg { width: 30px; height: 30px; }
+  .links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; color: var(--mute); }
+  .links a:hover { color: var(--navy); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 600; transition: transform .25s, box-shadow .25s, background .25s; }
+  .btn:hover { transform: translateY(-2px); background: var(--navy2); box-shadow: 0 16px 40px -14px rgba(11,37,69,.6); }
+  .btn.light { background: var(--white); color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--line); }
+  .btn.aqua { background: var(--aqua); color: var(--navy); }
+
+  .hero { position: relative; min-height: 100vh; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 40px; padding-top: 90px; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .7; z-index: -1; }
+  .b1 { width: 520px; height: 520px; background: #BDEFF5; right: -80px; top: 80px; }
+  .b2 { width: 380px; height: 380px; background: #DCE7FF; right: 260px; top: 360px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--white); box-shadow: 0 0 0 1px var(--line); font-size: 13px; font-weight: 600; color: var(--mute); }
+  .pill b { color: #F5A524; letter-spacing: 1px; }
+  h1 { font-size: clamp(46px, 6.4vw, 96px); line-height: .98; font-weight: 600; margin: 22px 0 24px; }
+  h1 em { font-style: normal; color: var(--aqua); position: relative; }
+  .hero p { max-width: 470px; font-size: 18px; line-height: 1.65; color: var(--mute); margin-bottom: 32px; }
+  .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tooth-stage { position: relative; height: 620px; perspective: 1000px; display: grid; place-items: center; }
+  .tooth { width: 360px; transform-style: preserve-3d; will-change: transform; }
+  .tooth svg { width: 100%; height: auto; filter: drop-shadow(0 40px 50px rgba(11,37,69,.22)); }
+  .float { position: absolute; padding: 14px 18px; border-radius: 18px; background: rgba(255,255,255,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 20px 40px -20px rgba(11,37,69,.35), 0 0 0 1px var(--line); font-size: 14px; }
+  .float b { display: block; font-family: Sora; font-size: 22px; letter-spacing: -.03em; }
+  .float span { color: var(--mute); }
+  .f1 { left: 0; top: 120px; } .f2 { right: 0; top: 260px; } .f3 { left: 30px; bottom: 90px; }
+  .spark { position: absolute; width: 18px; height: 18px; }
+
+  section { padding: 140px 0; }
+  .kick { color: var(--aqua); font-weight: 600; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+  h2 { font-size: clamp(38px, 5vw, 72px); line-height: 1.02; font-weight: 600; margin-top: 14px; }
+  .smile-sec { text-align: center; padding: 120px 0 60px; }
+  .smile-sec h2 { max-width: 900px; margin: 14px auto 0; }
+  .smile { width: min(760px, 90%); margin: 40px auto 0; display: block; }
+
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
+  .svc { position: relative; padding: 34px 30px; border-radius: 28px; background: var(--white); box-shadow: 0 0 0 1px var(--line); overflow: hidden; transition: transform .4s, box-shadow .4s; }
+  .svc:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(11,37,69,.35), 0 0 0 1px var(--aqua); }
+  .svc .ic { width: 58px; height: 58px; border-radius: 18px; background: var(--aqua-l); display: grid; place-items: center; margin-bottom: 26px; }
+  .svc .ic svg { width: 30px; height: 30px; }
+  .svc h3 { font-size: 24px; margin-bottom: 10px; }
+  .svc p { color: var(--mute); line-height: 1.6; }
+  .svc .more { display: inline-block; margin-top: 18px; font-weight: 600; color: var(--navy2); }
+
+  .ba { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: center; }
+  .ba p { color: var(--mute); font-size: 18px; line-height: 1.65; margin: 20px 0 28px; }
+  .compare { position: relative; aspect-ratio: 16 / 10; border-radius: 30px; overflow: hidden; background: #F3D9D2; box-shadow: 0 40px 80px -40px rgba(11,37,69,.45); user-select: none; touch-action: none; cursor: ew-resize; }
+  .compare svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .compare .after { clip-path: inset(0 0 0 var(--x, 50%)); }
+  .compare .handle { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 3px; margin-left: -1.5px; background: #fff; }
+  .compare .handle i { position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.2); display: grid; place-items: center; font-style: normal; font-weight: 700; color: var(--navy); }
+  .compare .tag { position: absolute; top: 18px; padding: 6px 12px; border-radius: 999px; background: rgba(11,37,69,.7); color: #fff; font-size: 12px; font-weight: 600; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 70px; }
+  .stat { padding: 30px; border-radius: 24px; background: var(--navy); color: #fff; }
+  .stat b { font-family: Sora; font-size: 52px; letter-spacing: -.05em; display: block; }
+  .stat span { color: #A9BCD6; }
+
+  .book { position: relative; overflow: hidden; border-radius: 40px; background: var(--navy); color: #fff; padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .book h2 { color: #fff; }
+  .book p { color: #A9BCD6; font-size: 18px; line-height: 1.6; margin-top: 18px; }
+  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .slot { padding: 16px 0; border-radius: 16px; text-align: center; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); cursor: pointer; transition: background .2s, color .2s; font-weight: 600; }
+  .slot small { display: block; font-weight: 400; color: #A9BCD6; font-size: 12px; margin-bottom: 4px; }
+  .slot:hover, .slot.on { background: var(--aqua); color: var(--navy); }
+  .slot.on small, .slot:hover small { color: var(--navy2); }
+  .book .btn { margin-top: 24px; }
+  footer { padding: 70px 0 110px; color: var(--mute); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .toast { position: fixed; left: 50%; top: 24px; z-index: 50; transform: translate(-50%, -220%); padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-weight: 600; font-size: 14px; transition: transform .5s cubic-bezier(.2,.9,.2,1); max-width: calc(100% - 32px); text-align: center; }
+  .toast.show { transform: translate(-50%, 0); }
+  @media (max-width: 960px) {
+    .links { display: none; }
+    .hero, .ba, .book { grid-template-columns: 1fr; }
+    .hero { padding-top: 120px; }
+    .tooth-stage { height: 460px; }
+    .tooth { width: 260px; }
+    .services, .stats { grid-template-columns: 1fr 1fr; }
+    .book { padding: 44px 26px; }
+    section { padding: 90px 0; }
+  }
+  @media (max-width: 560px) { .services, .stats { grid-template-columns: 1fr; } .f2 { display: none; } nav .btn { display: none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="enamel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#EEF6FB"/><stop offset="1" stop-color="#C9DCEA"/></linearGradient>
+  <radialGradient id="shine" cx=".32" cy=".26" r=".4"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  <symbol id="spk" viewBox="0 0 20 20"><path d="M10 0C11 7 13 9 20 10C13 11 11 13 10 20C9 13 7 11 0 10C7 9 9 7 10 0Z" fill="#2EC4D6"/></symbol>
+</defs></svg>
+
+<nav><div class="wrap">
+  <a href="#" class="logo"><svg viewBox="0 0 30 30"><path d="M6 6c3-3 6-2 9 0 3-2 6-3 9 0 3 4 1 10-1 14-1 3-1 8-3 8s-2-6-5-6-3 6-5 6-2-5-3-8C5 16 3 10 6 6Z" fill="#0B2545"/><circle cx="21" cy="9" r="2" fill="#2EC4D6"/></svg>lumi</a>
+  <div class="links"><a href="#tratamentos">Tratamentos</a><a href="#resultados">Resultados</a><a href="#clinica">A clínica</a><a href="#agendar">Agendar</a></div>
+  <a href="#agendar" class="btn">Agendar avaliação</a>
+</div></nav>
+
+<header class="wrap hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div>
+    <span class="pill rv"><b>★★★★★</b>4,9 no Google · 380 avaliações</span>
+    <h1 class="rv">O sorriso que você <em>não esconde</em> mais.</h1>
+    <p class="rv">Lentes, clareamento, implantes e ortodontia invisível com planejamento digital. Você vê o resultado antes de começar.</p>
+    <div class="ctas rv"><a href="#agendar" class="btn aqua">Quero minha avaliação</a><a href="#resultados" class="btn light">Ver antes e depois</a></div>
+  </div>
+  <div class="tooth-stage">
+    <div class="tooth" id="tooth"><svg viewBox="0 0 300 340">
+      <path d="M58 30C92 4 128 18 150 34C172 18 208 4 242 30C286 64 276 140 252 190C236 224 232 300 210 326C192 346 176 300 170 270C164 240 158 226 150 226S136 240 130 270C124 300 108 346 90 326C68 300 64 224 48 190C24 140 14 64 58 30Z" fill="url(#enamel)"/>
+      <path d="M58 30C92 4 128 18 150 34C172 18 208 4 242 30C286 64 276 140 252 190C236 224 232 300 210 326C192 346 176 300 170 270C164 240 158 226 150 226S136 240 130 270C124 300 108 346 90 326C68 300 64 224 48 190C24 140 14 64 58 30Z" fill="url(#shine)"/>
+      <path d="M80 52C100 40 122 44 138 56" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none"/>
+    </svg></div>
+    <svg class="spark" style="left:18%;top:18%"><use href="#spk"/></svg>
+    <svg class="spark" style="right:20%;top:12%;width:26px;height:26px"><use href="#spk"/></svg>
+    <svg class="spark" style="right:12%;bottom:24%"><use href="#spk"/></svg>
+    <div class="float f1"><b>3D</b><span>Planejamento digital</span></div>
+    <div class="float f2"><b>1 dia</b><span>Clareamento a laser</span></div>
+    <div class="float f3"><b>0 dor</b><span>Anestesia computadorizada</span></div>
+  </div>
+</header>
+
+<section class="smile-sec">
+  <div class="wrap">
+    <span class="kick">Por que a Lumi</span>
+    <h2 class="rv">Cada detalhe pensado para você sorrir sem pensar duas vezes.</h2>
+    <svg class="smile" viewBox="0 0 760 220" fill="none"><path id="smilePath" d="M40 40C160 200 600 200 720 40" stroke="#2EC4D6" stroke-width="16" stroke-linecap="round"/><path d="M180 90v40M260 110v50M340 118v54M420 118v54M500 110v50M580 90v40" stroke="#0B2545" stroke-width="5" stroke-linecap="round" class="teeth" opacity="0"/></svg>
+  </div>
+</section>
+
+<section id="tratamentos" style="padding-top:60px"><div class="wrap">
+  <span class="kick">Tratamentos</span>
+  <h2 class="rv">Do check-up à<br>transformação completa</h2>
+  <div class="services">
+    <div class="svc rv"><div class="ic"><svg viewBox="0 0 30 30" fill="none" stroke="#0B2545" stroke-width="2"><path d="M5 9c3-4 7-3 10-1 3-2 7-3 10 1 2 4 0 9-2 12-1 3-1 6-3 6s-2-5-5-5-3 5-5 5-2-3-3-6C5 18 3 13 5 9Z"/></svg></div><h3>Lentes de contato dental</h3><p>Lâminas ultrafinas de porcelana que corrigem cor e formato sem desgastar o seu dente.</p><a href="#agendar" class="more">Saiba mais →</a></div>
+    <div class="svc rv"><div class="ic"><svg viewBox="0 0 30 30" fill="none" stroke="#0B2545" stroke-width="2"><circle cx="15" cy="15" r="6"/><path d="M15 2v4M15 24v4M2 15h4M24 15h4M6 6l3 3M21 21l3 3M24 6l-3 3M9 21l-3 3"/></svg></div><h3>Clareamento</h3><p>Até 8 tons mais claro em uma sessão, com proteção para a sensibilidade.</p><a href="#agendar" class="more">Saiba mais →</a></div>
+    <div class="svc rv"><div class="ic"><svg viewBox="0 0 30 30" fill="none" stroke="#0B2545" stroke-width="2"><path d="M9 4h12l-2 9H11Z"/><path d="M12 13v13M18 13v13M12 17h6M12 21h6"/></svg></div><h3>Implantes</h3><p>Dente fixo de volta, com cirurgia guiada por computador e recuperação rápida.</p><a href="#agendar" class="more">Saiba mais →</a></div>
+    <div class="svc rv"><div class="ic"><svg viewBox="0 0 30 30" fill="none" stroke="#0B2545" stroke-width="2"><rect x="4" y="10" width="22" height="10" rx="5"/><path d="M9 10v10M15 10v10M21 10v10"/></svg></div><h3>Alinhadores invisíveis</h3><p>Ortodontia sem bráquetes. Ninguém percebe, e você tira para comer.</p><a href="#agendar" class="more">Saiba mais →</a></div>
+    <div class="svc rv"><div class="ic"><svg viewBox="0 0 30 30" fill="none" stroke="#0B2545" stroke-width="2"><path d="M15 4v22M4 15h22"/><circle cx="15" cy="15" r="11"/></svg></div><h3>Clínica geral</h3><p>Limpeza, restaurações e prevenção para a família toda, de 2 a 90 anos.</p><a href="#agendar" class="more">Saiba mais →</a></div>
+    <div class="svc rv"><div class="ic"><svg viewBox="0 0 30 30" fill="none" stroke="#0B2545" stroke-width="2"><path d="M4 22l7-7 5 5 10-10"/><path d="M20 10h6v6"/></svg></div><h3>Harmonização</h3><p>Toxina e preenchimento com naturalidade, para valorizar o seu sorriso novo.</p><a href="#agendar" class="more">Saiba mais →</a></div>
+  </div>
+</div></section>
+
+<section id="resultados" style="padding-top:40px"><div class="wrap ba">
+  <div>
+    <span class="kick">Antes e depois</span>
+    <h2 class="rv">Arraste e veja a diferença</h2>
+    <p class="rv">Com o planejamento digital, você aprova o formato e a cor do sorriso novo antes de qualquer procedimento.</p>
+    <a href="#agendar" class="btn rv">Quero esse resultado</a>
+  </div>
+  <div class="compare rv" id="compare">
+    <svg viewBox="0 0 640 400" class="before"><rect width="640" height="400" fill="#F0CFC7"/><path d="M90 150C200 110 440 110 550 150C520 300 120 300 90 150Z" fill="#B5545A"/><g fill="#E6D3A8" stroke="#C7B184" stroke-width="2"><path d="M150 160h50v58q-25 14-50 0Z"/><path d="M203 158h56v66q-28 14-56 0Z"/><path d="M262 156h56v72q-28 12-56 0Z" transform="rotate(3 290 190)"/><path d="M322 156h56v72q-28 12-56 0Z"/><path d="M381 158h56v66q-28 14-56 0Z" transform="rotate(-4 409 190)"/><path d="M440 160h50v58q-25 14-50 0Z"/></g></svg>
+    <svg viewBox="0 0 640 400" class="after"><rect width="640" height="400" fill="#F4D7CF"/><path d="M90 150C200 110 440 110 550 150C520 300 120 300 90 150Z" fill="#B5545A"/><g fill="#FFFFFF" stroke="#E2EEF6" stroke-width="2"><path d="M150 160h50v60q-25 12-50 0Z"/><path d="M203 158h56v68q-28 12-56 0Z"/><path d="M262 156h56v74q-28 12-56 0Z"/><path d="M322 156h56v74q-28 12-56 0Z"/><path d="M381 158h56v68q-28 12-56 0Z"/><path d="M440 160h50v60q-25 12-50 0Z"/></g><path d="M270 170h20" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".9"/></svg>
+    <span class="tag" style="left:18px">Antes</span><span class="tag" style="right:18px">Depois</span>
+    <div class="handle"><i>⇆</i></div>
+  </div>
+</div></section>
+
+<section id="clinica" style="padding-top:40px"><div class="wrap">
+  <span class="kick">A clínica</span>
+  <h2 class="rv">Números que falam<br>por nós</h2>
+  <div class="stats">
+    <div class="stat rv"><b data-n="12">0</b><span>anos de clínica</span></div>
+    <div class="stat rv"><b data-n="8400">0</b><span>sorrisos tratados</span></div>
+    <div class="stat rv"><b data-n="9">0</b><span>especialistas</span></div>
+    <div class="stat rv"><b data-n="380">0</b><span>avaliações 5 estrelas</span></div>
+  </div>
+</div></section>
+
+<section id="agendar" style="padding-top:20px"><div class="wrap">
+  <div class="book rv">
+    <div><span class="kick">Agendamento</span><h2>Sua avaliação<br>começa aqui</h2><p>Escolha um horário. A gente confirma pelo WhatsApp em minutos.</p></div>
+    <div>
+      <div class="slots" id="slots">
+        <div class="slot"><small>seg</small>09:00</div><div class="slot on"><small>seg</small>14:30</div><div class="slot"><small>ter</small>10:00</div>
+        <div class="slot"><small>ter</small>16:00</div><div class="slot"><small>qua</small>08:30</div><div class="slot"><small>qua</small>18:00</div>
+      </div>
+      <a href="#" class="btn aqua" data-demo>Confirmar no WhatsApp</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>Lumi Odontologia · Av. Central, 900 · sala 12</span><span>CRO 00000 · Responsável técnico: Dra. Marina Lopes</span></div></footer>
+<div class="toast" id="toast">Modelo de demonstração: no seu site, este botão abre o seu WhatsApp.</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const navEl = document.querySelector('nav'); addEventListener('scroll', () => navEl.classList.toggle('solid', scrollY > 30), { passive: true });
+const toast = document.getElementById('toast'); let tt;
+document.querySelectorAll('[data-demo]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2600); }));
+document.querySelectorAll('.slot').forEach(s => s.addEventListener('click', () => { document.querySelectorAll('.slot').forEach(x => x.classList.remove('on')); s.classList.add('on'); }));
+
+gsap.from('.hero .rv', { y: 40, opacity: 0, duration: 1.1, stagger: .1, ease: 'expo.out' });
+gsap.from('#tooth', { scale: .6, rotateY: -60, opacity: 0, duration: 1.6, ease: 'expo.out', delay: .2 });
+gsap.from('.float', { y: 30, opacity: 0, duration: 1, stagger: .15, delay: .7, ease: 'back.out(1.6)' });
+if (!reduce) {
+  gsap.to('#tooth', { y: -16, duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  gsap.to('.spark', { scale: .3, opacity: .3, duration: 1.2, yoyo: true, repeat: -1, stagger: .4, ease: 'sine.inOut' });
+  gsap.to('.float', { y: -10, duration: 2.6, yoyo: true, repeat: -1, stagger: .5, ease: 'sine.inOut' });
+  const tooth = document.getElementById('tooth');
+  addEventListener('pointermove', e => { const rx = (e.clientY / innerHeight - .5) * -24, ry = (e.clientX / innerWidth - .5) * 34; gsap.to(tooth, { rotateX: rx, rotateY: ry, duration: 1.2, ease: 'power3.out' }); });
+}
+gsap.to('#tooth', { rotateZ: 14, scale: .85, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+// smile draws on scroll
+const sp = document.getElementById('smilePath'), L = sp.getTotalLength();
+gsap.set(sp, { strokeDasharray: L, strokeDashoffset: L });
+gsap.timeline({ scrollTrigger: { trigger: '.smile', start: 'top 85%', end: 'bottom 45%', scrub: 1 } })
+  .to(sp, { strokeDashoffset: 0, ease: 'none' }).to('.teeth', { opacity: 1, duration: .3 });
+
+gsap.utils.toArray('section .rv').forEach(el => gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
+
+// counters
+document.querySelectorAll('[data-n]').forEach(b => { const n = +b.dataset.n, o = { v: 0 };
+  gsap.to(o, { v: n, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: b, start: 'top 90%' }, onUpdate: () => b.textContent = Math.round(o.v).toLocaleString('pt-BR') + (n > 999 ? '+' : '') }); });
+
+// before / after
+const cmp = document.getElementById('compare');
+const setX = e => { const r = cmp.getBoundingClientRect(); const x = Math.min(96, Math.max(4, (e.clientX - r.left) / r.width * 100)); cmp.style.setProperty('--x', x + '%'); };
+let drag = false;
+cmp.addEventListener('pointerdown', e => { drag = true; cmp.setPointerCapture(e.pointerId); setX(e); });
+cmp.addEventListener('pointermove', e => drag && setX(e));
+cmp.addEventListener('pointerup', () => drag = false);
+ScrollTrigger.create({ trigger: cmp, start: 'top 75%', once: true, onEnter: () => { const o = { x: 50 }; gsap.to(o, { x: 22, duration: .9, yoyo: true, repeat: 1, ease: 'power2.inOut', onUpdate: () => cmp.style.setProperty('--x', o.x + '%') }); } });
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site da clínica odontológica"></script>
+<script src="../assets/octomaker-stats.js"></script>
+</body>
+</html>

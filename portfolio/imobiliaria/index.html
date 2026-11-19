@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<title>Horizonte · Imóveis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<style>
+  :root { --ink: #1B1530; --ink2: #2B2347; --sand: #F7F1E8; --sun: #FF8A3D; --rose: #F25F7A; --mute: #6E6782; --line: #E6DED2; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body { background: var(--sand); color: var(--ink); font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .serif { font-family: Fraunces, serif; letter-spacing: -.03em; }
+  .wrap { max-width: 1260px; margin: 0 auto; padding: 0 28px; }
+  nav { position: fixed; inset: 0 0 auto; z-index: 20; color: #fff; transition: background .3s, color .3s; }
+  nav.solid { background: rgba(247,241,232,.9); color: var(--ink); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 82px; }
+  .logo { font-family: Fraunces; font-size: 26px; font-weight: 600; display: flex; gap: 10px; align-items: center; }
+  .logo i { width: 26px; height: 13px; border-radius: 26px 26px 0 0; background: var(--sun); }
+  .links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; opacity: .85; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; transition: transform .25s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.sun { background: var(--sun); color: var(--ink); }
+  nav .btn { background: #fff; color: var(--ink); }
+  nav.solid .btn { background: var(--ink); color: #fff; }
+
+  .pin { position: relative; height: 100vh; min-height: 680px; overflow: hidden; }
+  .sky { position: absolute; inset: 0; background: linear-gradient(180deg, #7EC8F0 0%, #BFE4F5 60%, #F7F1E8 100%); }
+  .sky.s2 { background: linear-gradient(180deg, #2B2347 0%, #F25F7A 55%, #FF8A3D 85%, #FFD08A 100%); opacity: 0; }
+  .sky.s3 { background: linear-gradient(180deg, #0A0818 0%, #1B1530 60%, #2B2347 100%); opacity: 0; }
+  .stars { position: absolute; inset: 0; opacity: 0; }
+  .sunball { position: absolute; left: 62%; top: 16%; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, #FFE7A3, #FFB04D 60%, rgba(255,138,61,0)); box-shadow: 0 0 120px 40px rgba(255,176,77,.45); }
+  .moon { position: absolute; left: 22%; top: 12%; width: 70px; height: 70px; border-radius: 50%; background: #F4EEDC; box-shadow: 0 0 60px rgba(244,238,220,.5); opacity: 0; }
+  .city { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 70%; }
+  .hero-copy { position: relative; z-index: 3; padding-top: 22vh; color: #fff; text-shadow: 0 2px 30px rgba(27,21,48,.25); }
+  .hero-copy h1 { font-family: Fraunces; font-weight: 400; font-size: clamp(48px, 7.2vw, 112px); line-height: .98; letter-spacing: -.04em; max-width: 900px; }
+  .hero-copy h1 em { font-style: italic; }
+  .search { margin-top: 34px; display: flex; align-items: center; gap: 6px; padding: 8px; border-radius: 999px; background: #fff; color: var(--ink); max-width: 760px; box-shadow: 0 30px 60px -30px rgba(27,21,48,.6); text-shadow: none; }
+  .search .tabs { display: flex; padding: 4px; border-radius: 999px; background: var(--sand); }
+  .search .tabs button { border: 0; background: none; padding: 10px 16px; border-radius: 999px; font: 600 14px Inter; color: var(--mute); cursor: pointer; }
+  .search .tabs button.on { background: var(--ink); color: #fff; }
+  .search input, .search select { flex: 1; min-width: 0; border: 0; outline: 0; font: 500 15px Inter; padding: 12px 14px; background: none; color: var(--ink); }
+  .search select { flex: .7; border-left: 1px solid var(--line); }
+  .search .btn { padding: 14px 22px; }
+
+  section { padding: 130px 0; }
+  .kick { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--rose); }
+  h2 { font-family: Fraunces; font-weight: 400; font-size: clamp(38px, 5vw, 72px); line-height: 1.02; letter-spacing: -.035em; margin-top: 14px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: 50px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 14px; cursor: pointer; transition: background .2s, color .2s; }
+  .chip.on, .chip:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card { border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--line); transition: transform .4s, box-shadow .4s; }
+  .card:hover { transform: translateY(-8px); box-shadow: 0 40px 70px -40px rgba(27,21,48,.45), 0 0 0 1px var(--line); }
+  .card .img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+  .card .img svg { width: 100%; height: 100%; transition: transform 1s cubic-bezier(.2,.8,.2,1); }
+  .card:hover .img svg { transform: scale(1.07); }
+  .card .badge { position: absolute; top: 14px; left: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.9); font-size: 12px; font-weight: 600; }
+  .card .fav { position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.9); display: grid; place-items: center; cursor: pointer; font-size: 18px; }
+  .card .body { padding: 22px 24px 24px; }
+  .card .price { font-family: Fraunces; font-size: 30px; letter-spacing: -.03em; }
+  .card h3 { font-size: 17px; font-weight: 600; margin: 6px 0 4px; }
+  .card .loc { color: var(--mute); font-size: 14px; }
+  .card .specs { display: flex; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--mute); }
+  .card .specs b { color: var(--ink); }
+  .card.hide { display: none; }
+
+  .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); margin-top: 50px; }
+  .why div { padding: 34px 30px 10px 0; }
+  .why b { font-family: Fraunces; font-size: 68px; font-weight: 400; letter-spacing: -.04em; display: block; color: var(--rose); }
+  .why span { color: var(--mute); line-height: 1.6; }
+  .sell { position: relative; overflow: hidden; border-radius: 40px; padding: 90px 70px; background: linear-gradient(135deg, var(--ink) 0%, var(--ink2) 60%, #4A2E5C 100%); color: #fff; }
+  .sell h2 { max-width: 640px; }
+  .sell p { max-width: 520px; color: #CFC7E0; font-size: 18px; line-height: 1.6; margin: 18px 0 30px; }
+  .sell .arc { position: absolute; right: -120px; bottom: -220px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, #FFB04D, #F25F7A 55%, rgba(242,95,122,0) 70%); opacity: .8; }
+  footer { padding: 60px 0 110px; font-size: 14px; color: var(--mute); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .toast { position: fixed; left: 50%; top: 24px; z-index: 50; transform: translate(-50%, -220%); padding: 14px 20px; border-radius: 14px; background: var(--ink); color: #fff; font-weight: 600; font-size: 14px; transition: transform .5s cubic-bezier(.2,.9,.2,1); max-width: calc(100% - 32px); text-align: center; }
+  .toast.show { transform: translate(-50%, 0); }
+  @media (max-width: 960px) {
+    .links { display: none; }
+    .grid, .why { grid-template-columns: 1fr 1fr; }
+    .search { flex-wrap: wrap; border-radius: 26px; }
+    .search .tabs { width: 100%; } .search .tabs button { flex: 1; }
+    .search select { border-left: 0; border-top: 1px solid var(--line); flex-basis: 100%; }
+    .search .btn { width: 100%; justify-content: center; }
+    .sell { padding: 60px 28px; }
+    section { padding: 90px 0; }
+  }
+  @media (max-width: 600px) { .grid, .why { grid-template-columns: 1fr; } nav .btn { display: none; } .hero-copy { padding-top: 16vh; } }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="#" class="logo"><i></i>Horizonte</a>
+  <div class="links"><a href="#imoveis">Imóveis</a><a href="#sobre">Sobre</a><a href="#anunciar">Anunciar</a></div>
+  <a href="#" class="btn" data-demo>Falar com corretor</a>
+</div></nav>
+
+<div class="pin" id="pin">
+  <div class="sky"></div><div class="sky s2"></div><div class="sky s3"></div>
+  <svg class="stars" id="stars" preserveAspectRatio="none" viewBox="0 0 100 60"></svg>
+  <div class="sunball" id="sun"></div><div class="moon" id="moon"></div>
+  <svg class="city" id="city" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMax slice"></svg>
+  <div class="wrap hero-copy">
+    <h1 id="h1">Seu próximo endereço <em>começa aqui.</em></h1>
+    <form class="search" onsubmit="return false">
+      <div class="tabs"><button type="button" class="on">Comprar</button><button type="button">Alugar</button></div>
+      <input placeholder="Bairro ou cidade" aria-label="Bairro ou cidade">
+      <select aria-label="Tipo"><option>Apartamento</option><option>Casa</option><option>Cobertura</option><option>Terreno</option></select>
+      <a href="#imoveis" class="btn sun">Buscar</a>
+    </form>
+  </div>
+</div>
+
+<section id="imoveis"><div class="wrap">
+  <div class="head">
+    <div><span class="kick">Destaques da semana</span><h2 class="rv">Imóveis escolhidos<br>a dedo</h2></div>
+    <div class="chips" id="chips"><span class="chip on" data-f="all">Todos</span><span class="chip" data-f="apto">Apartamentos</span><span class="chip" data-f="casa">Casas</span><span class="chip" data-f="cob">Coberturas</span></div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="sobre" style="padding-top:20px"><div class="wrap">
+  <span class="kick">Sobre a Horizonte</span>
+  <h2 class="rv">Há 18 anos levando famílias<br>para <em class="serif" style="font-style:italic">casa</em></h2>
+  <div class="why">
+    <div class="rv"><b>2.300+</b><span>chaves entregues em 18 anos</span></div>
+    <div class="rv"><b>45 dias</b><span>tempo médio para vender o seu imóvel</span></div>
+    <div class="rv"><b>100%</b><span>da documentação conferida antes da assinatura</span></div>
+  </div>
+</div></section>
+
+<section id="anunciar" style="padding-top:20px"><div class="wrap">
+  <div class="sell rv"><div class="arc"></div>
+    <span class="kick" style="color:#FFB04D">Vai vender ou alugar?</span>
+    <h2>Avaliamos o seu imóvel em 24 horas</h2>
+    <p>Fotos profissionais, anúncio nos maiores portais e corretor dedicado do primeiro contato até a escritura.</p>
+    <a href="#" class="btn sun" data-demo>Quero anunciar</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>Horizonte Imóveis · CRECI 00000-J</span><span>Rua das Palmeiras, 410 · Centro</span></div></footer>
+<div class="toast" id="toast">Modelo de demonstração: no seu site, este botão abre o seu WhatsApp.</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const navEl = document.querySelector('nav'); addEventListener('scroll', () => navEl.classList.toggle('solid', scrollY > 1450), { passive: true });
+const toast = document.getElementById('toast'); let tt;
+const demo = e => { e.preventDefault(); toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2600); };
+document.querySelectorAll('[data-demo]').forEach(a => a.addEventListener('click', demo));
+document.querySelectorAll('.search .tabs button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.search .tabs button').forEach(x => x.classList.remove('on')); b.classList.add('on'); }));
+
+// seeded random so the skyline is the same every visit
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const NS = 'http://www.w3.org/2000/svg', city = document.getElementById('city');
+const mk = (n, a, p) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+const layers = [], windows = [];
+[['#9AA7C7', 300, 60, 120], ['#5B5A86', 380, 50, 100], ['#2B2347', 470, 40, 90]].forEach(([fill, maxH, minW, maxW], li) => {
+  const g = mk('g', {}, city); layers.push(g); let x = -20;
+  while (x < 1620) {
+    const w = minW + rnd() * (maxW - minW), h = 120 + rnd() * maxH, y = 600 - h;
+    mk('rect', { x, y, width: w, height: h + 2, fill }, g);
+    if (rnd() > .6) mk('rect', { x: x + w * .4, y: y - 26, width: 4, height: 26, fill }, g);
+    if (li > 0) for (let wy = y + 18; wy < 580; wy += 26) for (let wx = x + 10; wx < x + w - 14; wx += 18) if (rnd() > .25) windows.push(mk('rect', { x: wx, y: wy, width: 8, height: 12, rx: 1, fill: li === 2 ? '#3A3160' : '#6E6C99' }, g));
+    x += w + 4 + rnd() * 10;
+  }
+});
+const stars = document.getElementById('stars');
+for (let i = 0; i < 90; i++) mk('circle', { cx: rnd() * 100, cy: rnd() * 40, r: rnd() * .18 + .05, fill: '#fff' }, stars);
+
+// day -> sunset -> night while the hero is pinned
+const tl = gsap.timeline({ scrollTrigger: { trigger: '#pin', start: 'top top', end: '+=1500', scrub: 1, pin: true } });
+tl.to('.sky.s2', { opacity: 1, duration: 1 }, 0)
+  .to('#sun', { top: '62%', left: '70%', scale: 1.3, duration: 1.4 }, 0)
+  .fromTo(layers[0], { y: 140 }, { y: 0, duration: 1 }, 0)
+  .fromTo(layers[1], { y: 220 }, { y: 0, duration: 1.2 }, 0)
+  .fromTo(layers[2], { y: 320 }, { y: 0, duration: 1.4 }, 0)
+  .to('.sky.s3', { opacity: 1, duration: .8 }, 1.2)
+  .to('#sun', { opacity: 0, duration: .5 }, 1.3)
+  .to('#moon', { opacity: 1, top: '10%', duration: .8 }, 1.3)
+  .to('#stars', { opacity: 1, duration: .8 }, 1.4)
+  .to(windows.filter(() => rnd() > .45), { attr: { fill: '#FFD27A' }, duration: .05, stagger: { each: .002, from: 'random' } }, 1.5)
+  .to('#h1', { yPercent: -40, opacity: .0, duration: .6 }, 1.6);
+
+gsap.from('.hero-copy h1, .search', { y: 50, opacity: 0, duration: 1.2, stagger: .15, ease: 'expo.out' });
+
+// properties
+const P = [
+  { t: 'apto', name: 'Apartamento com varanda gourmet', loc: 'Jardim América', price: 'R$ 780 mil', q: 3, a: 112, v: 2, sky: ['#FFB27A', '#F25F7A'], wall: '#F4E6D4', badge: 'Novo' },
+  { t: 'casa', name: 'Casa térrea com quintal e piscina', loc: 'Vila Verde', price: 'R$ 1,2 mi', q: 4, a: 240, v: 3, sky: ['#9FD5F0', '#E6F4FB'], wall: '#FFFFFF', badge: 'Exclusivo' },
+  { t: 'cob', name: 'Cobertura duplex com vista', loc: 'Alto da Serra', price: 'R$ 2,4 mi', q: 4, a: 310, v: 4, sky: ['#2B2347', '#F25F7A'], wall: '#E8E2F2', badge: 'Vista livre' },
+  { t: 'apto', name: 'Studio mobiliado perto do metrô', loc: 'Centro', price: 'R$ 2.900/mês', q: 1, a: 38, v: 1, sky: ['#BFE4F5', '#FFFFFF'], wall: '#F7D9C4', badge: 'Aluguel' },
+  { t: 'casa', name: 'Sobrado em condomínio fechado', loc: 'Parque das Águas', price: 'R$ 940 mil', q: 3, a: 190, v: 2, sky: ['#FFD08A', '#FF8A3D'], wall: '#EFE7DA', badge: 'Baixou' },
+  { t: 'cob', name: 'Cobertura com terraço e spa', loc: 'Beira-Rio', price: 'R$ 3,1 mi', q: 5, a: 380, v: 4, sky: ['#7EC8F0', '#2B2347'], wall: '#FFFFFF', badge: 'Alto padrão' },
+];
+const art = (p, i) => {
+  const tall = p.t !== 'casa';
+  const win = (x, y, n, cols) => { let s = ''; for (let r = 0; r < n; r++) for (let c = 0; c < cols; c++) s += `<rect x="${x + c * 34}" y="${y + r * 38}" width="22" height="26" rx="3" fill="#2B2347" opacity=".75"/>`; return s; };
+  return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.sky[0]}"/><stop offset="1" stop-color="${p.sky[1]}"/></linearGradient></defs>
+    <rect width="400" height="300" fill="url(#g${i})"/><circle cx="${300 - i * 20}" cy="70" r="28" fill="#FFE7A3" opacity=".85"/>
+    <rect x="0" y="250" width="400" height="50" fill="#7BAF6E"/><rect x="0" y="262" width="400" height="38" fill="#5E9457"/>
+    ${tall ? `<rect x="120" y="${p.t === 'cob' ? 40 : 70}" width="160" height="${p.t === 'cob' ? 222 : 192}" fill="${p.wall}"/>${p.t === 'cob' ? '<rect x="110" y="34" width="180" height="10" fill="#2B2347"/><rect x="150" y="14" width="100" height="22" fill="' + p.wall + '"/>' : ''}${win(138, p.t === 'cob' ? 60 : 88, 4, 4)}<rect x="104" y="140" width="192" height="6" fill="#2B2347" opacity=".2"/>`
+      : `<polygon points="70,140 200,60 330,140" fill="#C2553C"/><rect x="90" y="138" width="220" height="124" fill="${p.wall}"/><rect x="180" y="190" width="40" height="72" rx="3" fill="#2B2347"/>${win(110, 160, 2, 2)}${win(240, 160, 2, 2)}<rect x="0" y="250" width="70" height="12" fill="#5BC0DE"/>`}
+    <circle cx="50" cy="232" r="26" fill="#3F7A45"/><rect x="47" y="240" width="6" height="22" fill="#5A3B24"/><circle cx="360" cy="236" r="20" fill="#4C8A50"/></svg>`;
+};
+const grid = document.getElementById('grid');
+grid.innerHTML = P.map((p, i) => `<article class="card" data-t="${p.t}"><div class="img">${art(p, i)}<span class="badge">${p.badge}</span><span class="fav">♡</span></div><div class="body"><div class="price">${p.price}</div><h3>${p.name}</h3><div class="loc">${p.loc}</div><div class="specs"><span><b>${p.q}</b> quartos</span><span><b>${p.a}</b> m²</span><span><b>${p.v}</b> vagas</span></div></div></article>`).join('');
+grid.querySelectorAll('.card').forEach(c => c.addEventListener('click', demo));
+grid.querySelectorAll('.fav').forEach(f => f.addEventListener('click', e => { e.stopPropagation(); f.textContent = f.textContent === '♡' ? '♥' : '♡'; f.style.color = '#F25F7A'; gsap.fromTo(f, { scale: 1.5 }, { scale: 1, duration: .5, ease: 'back.out(3)' }); }));
+document.querySelectorAll('.chip').forEach(ch => ch.addEventListener('click', () => {
+  document.querySelectorAll('.chip').forEach(x => x.classList.remove('on')); ch.classList.add('on');
+  const f = ch.dataset.f, cards = [...grid.children];
+  cards.forEach(c => c.classList.toggle('hide', f !== 'all' && c.dataset.t !== f));
+  gsap.fromTo(cards.filter(c => !c.classList.contains('hide')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .6, stagger: .06, ease: 'expo.out' });
+  ScrollTrigger.refresh();
+}));
+gsap.from('.card', { y: 80, opacity: 0, duration: 1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: '#grid', start: 'top 85%' } });
+gsap.utils.toArray('.rv').forEach(el => gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site da imobiliária"></script>
+<script src="../assets/octomaker-stats.js"></script>
+</body>
+</html>

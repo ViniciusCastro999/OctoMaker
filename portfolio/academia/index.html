@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<title>Pulso · Academia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Narrow:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<style>
+  :root { --bg: #0A0A0A; --bg2: #141414; --line: #262626; --lime: #C6FF00; --text: #F3F3F0; --mute: #8F8F8A; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body { background: var(--bg); color: var(--text); font-family: Archivo, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .x { font-family: Archivo; font-weight: 900; text-transform: uppercase; letter-spacing: -.04em; line-height: .86; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 28px; }
+  nav { position: fixed; inset: 0 0 auto; z-index: 20; mix-blend-mode: difference; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+  .logo { font-size: 26px; display: flex; align-items: center; gap: 8px; }
+  .logo svg { width: 34px; height: 20px; }
+  .links { display: flex; gap: 32px; font-weight: 500; text-transform: uppercase; font-size: 14px; letter-spacing: .06em; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px; border-radius: 999px; background: var(--lime); color: #0A0A0A; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: .04em; transition: transform .25s; }
+  .btn:hover { transform: scale(1.04) rotate(-1deg); }
+  .btn.out { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--line); }
+
+  .hero { position: relative; height: 100vh; min-height: 680px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+  #ecg { position: absolute; left: 0; right: 0; top: 50%; width: 100%; height: 300px; margin-top: -150px; }
+  .hero h1 { position: relative; font-size: clamp(64px, 13vw, 220px); }
+  .hero h1 .l { display: block; overflow: hidden; }
+  .hero h1 .l span { display: inline-block; }
+  .hero h1 .lime { color: var(--lime); }
+  .hero .row { position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-top: 34px; flex-wrap: wrap; }
+  .hero p { max-width: 430px; font-size: 18px; line-height: 1.6; color: var(--mute); }
+  .bpm { display: flex; align-items: baseline; gap: 10px; }
+  .bpm b { font-size: 76px; font-weight: 900; color: var(--lime); font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+  .bpm span { color: var(--mute); text-transform: uppercase; font-size: 13px; letter-spacing: .1em; }
+  .bpm i { width: 12px; height: 12px; border-radius: 50%; background: var(--lime); animation: beat .8s infinite; align-self: center; }
+  @keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.6); } 30% { transform: scale(1); } }
+
+
+  section { padding: 140px 0; }
+  .kick { color: var(--lime); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: 13px; }
+  h2 { font-size: clamp(50px, 7vw, 120px); margin-top: 16px; }
+  .mods { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 60px; background: var(--line); border: 2px solid var(--line); }
+  .mod { position: relative; height: 420px; padding: 28px; background: var(--bg); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: background .4s, color .4s; cursor: default; }
+  .mod .n { font-weight: 700; color: var(--mute); }
+  .mod h3 { font-size: clamp(26px, 2.5vw, 38px); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  .mod p { color: var(--mute); line-height: 1.5; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s, opacity .4s, margin .4s; }
+  .mod svg { position: absolute; right: -30px; top: 40px; width: 220px; height: 220px; opacity: .14; transition: opacity .4s, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .mod:hover { background: var(--lime); color: #0A0A0A; }
+  .mod:hover .n, .mod:hover p { color: #0A0A0A; }
+  .mod:hover p { max-height: 120px; opacity: 1; margin-top: 12px; }
+  .mod:hover svg { opacity: .9; transform: rotate(-12deg) scale(1.1); }
+  .mod:hover h3 { transform: translateY(-6px); }
+
+  .plans-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .toggle { display: inline-flex; padding: 5px; border-radius: 999px; background: var(--bg2); border: 1px solid var(--line); }
+  .toggle button { border: 0; background: none; color: var(--mute); padding: 12px 22px; border-radius: 999px; font: 700 14px Archivo; text-transform: uppercase; cursor: pointer; }
+  .toggle button.on { background: var(--lime); color: #0A0A0A; }
+  .toggle small { color: var(--lime); }
+  .toggle button.on small { color: #0A0A0A; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
+  .plan { padding: 36px 32px; border-radius: 28px; background: var(--bg2); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 18px; }
+  .plan.hot { background: var(--lime); color: #0A0A0A; border-color: var(--lime); transform: translateY(-14px); }
+  .plan h3 { font-size: 34px; }
+  .plan .price { font-size: 72px; font-weight: 900; letter-spacing: -.05em; line-height: 1; }
+  .plan .price small { font-size: 18px; font-weight: 500; letter-spacing: 0; }
+  .plan ul { list-style: none; display: grid; gap: 12px; color: var(--mute); }
+  .plan.hot ul { color: #1A1A1A; }
+  .plan li::before { content: "→ "; color: var(--lime); font-weight: 700; }
+  .plan.hot li::before { color: #0A0A0A; }
+  .plan .btn { justify-content: center; margin-top: auto; }
+  .plan.hot .btn { background: #0A0A0A; color: var(--lime); }
+
+  .sched { margin-top: 50px; border-top: 2px solid var(--text); }
+  .srow { display: grid; grid-template-columns: 140px 1fr 1fr 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); font-size: 18px; align-items: center; transition: padding .3s, color .3s; }
+  .srow:hover { padding-left: 16px; color: var(--lime); }
+  .srow b { font-size: 26px; font-weight: 900; }
+  .srow span { color: var(--mute); }
+  .srow:hover span { color: var(--text); }
+
+  .final { text-align: center; padding: 160px 0; }
+  .final h2 { font-size: clamp(60px, 11vw, 190px); }
+  .final p { color: var(--mute); margin: 24px 0 36px; font-size: 19px; }
+  footer { padding: 40px 0 110px; border-top: 1px solid var(--line); color: var(--mute); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .toast { position: fixed; left: 50%; top: 24px; z-index: 50; transform: translate(-50%, -220%); padding: 14px 20px; border-radius: 14px; background: var(--lime); color: #0A0A0A; font-weight: 700; font-size: 14px; transition: transform .5s cubic-bezier(.2,.9,.2,1); max-width: calc(100% - 32px); text-align: center; }
+  .toast.show { transform: translate(-50%, 0); }
+  @media (max-width: 960px) {
+    .links { display: none; }
+    .mods { grid-template-columns: 1fr 1fr; }
+    .mod { height: 300px; }
+    .mod p { max-height: 120px; opacity: 1; margin-top: 10px; }
+    .plans { grid-template-columns: 1fr; }
+    .plan.hot { transform: none; }
+    .srow { grid-template-columns: 90px 1fr; }
+    .srow span:nth-child(n+3) { display: none; }
+    section { padding: 90px 0; }
+  }
+  @media (max-width: 560px) { .mods { grid-template-columns: 1fr; } nav .btn { display: none; } .bpm b { font-size: 56px; } }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="#" class="logo x"><svg viewBox="0 0 34 20" fill="none" stroke="#C6FF00" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M1 11h8l3-8 5 15 4-11 2 4h10"/></svg>Pulso</a>
+  <div class="links"><a href="#modalidades">Modalidades</a><a href="#planos">Planos</a><a href="#horarios">Horários</a></div>
+  <a href="#planos" class="btn">Aula grátis</a>
+</div></nav>
+
+<header class="hero">
+  <canvas id="ecg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 class="x"><span class="l"><span>Seu corpo</span></span><span class="l"><span>pede <span class="lime">mais.</span></span></span></h1>
+    <div class="row">
+      <p>Musculação, funcional, luta e bike indoor com treino montado para o seu objetivo. A primeira aula é por nossa conta.</p>
+      <div class="bpm"><i></i><b id="bpm">72</b><span>bpm<br>agora</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="modalidades"><div class="wrap">
+  <span class="kick">Modalidades</span>
+  <h2 class="x rv">Escolha como<br>você vai suar</h2>
+  <div class="mods">
+    <div class="mod"><span class="n">01</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><path d="M10 50h80M20 30v40M80 30v40M30 38v24M70 38v24"/></svg><div><h3 class="x">Musculação</h3><p>Equipamentos novos e treino revisado todo mês pelo professor.</p></div></div>
+    <div class="mod"><span class="n">02</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><circle cx="50" cy="50" r="32"/><path d="M50 18v64M18 50h64"/></svg><div><h3 class="x">Funcional</h3><p>Circuitos de 45 minutos em grupo, para todos os níveis.</p></div></div>
+    <div class="mod"><span class="n">03</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"><path d="M30 20h40v40a20 20 0 0 1-40 0Z"/><path d="M40 80h20"/></svg><div><h3 class="x">Muay thai</h3><p>Técnica, condicionamento e confiança, do iniciante ao avançado.</p></div></div>
+    <div class="mod"><span class="n">04</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><circle cx="26" cy="68" r="16"/><circle cx="74" cy="68" r="16"/><path d="M26 68l18-32h20l10 32M44 36l10 32"/></svg><div><h3 class="x">Bike indoor</h3><p>Aulas com luz, música alta e muita energia. Vicia.</p></div></div>
+  </div>
+</div></section>
+
+<section id="planos" style="padding-top:40px"><div class="wrap">
+  <div class="plans-head">
+    <div><span class="kick">Planos</span><h2 class="x rv">Sem taxa de<br>matrícula</h2></div>
+    <div class="toggle" id="toggle"><button class="on" data-m="m">Mensal</button><button data-m="a">Anual <small>-20%</small></button></div>
+  </div>
+  <div class="plans">
+    <div class="plan rv"><h3 class="x">Básico</h3><div class="price"><span data-m="89" data-a="71">89</span><small>/mês</small></div><ul><li>Musculação livre</li><li>Avaliação física</li><li>App de treino</li></ul><a href="#" class="btn out" data-demo>Começar</a></div>
+    <div class="plan hot rv"><h3 class="x">Pulso total</h3><div class="price"><span data-m="139" data-a="111">139</span><small>/mês</small></div><ul><li>Todas as modalidades</li><li>Treino com professor</li><li>Avaliação todo mês</li><li>Leve um amigo 2x por mês</li></ul><a href="#" class="btn" data-demo>Quero esse</a></div>
+    <div class="plan rv"><h3 class="x">Lutas</h3><div class="price"><span data-m="119" data-a="95">119</span><small>/mês</small></div><ul><li>Muay thai ilimitado</li><li>Musculação livre</li><li>Luvas na primeira semana</li></ul><a href="#" class="btn out" data-demo>Começar</a></div>
+  </div>
+</div></section>
+
+<section id="horarios" style="padding-top:40px"><div class="wrap">
+  <span class="kick">Horários</span>
+  <h2 class="x rv">Aberto quando<br>você puder</h2>
+  <div class="sched">
+    <div class="srow"><b>05:30</b><span>Funcional</span><span>Musculação</span><span>Bike indoor</span></div>
+    <div class="srow"><b>07:00</b><span>Bike indoor</span><span>Muay thai</span><span>Funcional</span></div>
+    <div class="srow"><b>12:00</b><span>Funcional express</span><span>Musculação</span><span>Alongamento</span></div>
+    <div class="srow"><b>18:30</b><span>Muay thai</span><span>Bike indoor</span><span>Funcional</span></div>
+    <div class="srow"><b>20:00</b><span>Funcional</span><span>Muay thai</span><span>Musculação até 23h</span></div>
+  </div>
+</div></section>
+
+<div class="final"><div class="wrap">
+  <h2 class="x rv">Comece<br><span style="color:var(--lime)">hoje.</span></h2>
+  <p class="rv">A primeira aula é grátis. Só falta você aparecer.</p>
+  <a href="#" class="btn rv" data-demo>Agendar aula grátis</a>
+</div></div>
+<footer><div class="wrap"><span>Pulso Academia · Rua do Esporte, 77</span><span>Seg a sex 5h30–23h · Sáb 8h–14h</span></div></footer>
+<div class="toast" id="toast">Modelo de demonstração: no seu site, este botão abre o seu WhatsApp.</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const toast = document.getElementById('toast'); let tt;
+document.querySelectorAll('[data-demo]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2600); }));
+
+gsap.from('.hero h1 .l > span', { yPercent: 105, duration: 1.2, stagger: .12, ease: 'expo.out' });
+gsap.from('.hero .row > *', { y: 30, opacity: 0, duration: 1, delay: .5, stagger: .1, ease: 'expo.out' });
+
+// live ECG line; speeds up as you scroll down the page
+const cv = document.getElementById('ecg'), cx = cv.getContext('2d'); let W, H;
+const size = () => { W = cv.width = cv.offsetWidth * devicePixelRatio; H = cv.height = cv.offsetHeight * devicePixelRatio; };
+size(); addEventListener('resize', size);
+const beat = p => { // one heartbeat shape, p in [0,1)
+  if (p < .38) return 0; if (p < .42) return -.08 * Math.sin((p - .38) / .04 * Math.PI);
+  if (p < .46) return .12 * ((p - .42) / .04); if (p < .5) return .12 - 1.12 * ((p - .46) / .04);
+  if (p < .55) return -1 + 1.35 * ((p - .5) / .05); if (p < .6) return .35 - .35 * ((p - .55) / .05);
+  if (p < .75) return -.14 * Math.sin((p - .6) / .15 * Math.PI); return 0;
+};
+let bpm = 72, phase = 0, last = 0; const hist = [];
+const bpmEl = document.getElementById('bpm');
+function draw(t) {
+  const dt = Math.min(50, t - last); last = t;
+  const target = 72 + Math.min(1, scrollY / 2400) * 96;
+  bpm += (target - bpm) * .04; bpmEl.textContent = Math.round(bpm);
+  phase += dt / 1000 * bpm / 60; const pts = 260;
+  hist.push(beat(phase % 1)); while (hist.length > pts) hist.shift();
+  cx.clearRect(0, 0, W, H);
+  cx.lineWidth = 3 * devicePixelRatio; cx.lineJoin = 'round'; cx.strokeStyle = '#C6FF00'; cx.shadowColor = '#C6FF00'; cx.shadowBlur = 18 * devicePixelRatio;
+  cx.beginPath();
+  hist.forEach((v, i) => { const x = i / (pts - 1) * W, y = H / 2 + v * H * .4; i ? cx.lineTo(x, y) : cx.moveTo(x, y); });
+  cx.globalAlpha = .55; cx.stroke(); cx.globalAlpha = 1;
+  if (!reduce) requestAnimationFrame(draw);
+}
+for (let i = 0; i < 260; i++) { phase += .016 * 72 / 60; hist.push(beat(phase % 1)); }
+requestAnimationFrame(draw);
+
+
+// plans toggle
+document.querySelectorAll('#toggle button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#toggle button').forEach(x => x.classList.remove('on')); b.classList.add('on');
+  document.querySelectorAll('.price span').forEach(s => { const o = { v: +s.textContent }; gsap.to(o, { v: +s.dataset[b.dataset.m], duration: .6, ease: 'power2.out', onUpdate: () => s.textContent = Math.round(o.v) }); });
+}));
+
+gsap.from('.mod', { y: 80, opacity: 0, duration: 1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: '.mods', start: 'top 85%' } });
+gsap.from('.srow', { x: -40, opacity: 0, duration: .8, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: '.sched', start: 'top 85%' } });
+gsap.utils.toArray('.rv').forEach(el => gsap.from(el, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
+</script>
+<script src="../assets/octomaker-badge.js" data-site="o site da academia"></script>
+<script src="../assets/octomaker-stats.js"></script>
+</body>
+</html>
