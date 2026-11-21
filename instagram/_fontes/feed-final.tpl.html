@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>OctoMaker · posts</title>
+<!-- Fotos: Unsplash (licença gratuita), carregadas de images.unsplash.com. Telas: sites reais de clientes e modelos da OctoMaker. -->
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #04141E; --ink2: #0B2230; --ink3: #153244; --paper: #FFF4E2; --turq: #64DBE8; --teal-d: #0A7F8C; --coral: #FF6D04; --mute-d: #9FB4BF; --mute: #4E6573;
+    --display: "Unbounded", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #666; padding: 40px; display: flex; flex-direction: column; gap: 40px; }
+  section { position: relative; width: 1080px; height: 1350px; overflow: hidden; flex: none; font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  .orange { background: var(--coral); color: var(--ink); --acc: var(--paper); --line: #04141E; --soft: rgba(4,20,30,.78); }
+  .navy { background: radial-gradient(120% 70% at 50% 0%, #0D3442 0%, #062433 38%, #04141E 75%); color: var(--paper); --acc: var(--turq); --line: #FF6D04; --soft: var(--mute-d); }
+  .cream { background: var(--paper); color: var(--ink); --acc: var(--teal-d); --line: #FF6D04; --soft: var(--mute); }
+  .photo { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; background-size: cover; background-position: center; }
+  .scr { position: absolute; overflow: hidden; z-index: 1; }
+  .scr img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .sym { position: absolute; left: 70px; top: 64px; width: 72px; height: 72px; z-index: 9; }
+  .cnt { position: absolute; right: 70px; top: 84px; z-index: 9; font: 700 26px var(--body); letter-spacing: .06em; opacity: .75; }
+  .t { position: absolute; z-index: 6; font-family: var(--display); font-weight: 800; letter-spacing: -.05em; word-spacing: .1em; line-height: .98; }
+  .t em { font-style: normal; position: relative; white-space: nowrap; color: var(--acc); }
+  .t em svg { position: absolute; left: 0; bottom: -.18em; width: 100%; height: .22em; overflow: visible; }
+  .b { position: absolute; z-index: 6; font: 600 38px/1.4 var(--body); color: var(--soft); }
+  .b strong { color: inherit; font-weight: 800; }
+  .navy .b strong, .navy .b b { color: var(--paper); } .cream .b strong { color: var(--ink); } .orange .b strong { color: var(--ink); }
+  .sticker { position: absolute; z-index: 9; display: inline-flex; align-items: center; gap: 14px; padding: 22px 36px; border-radius: 999px; font: 800 36px var(--body); white-space: nowrap; box-shadow: 0 20px 44px -16px rgba(0,0,0,.55); }
+  .phone { position: absolute; border-radius: 54px; padding: 14px; background: #0A0F14; box-shadow: 0 50px 90px -30px rgba(0,0,0,.7), inset 0 0 0 2px #2A3640; z-index: 2; }
+  .phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 42px; }
+  .phone::before { content: ""; position: absolute; top: 26px; left: 50%; width: 110px; height: 30px; margin-left: -55px; border-radius: 20px; background: #0A0F14; z-index: 2; }
+  .browser { position: absolute; border-radius: 24px; overflow: hidden; background: var(--ink); box-shadow: 0 50px 90px -30px rgba(0,0,0,.75), 0 0 0 1.5px rgba(100,219,232,.2); z-index: 2; }
+  .browser .bar { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 22px; font: 700 22px var(--body); color: var(--mute-d); }
+  .browser .bar i { width: 13px; height: 13px; border-radius: 50%; background: var(--ink3); } .browser .bar span { margin-left: 12px; }
+  .browser img { display: block; width: 100%; height: calc(100% - 52px); object-fit: cover; object-position: top; }
+  .wall { position: absolute; display: grid; grid-template-columns: repeat(3, 520px); gap: 34px; transform: perspective(2400px) rotateX(34deg) rotateZ(-20deg); }
+  .wall .browser { position: relative; height: 380px; }
+  .btn { position: absolute; z-index: 8; display: inline-flex; align-items: center; gap: 28px; padding: 12px 12px 12px 48px; border-radius: 999px; font: 800 38px var(--body); white-space: nowrap; }
+  .btn span { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; }
+  .btn svg { width: 40px; height: 40px; }
+  .navy .btn, .cream .btn { background: var(--coral); color: var(--ink); box-shadow: 0 22px 60px -10px rgba(255,109,4,.6), 0 0 0 10px rgba(255,109,4,.16); }
+  .navy .btn span, .cream .btn span { background: var(--ink); }
+  .orange .btn { background: var(--ink); color: var(--paper); box-shadow: 0 22px 60px -14px rgba(4,20,30,.6), 0 0 0 10px rgba(4,20,30,.12); }
+  .orange .btn span { background: var(--coral); }
+  .bign { position: absolute; z-index: 5; font: 800 300px/1 var(--display); letter-spacing: -.07em; color: transparent; -webkit-text-stroke: 4px var(--acc); }
+  .strk { position: absolute; z-index: 6; left: 70px; right: 70px; display: flex; flex-direction: column; gap: 26px; }
+  .strk div { position: relative; align-self: flex-start; font: 800 64px var(--display); letter-spacing: -.05em; }
+  .strk div svg { position: absolute; left: -2%; top: 42%; width: 104%; height: 30px; overflow: visible; }
+  svg.octo { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; overflow: visible; z-index: 7; pointer-events: none; }
+  .octo .pill rect { fill: #0B2230; stroke: rgba(100,219,232,.5); stroke-width: 2.5; }
+  .octo .pill text { fill: #E3F6F9; font-family: var(--body); font-weight: 800; }
+  .octo .pill.hot rect { fill: var(--coral); stroke: var(--coral); } .octo .pill.hot text { fill: var(--ink); }
+  .fade { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .list { position: absolute; z-index: 6; left: 70px; right: 70px; display: flex; flex-direction: column; gap: 22px; }
+  .list .it { display: flex; align-items: center; gap: 30px; padding: 30px 34px; border-radius: 28px; background: var(--card); }
+  .list .it b { flex: none; width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; background: var(--coral); color: var(--ink); font: 800 28px var(--display); }
+  .list .it b svg { width: 34px; height: 34px; }
+  .list .it span { font: 800 42px/1.15 var(--body); letter-spacing: -.02em; }
+  .list .it small { display: block; margin-top: 6px; font: 600 30px/1.35 var(--body); color: var(--soft); letter-spacing: 0; }
+  .list .it.win { background: var(--coral); color: var(--ink); } .list .it.win b { background: var(--ink); color: var(--coral); } .list .it.win small { color: rgba(4,20,30,.75); }
+  .navy { --card: rgba(255,255,255,.06); } .cream { --card: rgba(4,20,30,.06); } .orange { --card: rgba(4,20,30,.12); }
+  .orange .list .it b { background: var(--ink); color: var(--coral); }
+  .chat { width: 100%; height: 100%; background: #EFE7DD; font-family: system-ui, -apple-system, sans-serif; display: flex; flex-direction: column; }
+  .chat .hd { flex: none; height: 15%; background: #F7F3EE; display: flex; align-items: flex-end; gap: 14px; padding: 0 22px 16px; font: 700 24px system-ui; border-bottom: 1px solid #ddd; color: #111; }
+  .chat .hd i { width: 50px; height: 50px; border-radius: 50%; background: #C9D3D8; }
+  .chat .hd small { display: block; font: 400 18px system-ui; color: #667; }
+  .chat .ms { flex: 1; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font: 400 25px/1.3 system-ui; color: #111; }
+  .chat .ms div { background: #fff; padding: 12px 16px 9px; border-radius: 4px 18px 18px 18px; max-width: 86%; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
+  .chat .ms div.me { align-self: flex-end; background: #D9FDD3; border-radius: 18px 4px 18px 18px; }
+  .chat .ms small { font-size: 15px; color: #889; margin-left: 8px; }
+  .chat .typ { flex: none; margin: 0 14px 18px; padding: 16px 22px; border-radius: 999px; background: #fff; font: 400 24px system-ui; color: #111; display: flex; justify-content: space-between; align-items: center; }
+  .chat .typ b { width: 50px; height: 50px; border-radius: 50%; background: #25D366; display: grid; place-items: center; color: #fff; font-size: 24px; }
+  section.hl { width: 1080px; height: 1920px; background: var(--ink); display: grid; place-items: center; }
+  section.hl .ring { width: 640px; height: 640px; border-radius: 50%; display: grid; place-items: center; }
+  section.hl .ring svg { width: 300px; height: 300px; }
+</style>
+</head>
+<body>
+<div id="feed"></div>
+<script>
+/*OCTOFN*/
+
+const UN = id => `https://images.unsplash.com/${id}?w=1080&h=1350&fit=crop&q=85`;
+const PH = { desk: 'photo-1618826908215-bf5c44ca24af', table: 'photo-1565630916779-e303be97b6f5', hand: 'photo-1601972599720-36938d4ecd31', note: 'photo-1621606453029-5656bd7fa6c1', dark: 'photo-1582133456304-2f5cb1c2afbb', man: 'photo-1661870139279-95fecab7c53a' };
+const CHECK = `<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const CHAT = (name, msgs, typing) => `<div class="chat"><div class="hd"><i></i><span>${name}<small>online</small></span></div><div class="ms">${msgs.map(([m, h, me]) => `<div${me ? ' class="me"' : ''}>${m}<small>${h}</small></div>`).join('')}</div>${typing ? `<div class="typ">${typing}<b>➤</b></div>` : ''}</div>`;
+const SYM = (c, e) => `<svg class="sym" viewBox="0 0 40 40"><path d="M7 22A13 13 0 0 1 33 22V24H7Z" fill="${c}"/><circle cx="15" cy="17" r="2.4" fill="${e}"/><circle cx="25" cy="17" r="2.4" fill="${e}"/><g fill="none" stroke="${c}" stroke-width="3.6" stroke-linecap="round"><path d="M10 27Q10 35 5 35"/><path d="M17 27V36"/><path d="M23 27V36"/><path d="M30 27Q30 35 35 35"/></g></svg>`;
+// elemento que sobe da borda de baixo para preencher o slide
+const PEEK = k => {
+  const top = k.top || 1000;
+  if (k.phones) return k.phones.map((img, i) => { const n = k.phones.length, x = 540 + (i - (n - 1) / 2) * 330 - 150, r = (i - (n - 1) / 2) * 7, y = top + Math.abs(i - (n - 1) / 2) * 50; return `<div class="phone" style="left:${x}px;top:${y}px;width:300px;height:620px;transform:rotate(${r}deg);z-index:${i === (n - 1) / 2 ? 3 : 2}"><img src="${img}" alt=""></div>`; }).join('');
+  if (k.browser) return `<div class="browser" style="left:120px;top:${top}px;width:840px;height:560px;transform:rotate(${k.rot ?? -3}deg)"><div class="bar"><i></i><i></i><i></i><span>${k.url || 'seunegocio.com.br'}</span></div><img src="${k.browser}" alt=""></div>${k.tag ? `<span class="sticker" style="right:90px;top:${top - 40}px;background:var(--coral);color:var(--ink);transform:rotate(5deg)">${k.tag}</span>` : ''}`;
+  if (k.chat) return `<div class="phone" style="left:${k.left || 330}px;top:${top}px;width:420px;height:860px;transform:rotate(${k.rot ?? -5}deg)"><div style="width:100%;height:100%;border-radius:42px;overflow:hidden">${CHAT(k.name || 'Cliente', k.chat)}</div></div>`;
+  return '';
+};
+const symFor = bg => bg === 'orange' ? SYM('#04141E', '#FF6D04') : bg === 'cream' || bg === 'light' ? SYM('#0A7F8C', '#FFF4E2') : SYM('#64DBE8', '#04141E');
+const UL = c => `<svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M3 14C60 4 140 2 297 10" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round"/></svg>`;
+// [palavra] = destaque sublinhado, *palavra* = destaque sem sublinhado, | = quebra de linha
+const fmt = (s, line = 'var(--line)') => s.replace(/\[([^\]]+)\]/g, (_, w) => `<em>${w}${UL(line)}</em>`).replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/\|/g, '<br>');
+const ARROW = `<svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const STRIKE = `<svg viewBox="0 0 300 30" preserveAspectRatio="none"><path d="M2 18C60 8 120 24 180 12S270 8 298 14" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>`;
+
+const T = {
+  // capa laranja com celular
+  phone: s => `<div class="t" style="left:70px;top:190px;font-size:${s.size || 142}px;line-height:.96">${fmt(s.title)}</div>
+    <div class="phone" style="left:${s.phoneLeft || 660}px;top:${s.phoneTop || 900}px;width:${s.phoneW || 380}px;height:${(s.phoneW || 380) * 2.05}px;transform:rotate(${s.rot ?? 10}deg)">${s.html ? `<div style="width:100%;height:100%;border-radius:42px;overflow:hidden">${s.html}</div>` : `<img src="${s.img}" alt="">`}</div>
+    ${s.sticker ? `<span class="sticker" style="left:${s.stickerLeft || 90}px;top:1150px;background:${s.bg === 'orange' ? 'var(--ink)' : 'var(--coral)'};color:${s.bg === 'orange' ? 'var(--paper)' : 'var(--ink)'};transform:rotate(-5deg)">${s.sticker}</span>` : ''}`,
+  // lista de itens
+  list: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 210}px;font-size:${s.size || 88}px">${fmt(s.title)}</div>
+    <div class="list" style="top:${s.listTop || 560}px">${s.items.map((it, i) => { const [a, b] = it.split('::'); const win = a.startsWith('!'); return `<div class="it${win ? ' win' : ''}"><b>${s.check ? CHECK : String(i + 1).padStart(2, '0')}</b><span>${a.replace('!', '')}${b ? `<small>${b}</small>` : ''}</span></div>`; }).join('')}</div>
+    ${s.body ? `<p class="b" style="left:70px;right:100px;top:${s.bodyTop || 1150}px">${s.body}</p>` : ''}`,
+  // foto: celular na mão sobre fundo escuro, título claro embaixo
+  photoDark: s => `<div class="photo" style="background-image:url(${UN(PH.dark)})"></div>
+    <div class="scr" style="left:360px;top:285px;width:279px;height:592px;border-radius:34px">${s.html || `<img src="${s.img}" alt="">`}</div>
+    <div style="position:absolute;left:430px;top:284px;width:140px;height:22px;border-radius:0 0 16px 16px;background:#0b0b0b;z-index:2"></div>
+    <div class="fade" style="background:linear-gradient(180deg,rgba(4,20,30,0) 60%,rgba(4,20,30,.85) 80%)"></div>
+    <div class="t" style="left:60px;right:60px;top:${s.top || 960}px;text-align:center;font-size:${s.size || 84}px">${fmt(s.title)}</div>`,
+  // foto: homem no notebook, título claro sobre azul embaixo
+  photoMan: s => `<div class="photo" style="background-image:url(${UN(PH.man)})"></div>
+    <div class="scr" data-quad="425,152 1048,210 998,632 410,560" style="left:0;top:0;width:1200px;height:760px;transform-origin:0 0"><img src="${s.img}" alt=""></div>
+    <div class="fade" style="background:linear-gradient(180deg,rgba(4,20,30,0) 45%,rgba(4,20,30,.85) 66%,#04141E 82%)"></div>
+    <div class="t" style="left:60px;right:60px;top:${s.top || 960}px;text-align:center;font-size:${s.size || 88}px">${fmt(s.title)}</div>`,
+  // foto: notebook na mesa clara com caderno, título escuro no topo
+  photoNote: s => `<div class="photo" style="background-image:url(${UN(PH.note)})"></div>
+    <div class="scr" data-quad="418,745 766,738 801,996 456,1001" style="left:0;top:0;width:1000px;height:640px;transform-origin:0 0"><img src="${s.img}" alt=""></div>
+    <div class="t" style="left:60px;right:60px;top:200px;text-align:center;font-size:${s.size || 84}px">${fmt(s.title)}</div>
+    ${s.tag ? `<span class="sticker" style="left:50%;top:1190px;transform:translateX(-50%);background:var(--ink);color:var(--paper)">${s.tag}</span>` : ''}`,
+  // polvo segurando telas
+  navyOcto: s => `<div class="t" style="left:0;right:0;top:190px;text-align:center;font-size:${s.size || 118}px">${fmt(s.title)}</div>
+    <div class="phone" style="left:40px;top:700px;width:270px;height:550px;transform:rotate(-12deg)"><img src="${s.img1}" alt=""></div>
+    <div class="browser" style="left:700px;top:720px;width:470px;height:330px;transform:rotate(9deg)"><div class="bar"><i></i><i></i><i></i><span>${s.url2}</span></div><img src="${s.img2}" alt=""></div>
+    <svg class="octo" data-octo="holder" data-labels="${s.labels || ''}"></svg>`,
+  // vitrine de sites
+  wall: s => `<div class="wall" style="left:-260px;top:540px">${s.sites.map(([img, u]) => `<div class="browser"><div class="bar"><i></i><i></i><i></i><span>${u}</span></div><img src="${img}" alt=""></div>`).join('')}</div>
+    <div class="fade" style="background:linear-gradient(180deg,#04141E 0%,#04141E 36%,rgba(4,20,30,.7) 48%,rgba(4,20,30,0) 64%)"></div>
+    <div class="t" style="left:70px;top:190px;font-size:${s.size || 126}px">${fmt(s.title, '#64DBE8')}</div>
+    ${s.body ? `<p class="b" style="left:70px;right:70px;top:${s.bodyTop || 500}px;color:var(--paper)">${s.body}</p>` : ''}
+    ${s.sticker ? `<span class="sticker" style="right:60px;top:${s.stickerTop || 640}px;background:var(--coral);color:var(--ink);transform:rotate(6deg)">${s.sticker}</span>` : ''}`,
+  // foto: notebook na mesa, título claro sobre azul no topo
+  photoDesk: s => `<div class="photo" style="top:160px;background-image:url(${UN(PH.desk)})"></div>
+    <div class="scr" style="left:272px;top:621px;width:417px;height:282px;border-radius:10px 10px 0 0"><img src="${s.img}" alt=""></div>
+    <div class="fade" style="height:660px;background:linear-gradient(180deg,#04141E 0%,#04141E 62%,rgba(4,20,30,0) 100%)"></div>
+    <div class="t" style="left:0;right:0;top:180px;text-align:center;font-size:${s.size || 96}px">${fmt(s.title)}</div>
+    ${s.tag ? `<span class="sticker" style="left:50%;top:1150px;transform:translateX(-50%) rotate(-3deg);background:var(--coral);color:var(--ink)">${s.tag}</span>` : ''}`,
+  // foto: notebook claro, título escuro embaixo
+  photoTable: s => `<div class="photo" style="background-image:url(${UN(PH.table)})"></div>
+    <div class="scr" style="left:317px;top:254px;width:471px;height:293px"><img src="${s.img}" alt=""></div>
+    <div class="fade" style="top:auto;height:640px;background:linear-gradient(180deg,rgba(255,248,238,0),rgba(255,248,238,.92) 35%,rgba(255,248,238,.97))"></div>
+    <div class="t" style="left:60px;right:60px;top:${s.top || 850}px;text-align:center;font-size:${s.size || 82}px">${fmt(s.title)}</div>
+    ${s.tag ? `<span class="sticker" style="left:50%;top:1200px;transform:translateX(-50%);background:var(--ink);color:var(--paper)">${s.tag}</span>` : ''}`,
+  // foto: celular na mão, título escuro no topo
+  photoHand: s => `<div class="photo" style="background-image:url(${UN(PH.hand)})"></div>
+    <div class="scr" style="left:391px;top:433px;width:291px;height:640px;border-radius:38px"><img src="${s.img}" alt=""></div>
+    <div style="position:absolute;left:512px;top:431px;width:108px;height:26px;border-radius:0 0 18px 18px;background:#111;z-index:2"></div>
+    <div class="fade" style="height:430px;background:linear-gradient(180deg,rgba(245,240,240,.8),rgba(245,240,240,0))"></div>
+    <div class="t" style="left:60px;right:60px;top:170px;text-align:center;font-size:${s.size || 76}px">${fmt(s.title)}</div>
+    ${s.tag ? `<span class="sticker" style="left:50%;top:1160px;transform:translateX(-50%);background:var(--ink);color:var(--paper)">${s.tag}</span>` : ''}`,
+  // foto: pessoa trabalhando, título claro embaixo
+  photoCozy: s => `<div class="photo" style="top:-60px;background-image:url(${UN(PH.cozy)})"></div>
+    <div class="fade" style="background:linear-gradient(180deg,rgba(4,20,30,.55) 0%,rgba(4,20,30,0) 22%,rgba(4,20,30,0) 42%,rgba(4,20,30,.92) 66%,#04141E 100%)"></div>
+    <div class="t" style="left:60px;right:60px;top:${s.top || 880}px;text-align:center;font-size:${s.size || 104}px">${fmt(s.title)}</div>
+    ${s.sticker ? `<span class="sticker" style="right:60px;top:640px;background:var(--coral);color:var(--ink);transform:rotate(5deg)">${s.sticker}</span>` : ''}`,
+  // texto grande
+  text: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 240}px;font-size:${s.size || 104}px">${fmt(s.title)}</div>
+    ${s.body ? `<p class="b" style="left:70px;right:${s.bodyRight || 120}px;top:${s.bodyTop || 820}px">${s.body}</p>` : ''}
+    ${s.source ? `<p class="b" style="left:70px;right:70px;top:${s.sourceTop || 1240}px;font-size:26px;opacity:.8">${s.source}</p>` : ''}
+    ${s.octo ? `<svg class="octo" data-octo="${s.octo}"></svg>` : ''}`,
+  // número gigante
+  number: s => `<div class="bign" style="left:56px;top:170px;font-size:280px">${s.n}</div>
+    <div class="t" style="left:70px;right:70px;top:${s.top || 480}px;font-size:${s.size || 96}px">${fmt(s.title)}</div>
+    <p class="b" style="left:70px;right:110px;top:${s.bodyTop || 730}px">${s.body}</p>`,
+  // desculpas riscadas
+  strike: s => `<div class="t" style="left:70px;right:70px;top:220px;font-size:${s.size || 92}px">${fmt(s.title)}</div>
+    <div class="strk" style="top:${s.listTop || 600}px">${s.items.map(i => `<div>${i}<span style="color:${s.strikeColor || 'var(--line)'}">${STRIKE}</span></div>`).join('')}</div>
+    ${s.body ? `<p class="b" style="left:70px;right:100px;top:${s.bodyTop || 1080}px">${s.body}</p>` : ''}`,
+  // chamada final
+  cta: s => `<div class="t" style="left:0;right:0;top:${s.top || 260}px;text-align:center;font-size:${s.size || 100}px">${fmt(s.title)}</div>
+    <p class="b" style="left:110px;right:110px;top:${s.bodyTop || 720}px;text-align:center">${s.body}</p>
+    <span class="btn" style="left:50%;top:${s.btnTop || 930}px;transform:translateX(-50%)">${s.btn || 'Quero meu site'}<span>${ARROW}</span></span>`,
+};
+
+const POSTS = /*POSTS*/;
+
+const OCTOS = {
+  orangePeek: { cx: 230, cy: 1300, r: 150, tilt: 12, lx: .7, ly: -.6, len: [150, 170, 190, 210, 240, 270, 330, 400], ang: [190, 215, 240, 262, 290, 310, 330, 345], curls: [.9, .8, .7, .5, -.6, -.8, -1.2, -1.5], thick: 36, font: 26, wave: .25 },
+  holder: { cx: 540, cy: 1150, r: 210, lx: 0, ly: -1, len: [330, 300, 230, 170, 170, 230, 300, 330], ang: [196, 222, 160, 120, 60, 20, -42, -16], thick: 44, font: 30, curl: .7, wave: .3 },
+  bottomPeek: { cx: 540, cy: 1290, r: 140, lx: 0, ly: -1, len: [260, 220, 170, 140, 140, 170, 220, 260], ang: [180, 160, 140, 120, 60, 40, 20, 0], thick: 34, font: 24, curl: .5, wave: .3 },
+  cornerPeek: { cx: 930, cy: 1300, r: 130, tilt: -14, lx: -.6, ly: -.7, len: [200, 170, 150, 130, 130, 150, 170, 200], ang: [200, 225, 250, 270, 290, 310, 330, 350], curl: .6, thick: 32, font: 24, wave: .3 },
+};
+
+const feed = document.getElementById('feed');
+POSTS.forEach(p => p.hl ? p.hl.forEach(([name, icon, bg]) => { const sec = document.createElement('section'); sec.className = 'hl'; sec.dataset.out = `${p.folder}/${name}.png`; sec.innerHTML = `<div class="ring" style="background:${bg}">${icon}</div>`; feed.appendChild(sec); }) : p.slides.forEach((s, i) => {
+  const sec = document.createElement('section');
+  const bg = s.bg || 'navy';
+  sec.className = bg === 'light' ? 'cream' : bg;
+  if (bg === 'light') sec.style.background = 'var(--paper)';
+  sec.dataset.out = `${p.folder}/${p.slides.length > 1 ? `slide-${i + 1}` : 'post'}.png`;
+  sec.innerHTML = symFor(bg) + (p.slides.length > 1 ? `<span class="cnt">${i + 1}/${p.slides.length}</span>` : '') + T[s.type](s) + (s.peek ? PEEK(s.peek) : '');
+  feed.appendChild(sec);
+}));
+// encaixa a tela em perspectiva (homografia retângulo -> quadrilátero)
+function quad(el) {
+  const w = el.offsetWidth, h = el.offsetHeight, [p0, p1, p2, p3] = el.dataset.quad.split(' ').map(p => p.split(',').map(Number));
+  const sx = p0[0] - p1[0] + p2[0] - p3[0], sy = p0[1] - p1[1] + p2[1] - p3[1];
+  const dx1 = p1[0] - p2[0], dx2 = p3[0] - p2[0], dy1 = p1[1] - p2[1], dy2 = p3[1] - p2[1], den = dx1 * dy2 - dx2 * dy1;
+  const g = (sx * dy2 - dx2 * sy) / den, hh = (dx1 * sy - sx * dy1) / den;
+  const a = p1[0] - p0[0] + g * p1[0], b = p3[0] - p0[0] + hh * p3[0], d = p1[1] - p0[1] + g * p1[1], e = p3[1] - p0[1] + hh * p3[1];
+  el.style.transform = `matrix3d(${a / w},${d / w},0,${g / w}, ${b / h},${e / h},0,${hh / h}, 0,0,1,0, ${p0[0]},${p0[1]},0,1)`;
+}
+document.querySelectorAll('[data-quad]').forEach(quad);
+document.querySelectorAll('svg.octo').forEach(s => { const c = { ...OCTOS[s.dataset.octo] }; if (s.dataset.labels) c.labels = s.dataset.labels.split(','); octopus(s, c); });
+</script>
+</body>
+</html>
