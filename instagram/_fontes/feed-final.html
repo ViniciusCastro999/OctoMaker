@@ -50,6 +50,7 @@
   .octo .pill rect { fill: #0B2230; stroke: rgba(100,219,232,.5); stroke-width: 2.5; }
   .octo .pill text { fill: #E3F6F9; font-family: var(--body); font-weight: 800; }
   .octo .pill.hot rect { fill: var(--coral); stroke: var(--coral); } .octo .pill.hot text { fill: var(--ink); }
+  .octo .pill.off rect { fill: #0B2230; stroke: rgba(159,180,191,.4); } .octo .pill.off text { fill: #9FB4BF; text-decoration: line-through; text-decoration-color: #FF6D04; text-decoration-thickness: 4px; }
   .fade { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
   .list { position: absolute; z-index: 6; left: 70px; right: 70px; display: flex; flex-direction: column; gap: 22px; }
   .list .it { display: flex; align-items: center; gap: 30px; padding: 30px 34px; border-radius: 28px; background: var(--card); }
@@ -107,8 +108,8 @@ function octopus(svg, C) {
     body.setAttribute('d', d + 'Z');
     const label = C.labels && C.labels[i];
     if (label) {
-      const hot = label.startsWith('!'), txt0 = label.replace('!', '');
-      const pill = el('g', { class: 'pill' + (hot ? ' hot' : ''), transform: `translate(${pts[N]}) rotate(${(Math.sin(t * 1.3 + ph) * 6).toFixed(1)})` }, gPills);
+      const hot = label.startsWith('!'), off = label.startsWith('~'), txt0 = label.replace(/^[!~]/, '');
+      const pill = el('g', { class: 'pill' + (hot ? ' hot' : '') + (off ? ' off' : ''), transform: `translate(${pts[N]}) rotate(${(Math.sin(t * 1.3 + ph) * 6).toFixed(1)})` }, gPills);
       const rect = el('rect', { rx: C.font * 1.05 }, pill);
       const tx = el('text', { 'font-size': C.font, 'text-anchor': 'middle', 'dominant-baseline': 'central' }, pill);
       tx.textContent = txt0;
@@ -237,7 +238,7 @@ return [
   { type: 'cta', bg: 'orange', title: 'O que ele|*encontra*|quando te|procura?', size: 104, top: 230, body: 'Eu faço sites que mostram o seu trabalho do jeito que ele merece.', bodyTop: 690, btnTop: 880, peek: { phones: [MO('academia'), MO('odonto'), MO('imobiliaria')], top: 1060 } },
 ]},
 { folder: '02 - O momento certo nao existe (carrossel)', slides: [
-  { type: 'navyOcto', bg: 'navy', title: 'O momento|certo não|[existe.]', img1: MO('academia'), url2: 'seunegocio.com.br', img2: TH('cafeteria'), labels: ',,!do seu jeito,,,WhatsApp,,' },
+  { type: 'navyOcto', bg: 'navy', title: 'O momento|certo não|[existe.]', img1: MO('academia'), url2: 'seunegocio.com.br', img2: TH('cafeteria'), labels: ',~mês que vem,,,,,~segunda-feira,!hoje' },
   { type: 'strike', bg: 'orange', title: 'As desculpas|que eu *mais*|escuto:', items: ['mês que vem', 'depois das festas', 'quando sobrar grana', 'quando tiver fotos'], strikeColor: '#FFF4E2', listTop: 620, body: 'O site é o que traz os clientes. <strong>Não o contrário.</strong>', bodyTop: 1090 },
   { type: 'text', bg: 'light', title: 'Com o que|você *já tem,*|eu já começo.', size: 96, body: 'O que você faz, umas fotos do seu trabalho e como te chamar. <strong>Não precisa de foto de estúdio nem de texto pronto.</strong>', bodyTop: 640, peek: { chat: [['faço bolo caseiro 🎂', '10:02'], ['te mandei umas fotos', '10:03'], ['meu zap é esse aqui', '10:03'], ['Com isso eu já começo! 🐙', '10:05', true]], name: 'Ana · Bolos', top: 900, left: 330 } },
   { type: 'cta', bg: 'navy', title: 'O começo|é [hoje.]', size: 130, top: 280, body: 'Me manda <strong>SITE</strong> no direct que eu te explico como funciona.', bodyTop: 640, btnTop: 840, peek: { phones: [MO('hamburgueria'), MO('cafe'), MO('coloreouros')], top: 1040 } },
