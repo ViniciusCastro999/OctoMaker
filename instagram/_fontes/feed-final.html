@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>OctoMaker · posts</title>
 <!-- Fotos: Unsplash (licença gratuita), carregadas de images.unsplash.com. Telas: sites reais de clientes e modelos da OctoMaker. -->
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <style>
   :root { --ink: #04141E; --ink2: #0B2230; --ink3: #153244; --paper: #FFF4E2; --turq: #64DBE8; --teal-d: #0A7F8C; --coral: #FF6D04; --mute-d: #9FB4BF; --mute: #4E6573;
     --display: "Unbounded", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif; }
@@ -35,6 +35,67 @@
   .browser img { display: block; width: 100%; height: calc(100% - 52px); object-fit: cover; object-position: top; }
   .wall { position: absolute; display: grid; grid-template-columns: repeat(3, 520px); gap: 34px; transform: perspective(2400px) rotateX(34deg) rotateZ(-20deg); }
   .wall .browser { position: relative; height: 380px; }
+
+  .stp { position: absolute; z-index: 6; left: 80px; right: 80px; transform: translateY(-50%); border: 3px solid var(--fr); border-top: none; border-radius: 0 0 36px 36px; text-align: center; }
+  .stp .hd { position: absolute; left: -3px; right: -3px; top: -.5em; display: flex; align-items: flex-start; font: 800 90px/1.02 var(--display); letter-spacing: -.04em; }
+  .stp .hd small { font-size: .7em !important; }
+  .stp .hd::before, .stp .hd::after { content: ""; flex: 1; min-width: 40px; height: 40px; margin-top: .5em; border-top: 3px solid var(--fr); }
+  .stp .hd::before { border-left: 3px solid var(--fr); border-radius: 36px 0 0 0; } .stp .hd::after { border-right: 3px solid var(--fr); border-radius: 0 36px 0 0; }
+  .stp .hd div { padding: 0 28px; } .stp .hd small { display: block; font-size: .62em; letter-spacing: -.02em; color: var(--soft); margin-bottom: 6px; } .stp .hd em { font-style: normal; color: var(--acc); }
+  .stp .in { padding: 0 66px 80px; }
+  .stp .lead { font: 800 52px/1.25 var(--body); margin-bottom: 36px; }
+  .stp .tx { font: 600 42px/1.45 var(--body); color: var(--soft); }
+  .stp .tx strong { font-weight: 800; color: inherit; }
+  .stp .nt { margin-top: 44px; padding-top: 40px; border-top: 2px dashed var(--fr); font: 700 40px/1.4 var(--body); color: var(--acc); }
+  .navy .stp { --fr: rgba(100,219,232,.45); } .cream .stp { --fr: rgba(4,20,30,.28); } .orange .stp { --fr: rgba(4,20,30,.5); --acc: var(--paper); }
+  .navy .stp .lead { color: var(--paper); } .cream .stp .lead, .orange .stp .lead { color: var(--ink); }
+  .ghostn { position: absolute; z-index: 1; right: -40px; bottom: -120px; font: 800 560px/1 var(--display); letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 3px var(--fr2); }
+  .navy .ghostn { --fr2: rgba(100,219,232,.12); } .cream .ghostn { --fr2: rgba(4,20,30,.08); } .orange .ghostn { --fr2: rgba(4,20,30,.14); }
+  .tl { position: absolute; z-index: 6; left: 70px; right: 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .tl div { display: flex; align-items: center; gap: 20px; padding: 34px 30px; border-radius: 28px; background: rgba(100,219,232,.08); box-shadow: inset 0 0 0 2px rgba(100,219,232,.22); font: 800 40px var(--body); color: var(--paper); }
+  .tl b { font: 800 30px var(--display); color: var(--turq); }
+
+  .mk { position: relative; width: 100%; height: calc(100% - 52px); overflow: hidden; font-family: var(--body); }
+  .mk.ui { background: url(https://images.unsplash.com/photo-1601985705806-5b9a71f6004f?w=1200&q=80&auto=format&fit=crop) center/cover; }
+  .mk.ui::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,32,22,.88) 0%, rgba(20,32,22,.55) 48%, rgba(20,32,22,0) 80%); }
+  .mk.ui > * { position: relative; }
+  .mk.ui .nv { display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; color: #F3EEE2; font: 600 30px Fraunces, serif; }
+  .mk.ui .nv span { font: 700 17px var(--body); letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+  .mk.ui h5 { padding: 30px 40px 0; font: 400 66px/1.02 Fraunces, serif; color: #F3EEE2; letter-spacing: -.02em; } .mk.ui h5 em { font-style: italic; color: #C9DDB0; }
+  .mk.ui p { padding: 18px 40px 0; width: 70%; font: 600 20px/1.4 var(--body); color: rgba(243,238,226,.85); }
+  .mk.ui .bts { padding: 26px 40px; display: flex; gap: 12px; } .mk.ui .bts span { padding: 16px 28px; border-radius: 999px; font: 800 18px var(--body); background: #C9DDB0; color: #1F2E21; } .mk.ui .bts span + span { background: none; color: #F3EEE2; box-shadow: inset 0 0 0 2px rgba(243,238,226,.6); }
+  .mk.wire { background: #fff; padding: 30px; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: min-content; gap: 16px; }
+  .mk.wire div { border: 3px dashed #9FD8DF; border-radius: 18px; background: #F2FBFC; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 18px 22px; font: 800 16px var(--body); letter-spacing: .12em; text-transform: uppercase; color: #0A7F8C; }
+  .mk.wire div small { font: 600 18px/1.3 var(--body); letter-spacing: 0; text-transform: none; color: #5E7A80; }
+  .mk.wire .hdr { grid-column: 1 / 4; flex-direction: row; justify-content: space-between; align-items: center; height: 60px; }
+  .mk.wire .hero { grid-column: 1 / 4; height: 190px; } .mk.wire .card { height: 150px; }
+  .mk.wire .hero i { display: block; width: 180px; height: 46px; border-radius: 999px; background: #64DBE8; margin-top: 6px; }
+  .mk.brand { background: #F5F1E8; display: grid; grid-template-columns: 250px 1fr; gap: 0; }
+  .mk.brand .ph { background: url(https://images.unsplash.com/photo-1525498128493-380d1990a112?w=1200&q=80&auto=format&fit=crop) center/cover; }
+  .mk.brand .rt { padding: 34px 38px; }
+  .mk.brand .wm { font: 600 64px/1 Fraunces, serif; color: #2F4A33; letter-spacing: -.02em; } .mk.brand .wm i { font-style: italic; font-weight: 400; color: #8CAF6E; }
+  .mk.brand .ty { margin: 14px 0 26px; font: 700 17px var(--body); letter-spacing: .14em; text-transform: uppercase; color: #8A8677; }
+  .mk.brand .sw { display: flex; gap: 14px; } .mk.brand .sw div { flex: 1; height: 120px; border-radius: 18px; padding: 12px; display: flex; align-items: flex-end; font: 700 15px var(--body); }
+  .mk.code { background: #0B1A23; display: grid; grid-template-columns: 64px 1fr; grid-template-rows: 54px 1fr; font: 600 23px/1.8 ui-monospace, Menlo, monospace; color: #C8D6DD; }
+  .mk.code .tabs { grid-column: 1 / 3; display: flex; align-items: flex-end; gap: 4px; padding: 0 20px; background: #07121A; } .mk.code .tabs span { padding: 12px 22px; border-radius: 12px 12px 0 0; font: 700 17px var(--body); color: #6B8794; } .mk.code .tabs span.on { background: #0B1A23; color: #E6F1F4; }
+  .mk.code .ln { padding: 18px 0; text-align: right; color: #35505C; padding-right: 14px; } .mk.code .src { padding: 18px 10px; white-space: pre; }
+  .mk.code .k { color: #FF8A3D; } .mk.code .s { color: #64DBE8; } .mk.code .c { color: #4E6673; font-style: italic; } .mk.code .a { color: #C9DDB0; }
+  .mk.log { background: #F7F9FA; padding: 26px 34px; }
+  .mk.log h6 { font: 800 16px var(--body); letter-spacing: .14em; text-transform: uppercase; color: #7E8F96; margin: 4px 0 10px; }
+  .mk.log .r { display: flex; align-items: center; gap: 18px; background: #fff; border-radius: 18px; padding: 18px 22px; margin-bottom: 12px; box-shadow: 0 4px 14px rgba(4,20,30,.06); font: 800 25px var(--body); color: #04141E; }
+  .mk.log .r b { width: 42px; height: 42px; border-radius: 50%; background: #64DBE8; display: grid; place-items: center; font-size: 22px; flex: none; }
+  .mk.log .r span { margin-left: auto; padding: 8px 14px; border-radius: 999px; background: #EEF3F5; font: 700 16px var(--body); color: #5E7A80; }
+  .b .nt { display: block; margin-top: 26px; font-style: italic; color: var(--acc); font-weight: 700; }
+
+  .lscr { width: 100%; height: 100%; background: #FFF4E2; display: flex; flex-direction: column; justify-content: center; padding: 0 70px; }
+  .lscr .l1 { font: 800 112px/1 var(--display); letter-spacing: -.05em; color: #04141E; }
+  .lscr .l2 { margin-top: 34px; font: 800 74px/1.05 var(--display); letter-spacing: -.04em; color: #04141E; } .lscr .l2 em { font-style: normal; color: #FF6D04; }
+  .inset { position: absolute; z-index: 4; border-radius: 30px; background-size: cover; background-position: center; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
+  .mani { position: absolute; z-index: 6; left: 80px; right: 80px; font: 600 50px/1.4 var(--body); color: var(--soft); text-align: center; }
+  .mani strong { color: var(--paper); font-weight: 800; box-shadow: inset 0 -6px 0 rgba(255,109,4,.8); }
+  .vline { position: absolute; z-index: 6; left: 539px; width: 3px; background: rgba(100,219,232,.5); }
+  .mbox { position: absolute; z-index: 6; left: 100px; right: 100px; padding: 70px 56px; border: 3px solid rgba(100,219,232,.5); border-radius: 36px; text-align: center; font: 800 70px/1.12 var(--display); letter-spacing: -.04em; color: var(--paper); }
+  .mbox small { display: block; font: 600 36px/1.3 var(--body); letter-spacing: 0; color: var(--soft); margin-bottom: 22px; } .mbox em { font-style: normal; color: var(--turq); }
   .btn { position: absolute; z-index: 8; display: inline-flex; align-items: center; gap: 28px; padding: 12px 12px 12px 48px; border-radius: 999px; font: 800 38px var(--body); white-space: nowrap; }
   .btn span { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; }
   .btn svg { width: 40px; height: 40px; }
@@ -137,6 +198,14 @@ const PEEK = k => {
   const top = k.top || 1000;
   if (k.phones) return k.phones.map((img, i) => { const n = k.phones.length, x = 540 + (i - (n - 1) / 2) * 330 - 150, r = (i - (n - 1) / 2) * 7, y = top + Math.abs(i - (n - 1) / 2) * 50; return `<div class="phone" style="left:${x}px;top:${y}px;width:300px;height:620px;transform:rotate(${r}deg);z-index:${i === (n - 1) / 2 ? 3 : 2}"><img src="${img}" alt=""></div>`; }).join('');
   if (k.browser) return `<div class="browser" style="left:120px;top:${top}px;width:840px;height:560px;transform:rotate(${k.rot ?? -3}deg)"><div class="bar"><i></i><i></i><i></i><span>${k.url || 'seunegocio.com.br'}</span></div><img src="${k.browser}" alt=""></div>${k.tag ? `<span class="sticker" style="right:90px;top:${top - 40}px;background:var(--coral);color:var(--ink);transform:rotate(5deg)">${k.tag}</span>` : ''}`;
+  if (k.mock) { const M = {
+      wire: '<div class="mk wire"><div class="hdr">Logo<small>Plantas · Vasos · Paisagismo · Contato</small></div><div class="hero">Topo<small>Frase principal + botão de WhatsApp</small><i></i></div><div class="card">Plantas<small>Catálogo</small></div><div class="card">Vasos<small>Catálogo</small></div><div class="card">Paisagismo<small>Serviço</small></div></div>',
+      brand: '<div class="mk brand"><div class="ph"></div><div class="rt"><div class="wm">Terra <i>Viva</i></div><div class="ty">Fraunces · Manrope</div><div class="sw"><div style="background:#2F4A33;color:#C9DDB0">#2F4A33</div><div style="background:#8CAF6E;color:#1F2E21">#8CAF6E</div><div style="background:#E9E1CF;color:#6B6455">#E9E1CF</div></div></div></div>',
+      ui: '<div class="mk ui"><div class="nv">Terra Viva<span>Plantas · Paisagismo</span></div><h5>Sua casa <em>mais verde,</em><br>sem complicação.</h5><p>Plantas, vasos e paisagismo com quem entende de verdade.</p><div class="bts"><span>Ver plantas</span><span>Paisagismo</span></div></div>',
+      code: '<div class="mk code"><div class="tabs"><span class="on">index.html</span><span>estilo.css</span></div><div class="ln">1<br>2<br>3<br>4<br>5<br>6</div><div class="src"><span class="c">&lt;!-- topo do site --&gt;</span>\n<span class="k">&lt;section</span> <span class="a">class</span>=<span class="s">"topo"</span><span class="k">&gt;</span>\n  <span class="k">&lt;h1&gt;</span>Sua casa mais verde<span class="k">&lt;/h1&gt;</span>\n  <span class="k">&lt;a</span> <span class="a">href</span>=<span class="s">"wa.me/..."</span><span class="k">&gt;</span>\n    Fale com a gente\n  <span class="k">&lt;/a&gt;</span></div></div>',
+      check: '<div class="mk log"><h6>Manutenção · Terra Viva</h6><div class="r"><b>✓</b>Horário de sábado atualizado<span>hoje</span></div><div class="r"><b>✓</b>Novas plantas no catálogo<span>ontem</span></div><div class="r"><b>✓</b>Site revisado no celular<span>seg</span></div></div>',
+    };
+    return `<div class="browser" style="left:120px;top:${top}px;width:840px;height:560px;transform:rotate(${k.rot ?? -3}deg)"><div class="bar"><i></i><i></i><i></i><span>${k.url || 'seunegocio.com.br'}</span></div>${M[k.mock]}</div>${k.tag ? `<span class="sticker" style="right:90px;top:${top - 40}px;background:var(--coral);color:var(--ink);transform:rotate(5deg)">${k.tag}</span>` : ''}`; }
   if (k.chat) return `<div class="phone" style="left:${k.left || 330}px;top:${top}px;width:420px;height:860px;transform:rotate(${k.rot ?? -5}deg)"><div style="width:100%;height:100%;border-radius:42px;overflow:hidden">${CHAT(k.name || 'Cliente', k.chat)}</div></div>`;
   return '';
 };
@@ -209,7 +278,7 @@ const T = {
     ${s.sticker ? `<span class="sticker" style="right:60px;top:640px;background:var(--coral);color:var(--ink);transform:rotate(5deg)">${s.sticker}</span>` : ''}`,
   // texto grande
   text: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 240}px;font-size:${s.size || 104}px">${fmt(s.title)}</div>
-    ${s.body ? `<p class="b" style="left:70px;right:${s.bodyRight || 120}px;top:${s.bodyTop || 820}px">${s.body}</p>` : ''}
+    ${s.body ? `<p class="b" style="left:70px;right:${s.bodyRight || 120}px;top:${s.bodyTop || 820}px${s.bodySize ? `;font-size:${s.bodySize}px` : ''}">${s.body}</p>` : ''}
     ${s.source ? `<p class="b" style="left:70px;right:70px;top:${s.sourceTop || 1240}px;font-size:26px;opacity:.8">${s.source}</p>` : ''}
     ${s.octo ? `<svg class="octo" data-octo="${s.octo}"></svg>` : ''}`,
   // número gigante
@@ -220,6 +289,24 @@ const T = {
   strike: s => `<div class="t" style="left:70px;right:70px;top:220px;font-size:${s.size || 92}px">${fmt(s.title)}</div>
     <div class="strk" style="top:${s.listTop || 600}px">${s.items.map(i => `<div>${i}<span style="color:${s.strikeColor || 'var(--line)'}">${STRIKE}</span></div>`).join('')}</div>
     ${s.body ? `<p class="b" style="left:70px;right:100px;top:${s.bodyTop || 1080}px">${s.body}</p>` : ''}`,
+  // etapa em moldura (estilo editorial)
+  step: s => `<div class="ghostn">${s.n}</div><div class="stp" style="top:${s.top || 720}px"><div class="hd"><div><small>Etapa ${s.n}</small>${fmt(s.title)}</div></div><div class="in" style="padding-top:${s.pad || 190}px"><div class="lead">${s.lead}</div><div class="tx">${s.body}</div>${s.note ? `<div class="nt">${s.note}</div>` : ''}</div></div>`,
+  // capa com a linha do tempo das etapas
+  stepsCover: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 230}px;font-size:${s.size || 104}px">${fmt(s.title)}</div>
+    ${s.body ? `<p class="b" style="left:70px;right:70px;top:${s.bodyTop || 700}px">${s.body}</p>` : ''}
+    <div class="tl" style="top:${s.listTop || 840}px">${s.items.map((it, i) => `<div><b>0${i + 1}</b>${it}</div>`).join('')}</div>`,
+  // foto: notebook com o texto na tela
+  photoLaptop: s => `<div class="photo" style="background-image:url(${UN('photo-1759661142441-d77ffb3ca943')})"></div>
+    <div class="scr" data-quad="${s.quad || '342,262 982,262 972,692 308,688'}" style="left:0;top:0;width:1000px;height:640px;transform-origin:0 0"><div class="lscr">${s.screen}</div></div>
+    ${s.tag ? `<span class="sticker" style="left:50%;top:1130px;transform:translateX(-50%) rotate(-3deg);background:var(--coral);color:var(--ink)">${s.tag}</span>` : ''}`,
+  // título + foto recortada + texto ao lado
+  inset: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 210}px;font-size:${s.size || 96}px">${fmt(s.title)}</div>
+    <div class="inset" style="left:70px;top:${s.imgTop || 640}px;width:430px;height:600px;background-image:url(https://images.unsplash.com/${s.photo}?w=900&h=1260&fit=crop&q=85)"></div>
+    <p class="b" style="left:550px;right:60px;top:${s.bodyTop || 700}px;font-size:48px">${s.body}</p>`,
+  // manifesto: texto, linha, caixa
+  manifesto: s => `<p class="mani" style="top:${s.top || 230}px">${s.body}</p>
+    <div class="vline" style="top:${s.lineTop || 640}px;height:${s.lineH || 150}px"></div>
+    <div class="mbox" style="top:${(s.lineTop || 640) + (s.lineH || 150)}px">${s.box}</div>`,
   // chamada final
   cta: s => `<div class="t" style="left:0;right:0;top:${s.top || 260}px;text-align:center;font-size:${s.size || 100}px">${fmt(s.title)}</div>
     <p class="b" style="left:110px;right:110px;top:${s.bodyTop || 720}px;text-align:center">${s.body}</p>
@@ -252,12 +339,14 @@ return [
   { type: 'cta', bg: 'light', title: 'O próximo|pode ser|o [seu.]', size: 116, top: 250, body: 'Me conta do seu negócio. <strong>A primeira conversa é sem compromisso.</strong>', bodyTop: 660, btnTop: 860, peek: { phones: [MO('savio'), MO('ligia'), MO('coloreouros')], top: 1050 } },
 ]},
 { folder: '04 - Como eu faco o seu site (carrossel)', slides: [
-  { type: 'text', bg: 'orange', title: 'Como eu|faço o seu|site, *do papo|ao ar.*', size: 112, top: 230, peek: { browser: TH('advocacia'), url: 'pradoemartins.adv.br', top: 860, tag: 'arrasta →' } },
-  { type: 'number', bg: 'navy', n: '01', title: 'A gente|[conversa.]', body: 'Você me conta do seu negócio e do que você quer. <strong>Sem formulário enorme.</strong>', peek: { chat: [['Oi! Quero um site pra minha clínica', '09:12'], ['Bora! Me conta como você atende?', '09:14', true], ['Atendo com hora marcada, 3 dentistas', '09:15']], name: 'Clínica Sorriso', top: 940 } },
-  { type: 'number', bg: 'light', n: '02', title: 'Você aprova|[antes.]', body: 'Antes de eu programar, você vê como vai ficar e <strong>pede os ajustes que quiser.</strong>', peek: { browser: TH('odontologia'), url: 'lumi.com.br', top: 960, tag: 'Aprovado ✓' } },
-  { type: 'phone', bg: 'orange', title: 'Aí eu|programo|o *seu site.*', size: 120, img: MO('hamburgueria'), sticker: 'Rápido e pronto pro celular', phoneLeft: 560, phoneTop: 560, phoneW: 420, rot: 8 },
-  { type: 'number', bg: 'navy', n: '04', title: 'Eu continuo|[cuidando.]', body: 'O site subiu e eu não sumo: <strong>ajustes, atualizações e manutenção</strong> ficam comigo.', peek: { chat: [['Consegue mudar o horário de sábado?', '16:20'], ['Feito! Já tá no ar ✓', '16:31', true], ['vc é demais 🙌', '16:32']], name: 'Grão · Cafeteria', top: 940 } },
-  { type: 'cta', bg: 'orange', title: 'Bora fazer|o [seu?]', size: 130, top: 280, body: 'Me chama no direct ou pelo link da bio.', bodyTop: 640, btnTop: 820, peek: { phones: [MO('advocacia'), MO('hamburgueria'), MO('academia')], top: 1030 } },
+  { type: 'text', bg: 'orange', title: 'Site|bonito não|[basta.]', size: 124, top: 220, body: 'É o processo que faz ele <strong>funcionar de verdade.</strong> As 6 etapas de como a gente monta um site do zero →', bodyTop: 680, peek: { mock: 'ui', url: 'terraviva.com.br', top: 960, tag: 'salva 📌' } },
+  { type: 'number', bg: 'navy', n: '01', title: 'Briefing e|[alinhamento.]', size: 86, body: 'Antes de qualquer criação, a gente entende o seu negócio: <strong>público, diferencial e objetivo do site.</strong><span class="nt">Sem esse passo, qualquer ideia vira um tiro no escuro.</span>', bodyTop: 700, peek: { chat: [['Quero um site pra minha loja de plantas 🌿', '09:12'], ['Bora! Quem é o seu cliente?', '09:14', true], ['Gente que quer a casa mais verde, mas não sabe por onde começar', '09:16']], name: 'Terra Viva', top: 950 } },
+  { type: 'number', bg: 'light', n: '02', title: '[Estrutura]|por blocos.', size: 86, body: 'Antes de deixar bonito, montamos o site em blocos: <strong>o que entra, em que ordem e como navegar.</strong><span class="nt">Isso facilita o design e a programação depois.</span>', bodyTop: 700, peek: { mock: 'wire', url: 'rascunho · estrutura', top: 990, rot: 2 } },
+  { type: 'number', bg: 'orange', n: '03', title: 'Identidade|*visual.*', size: 92, body: 'Usamos a sua identidade ou o <strong>nosso time de designers cria uma nova,</strong> com cores, fontes e imagens pensadas pra web.<span class="nt">Aqui o site ganha cor e intenção.</span>', bodyTop: 700, peek: { mock: 'brand', url: 'identidade · terra viva', top: 990, rot: -2 } },
+  { type: 'number', bg: 'navy', n: '04', title: 'Design e|[aprovação.]', size: 92, body: 'Você vê o layout completo, página por página, e <strong>pede os ajustes que quiser.</strong><span class="nt">Nada é programado sem o seu ok.</span>', bodyTop: 700, peek: { mock: 'ui', url: 'terraviva.com.br', top: 920, tag: 'Aprovado ✓' } },
+  { type: 'number', bg: 'light', n: '05', title: '[Programação.]', size: 92, top: 500, body: 'Com o layout aprovado, nossos programadores partem pra parte técnica, <strong>respeitando o que foi planejado.</strong><span class="nt">É onde tudo ganha vida e funciona de verdade.</span>', bodyTop: 640, peek: { mock: 'code', url: 'terraviva.com.br · código', top: 900, rot: 3 } },
+  { type: 'number', bg: 'navy', n: '06', title: 'No ar e em|[manutenção.]', size: 88, body: 'Site no ar não é o fim. A OctoMaker segue cuidando de <strong>velocidade, versão pro celular, melhorias e ajustes.</strong>', bodyTop: 700, peek: { mock: 'check', url: 'terraviva.com.br', top: 900 } },
+  { type: 'cta', bg: 'orange', title: 'Seu site com|*processo,* não|no [improviso.]', size: 86, top: 260, body: 'Manda <strong>SITE</strong> no direct que a gente te explica como funciona.', bodyTop: 720, btnTop: 900, peek: { chat: [['Oi! Vi o post e quero um site 🙂', '10:02'], ['Bora! Me conta do seu negócio?', '10:03', true]], name: 'Você', top: 1070, rot: 4 } },
 ]},
 { folder: '05 - Prazer, OctoMaker (carrossel, fixar)', slides: [
   { type: 'text', bg: 'orange', title: 'Prazer,|*OctoMaker.*', size: 118, top: 230, body: 'Sites, sistemas e aplicativos <strong>por encomenda. Do seu jeito.</strong>', bodyTop: 560, peek: { phones: [MO('savio'), MO('odonto'), MO('hamburgueria')], top: 820 } },
@@ -295,6 +384,13 @@ return [
   ['3 - Como funciona', `<svg viewBox="0 0 24 24" fill="none" stroke="#04141E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="18" cy="6" r="2"/><circle cx="15" cy="18" r="2"/></svg>`, '#FFF4E2'],
   ['4 - Orcamento', `<svg viewBox="0 0 24 24" fill="none" stroke="#04141E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>`, '#FF6D04'],
   ['5 - Contato', `<svg viewBox="0 0 24 24" fill="none" stroke="#04141E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2z" fill="#04141E" stroke="none"/></svg>`, '#64DBE8'],
+]},
+{ folder: '13 - Seu trabalho e bom (carrossel)', slides: [
+  { type: 'photoLaptop', bg: 'navy', screen: '<div class="l1">Seu trabalho<br>é bom.</div><div class="l2">Seu site<br><em>mostra isso?</em></div>' },
+  { type: 'inset', bg: 'light', title: 'O site é a|sua *fachada*|na internet.', size: 96, top: 220, imgTop: 660, photo: 'photo-1775743093104-d8e53e5ed250', body: 'É ele que mostra <strong>o nível do seu negócio</strong> antes mesmo de você falar qualquer coisa.', bodyTop: 690 },
+  { type: 'text', bg: 'navy', title: 'Quando a sua|presença online|*não acompanha*|o que você|entrega,', size: 84, top: 330, body: 'você perde autoridade e <strong>os clientes que buscam confiança.</strong>', bodyTop: 930, bodyRight: 70, bodySize: 58 },
+  { type: 'manifesto', bg: 'navy', body: 'Por isso, cada projeto da OctoMaker começa entendendo <strong>o seu negócio, o seu diferencial e o seu cliente</strong> antes de qualquer layout.', top: 250, lineTop: 700, lineH: 150, box: '<small>O resultado é um site</small>com a <em>sua cara,</em> que mostra o seu valor.' },
+  { type: 'cta', bg: 'orange', title: 'Site não é sobre|o que você vê.|É sobre o que|o cliente [sente.]', size: 90, top: 330, body: 'Manda <strong>SITE</strong> no direct e vamos mostrar o nível do seu trabalho.', bodyTop: 860, btnTop: 1060 },
 ]},
 ];
 })();

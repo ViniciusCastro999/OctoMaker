@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #04141E; --turq: #64DBE8; --orange: #FF6D04; --cream: #FFF4E2; --muted: #9FB4BF;
+    --display: "Unbounded", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--navy); width: 1080px; height: 1920px; overflow: hidden; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(900px 700px at 50% 52%, #0B3442 0%, rgba(11,52,66,0) 70%), var(--navy); }
+  .head { position: absolute; top: 170px; left: 0; right: 0; text-align: center; }
+  .sym { width: 74px; height: 74px; display: block; margin: 0 auto 26px; }
+  .title { font: 800 70px/1 var(--display); color: var(--cream); letter-spacing: -1px; }
+  .title b { color: var(--orange); font-weight: 800; margin: 0 14px; }
+  .phone { position: absolute; left: 50%; top: 400px; width: 480px; height: 1020px; margin-left: -240px;
+    border-radius: 66px; background: #0E1D26; padding: 16px; box-shadow: 0 50px 120px rgba(0,0,0,.55), inset 0 0 0 3px #22343F; }
+  .screen { position: relative; width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #fff; }
+  .screen img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+  .scr, .scr > div { position: absolute; inset: 0; }
+  .scr > div { padding: 96px 30px 30px; font-family: var(--body); overflow: hidden; }
+  .ma { background: #F2F2F2; } .mb { background: var(--cream); }
+  .bar { height: 14px; border-radius: 7px; background: #C9CDD1; margin: 0 0 14px; }
+  .site-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
+  .logo { font: 800 22px/1 var(--display); color: var(--navy); } .logo i { font-style: normal; color: var(--orange); }
+  .burger { width: 30px; height: 4px; background: var(--navy); border-radius: 2px; box-shadow: 0 9px 0 var(--navy), 0 -9px 0 var(--navy); }
+  .h1 { font: 800 42px/1.08 var(--display); color: var(--navy); letter-spacing: -1px; margin-bottom: 20px; } .h1 em { font-style: normal; color: var(--orange); }
+  .p { font: 600 20px/1.4 var(--body); color: #4A5A63; margin-bottom: 28px; }
+  .btn { display: inline-block; padding: 18px 28px; border-radius: 999px; background: var(--orange); color: #fff; font: 800 18px/1 var(--body); }
+  .btn.ghost { background: none; color: var(--navy); box-shadow: inset 0 0 0 2px var(--navy); margin-left: 8px; }
+  .svc { background: #fff; border-radius: 22px; padding: 22px 22px; margin-bottom: 14px; display: flex; gap: 16px; align-items: center; box-shadow: 0 6px 18px rgba(4,20,30,.06); }
+  .svc .ic { width: 52px; height: 52px; border-radius: 16px; background: var(--turq); flex: none; display: grid; place-items: center; font: 800 22px/1 var(--display); color: var(--navy); }
+  .svc b { display: block; font: 800 20px/1.2 var(--body); color: var(--navy); } .svc span { font: 600 16px/1.3 var(--body); color: #6A7880; }
+  .svc .pr { margin-left: auto; font: 800 18px/1 var(--body); color: var(--orange); }
+  .tag { display: inline-block; font: 800 14px/1 var(--body); letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+  /* instagram highlights */
+  .ig-head { display: flex; gap: 22px; align-items: center; margin-bottom: 26px; }
+  .ig-av { width: 96px; height: 96px; border-radius: 50%; background: #D5D9DC; flex: none; }
+  .ig-name { font: 800 22px/1 var(--body); color: #222; }
+  .hls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 10px; }
+  .hl { text-align: center; font: 600 14px/1.2 var(--body); color: #333; }
+  .hl i { display: block; width: 78px; height: 78px; border-radius: 50%; margin: 0 auto 8px; background: #E3E6E8; box-shadow: 0 0 0 3px #F2F2F2, 0 0 0 5px #C9CDD1; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 30px; } .grid3 i { aspect-ratio: 1; background: #DDE0E3; }
+  /* google */
+  .gbox { height: 60px; border-radius: 30px; background: #fff; box-shadow: 0 3px 12px rgba(0,0,0,.1); display: flex; align-items: center; padding: 0 24px; font: 600 20px/1 var(--body); color: #333; margin-bottom: 34px; }
+  .gres { background: #fff; border-radius: 22px; padding: 24px; margin-bottom: 16px; }
+  .gres small { display: block; font: 600 15px/1.2 var(--body); color: #5f6b72; margin-bottom: 8px; }
+  .gres b { display: block; font: 700 22px/1.25 var(--body); color: #1A4FB8; margin-bottom: 8px; }
+  .gres span { font: 500 16px/1.4 var(--body); color: #4A5A63; }
+  .gres.top { box-shadow: inset 0 0 0 3px var(--turq); }
+  /* linktree */
+  .lt { text-align: center; }
+  .lt .ig-av { margin: 0 auto 14px; width: 84px; height: 84px; }
+  .lt .ig-name { margin-bottom: 26px; }
+  .lb { height: 52px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 2px #C9CDD1; margin-bottom: 12px; display: grid; place-items: center; font: 700 17px/1 var(--body); color: #555; }
+  /* whatsapp */
+  .wa { background: #E9E2D8 !important; padding-top: 0 !important; }
+  .wa-top { height: 150px; background: #0E5F55; margin: 0 -30px 22px; padding: 96px 30px 0; color: #fff; font: 800 20px/1 var(--body); }
+  .msg { max-width: 78%; padding: 14px 18px; border-radius: 16px; font: 600 18px/1.3 var(--body); margin-bottom: 12px; background: #fff; color: #222; }
+  .msg.me { margin-left: auto; background: #D6F5C8; }
+  .ok { display: flex; gap: 12px; align-items: center; font: 700 19px/1.3 var(--body); color: var(--navy); margin-bottom: 16px; }
+  .ok i { width: 34px; height: 34px; border-radius: 50%; background: var(--turq); flex: none; display: grid; place-items: center; font: 800 18px/1 var(--body); font-style: normal; color: var(--navy); }
+  /* steps */
+  .blank { display: grid; place-items: center; text-align: center; }
+  .blank .q { font: 800 160px/1 var(--display); color: #C9CDD1; }
+  .blank .p { margin-top: 20px; }
+  .step { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 26px; }
+  .step .n { width: 56px; height: 56px; border-radius: 18px; background: var(--navy); color: var(--turq); font: 800 22px/1 var(--display); display: grid; place-items: center; flex: none; }
+  .step b { display: block; font: 800 22px/1.2 var(--body); color: var(--navy); margin: 4px 0 4px; } .step span { font: 600 16px/1.35 var(--body); color: #5A6A72; }
+
+  .mb { padding: 0 !important; }
+  .hero { position: relative; height: 470px; background-size: cover; background-position: center; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, var(--fade, rgba(0,0,0,.6)) 100%); }
+  .nav { position: absolute; z-index: 2; top: 84px; left: 28px; right: 28px; display: flex; justify-content: space-between; align-items: center; color: #fff; }
+  .nav .bg { font: 600 22px/1 Fraunces, serif; } .nav .bu { width: 26px; height: 3px; background: currentColor; box-shadow: 0 8px 0 currentColor, 0 -8px 0 currentColor; }
+  .hcap { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 26px; color: #fff; }
+  .body { padding: 26px 28px; }
+  /* 1 confeitaria */
+  .doce { background: #FBF1EC; } .doce .hcap h3 { font: italic 400 48px/1 Fraunces, serif; letter-spacing: -1px; }
+  .doce .k { font: 700 13px/1 var(--body); letter-spacing: 3px; text-transform: uppercase; color: #fff; opacity: .9; margin-bottom: 12px; }
+  .doce .t { font: 400 26px/1.25 Fraunces, serif; color: #4B2A2A; margin-bottom: 20px; } .doce .t i { color: #C2566B; }
+  .pill2 { display: inline-block; padding: 16px 26px; border-radius: 999px; font: 800 16px/1 var(--body); }
+  .doce .pill2 { background: #C2566B; color: #fff; } .doce .pill2.o { background: none; color: #4B2A2A; box-shadow: inset 0 0 0 1.5px #4B2A2A; margin-left: 6px; }
+  /* 2 barbearia */
+  .barb { background: #111; color: #EDE6D8; } .barb .hero { height: 330px; }
+  .barb .nav .bg, .barb .hcap h3 { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+  .barb .hcap h3 { font-size: 44px; font-weight: 700; line-height: 1; } .barb .hcap h3 span { color: #D3A35A; }
+  .row { display: flex; align-items: baseline; gap: 10px; padding: 15px 0; border-bottom: 1px solid #2A2A2A; }
+  .row b { font: 500 22px/1 Oswald, sans-serif; text-transform: uppercase; letter-spacing: 1px; } .row small { font: 600 14px/1 var(--body); color: #8E877B; }
+  .row .dots { flex: 1; border-bottom: 2px dotted #3A3A3A; transform: translateY(-4px); } .row em { font: 500 22px/1 Oswald, sans-serif; font-style: normal; color: #D3A35A; }
+  .barb .pill2 { background: #D3A35A; color: #111; margin-top: 20px; font-family: Oswald, sans-serif; letter-spacing: 1px; text-transform: uppercase; font-size: 17px; }
+  /* 3 google */
+  .goog { background: #fff; padding: 92px 24px 0 !important; }
+  .gq { height: 56px; border-radius: 28px; box-shadow: 0 2px 10px rgba(0,0,0,.14); display: flex; align-items: center; gap: 12px; padding: 0 22px; font: 600 19px/1 var(--body); color: #222; margin-bottom: 20px; }
+  .gtabs { display: flex; gap: 22px; font: 700 15px/1 var(--body); color: #666; border-bottom: 1px solid #e5e5e5; padding-bottom: 12px; margin-bottom: 22px; } .gtabs b { color: #1A4FB8; }
+  .gr { display: flex; gap: 14px; margin-bottom: 26px; }
+  .gr .fav { width: 32px; height: 32px; border-radius: 50%; background: #4C7A4E; color: #fff; display: grid; place-items: center; font: 600 16px/1 Fraunces, serif; flex: none; }
+  .gr small { display: block; font: 600 14px/1.3 var(--body); color: #333; } .gr small span { color: #666; font-weight: 500; }
+  .gr h4 { font: 600 22px/1.25 var(--body); color: #1A0DAB; margin: 8px 0 6px; } .gr p { font: 500 15px/1.4 var(--body); color: #4d5156; }
+  .gimg { height: 190px; border-radius: 18px; background-size: cover; background-position: center; margin: 12px 0; }
+  .slinks { display: flex; gap: 8px; flex-wrap: wrap; } .slinks span { padding: 10px 14px; border-radius: 999px; box-shadow: inset 0 0 0 1px #DADCE0; font: 700 14px/1 var(--body); color: #1A0DAB; }
+  /* 4 arquitetura */
+  .arq { background: #F4F1EC; color: #1C1C1C; } .arq .hero { height: 520px; }
+  .arq .nav .bg { font: 600 18px/1 var(--body); letter-spacing: 4px; text-transform: uppercase; }
+  .arq h3 { font: 400 40px/1.08 Fraunces, serif; letter-spacing: -1px; margin-bottom: 18px; } .arq h3 i { font-style: italic; }
+  .arq .ln { display: flex; justify-content: space-between; font: 700 13px/1 var(--body); letter-spacing: 3px; text-transform: uppercase; color: #777; border-top: 1px solid #ccc; padding-top: 16px; }
+  /* 5 spa */
+  .spa { background: #EEF0E8; color: #2F3A2E; } .spa .hero { height: 300px; }
+  .spa .nav .bg { font: italic 400 26px/1 Fraunces, serif; }
+  .spa h3 { font: 400 34px/1.1 Fraunces, serif; margin-bottom: 16px; } .spa h3 i { color: #6E8A5E; }
+  .faq { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #CDD3C4; font: 700 17px/1.2 var(--body); }
+  .faq span { width: 28px; height: 28px; border-radius: 50%; background: #6E8A5E; color: #fff; display: grid; place-items: center; font: 600 18px/1 var(--body); }
+  /* 6 octo */
+  .octo6 { background: var(--navy) !important; color: var(--cream); padding: 100px 28px 0 !important; }
+  .octo6 .tag { color: var(--orange); } .octo6 .h1 { color: var(--cream); } .octo6 .h1 em { color: var(--turq); }
+  .octo6 .step b { color: var(--cream); } .octo6 .step span { color: #9FB4BF; } .octo6 .step .n { background: var(--turq); color: var(--navy); }
+  .notch { position: absolute; top: 34px; left: 50%; width: 130px; height: 36px; margin-left: -65px; border-radius: 20px; background: #0E1D26; z-index: 9; }
+  .card { position: absolute; left: 90px; right: 90px; top: 1170px; padding: 44px 48px 50px; border-radius: 40px;
+    background: #04141E; box-shadow: 0 30px 80px rgba(0,0,0,.5), inset 0 0 0 2px rgba(100,219,232,.25); }
+  .lbl { font: 800 24px/1 var(--body); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
+  .lbl.p { color: var(--orange); } .lbl.s { color: var(--turq); margin-top: 34px; }
+  .prob { position: relative; display: inline; font: 700 44px/1.25 var(--body); color: var(--muted); }
+  .prob { background: linear-gradient(var(--orange), var(--orange)) no-repeat 0 58% / var(--s, 0%) 5px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .sol { font: 700 50px/1.15 var(--display); color: var(--cream); letter-spacing: -.5px; }
+  .sol em { font-style: normal; color: var(--turq); }
+  .end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: var(--navy); }
+  .end .sym { width: 120px; height: 120px; margin-bottom: 60px; }
+  .end h2 { font: 800 96px/1.05 var(--display); color: var(--cream); letter-spacing: -2px; }
+  .end h2 em { font-style: normal; color: var(--turq); }
+  .end .cta { margin-top: 70px; display: inline-block; padding: 34px 56px; border-radius: 999px; background: var(--orange); color: var(--navy); font: 800 44px/1 var(--display); }
+  .end .url { margin-top: 44px; font: 700 36px/1 var(--body); color: var(--muted); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="head">
+    <svg class="sym" viewBox="0 0 40 40"><path d="M7 22A13 13 0 0 1 33 22V24H7Z" fill="#64DBE8"/><circle cx="15" cy="17" r="2.4" fill="#04141E"/><circle cx="25" cy="17" r="2.4" fill="#04141E"/><g fill="none" stroke="#64DBE8" stroke-width="3.6" stroke-linecap="round"><path d="M10 27Q10 35 5 35"/><path d="M17 27V36"/><path d="M23 27V36"/><path d="M30 27Q30 35 35 35"/></g></svg>
+    <div class="title">Problema<b>×</b>Solução</div>
+  </div>
+  <div class="phone" id="phone"><div class="screen" id="screen"><div class="notch"></div></div></div>
+  <div class="card" id="card">
+    <div class="lbl p">Problema</div>
+    <div><span class="prob" id="prob"></span></div>
+    <div class="lbl s" id="lbls">Solução</div>
+    <div class="sol" id="sol"></div>
+  </div>
+  <div class="end" id="end">
+    <svg class="sym" viewBox="0 0 40 40"><path d="M7 22A13 13 0 0 1 33 22V24H7Z" fill="#64DBE8"/><circle cx="15" cy="17" r="2.4" fill="#04141E"/><circle cx="25" cy="17" r="2.4" fill="#04141E"/><g fill="none" stroke="#64DBE8" stroke-width="3.6" stroke-linecap="round"><path d="M10 27Q10 35 5 35"/><path d="M17 27V36"/><path d="M23 27V36"/><path d="M30 27Q30 35 35 35"/></g></svg>
+    <h2>Quer o seu<br><em>site?</em></h2>
+    <div class="cta">Manda SITE no direct</div>
+    <div class="url">octomaker.com.br</div>
+  </div>
+</div>
+<script>
+const PAIRS = [
+  ['Cliente entra e não entende o que você faz', 'A primeira tela já diz <em>o que você faz</em>'],
+  ['Serviços perdidos nos destaques', 'Tudo organizado <em>numa página só</em>'],
+  ['Depende do algoritmo pra ser visto', 'Seu site aparece <em>no Google</em>'],
+  ['Linktree com dez botões', 'Um site com <em>a sua cara</em>'],
+  ['Explica tudo de novo pelo WhatsApp', 'O cliente chega <em>já informado</em>'],
+  ['Não sabe por onde começar', 'A gente conversa e <em>cuida do resto</em>'],
+];
+const SEG = 2.8, END = 2.6, DUR = PAIRS.length * SEG + END;
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+const prog = (t, a, b) => ease((t - a) / (b - a));
+// one image per pair, stacked
+
+const BARS = n => Array.from({length: n}, (_, i) => `<div class="bar" style="width:${[92,78,86,64,90,70,82,58,88,74][i % 10]}%"></div>`).join('');
+const TOP = `<div class="site-top"><div class="logo">seu<i>negócio</i></div><div class="burger"></div></div>`;
+const SCREENS = [
+  [ `<div class="bar" style="width:60%;height:26px;background:#AEB4B9;margin-bottom:28px"></div>${BARS(22)}`,
+    `<div class="doce" style="height:100%"><div class="hero" style="background-image:url(https://images.unsplash.com/photo-1583338917451-face2751d8d5?w=900&q=80&auto=format&fit=crop)"><div class="nav"><div class="bg">Flor de Açúcar</div><div class="bu"></div></div><div class="hcap"><div class="k">Confeitaria artesanal</div><h3>Bolos que viram lembrança.</h3></div></div><div class="body"><div class="t">Encomendas para aniversários e casamentos, <i>feitas à mão</i> do primeiro ao último detalhe.</div><span class="pill2">Fazer encomenda</span><span class="pill2 o">Cardápio</span></div></div>` ],
+  [ `<div class="ig-head"><div class="ig-av"></div><div><div class="ig-name">seunegocio</div><div class="bar" style="width:180px;margin-top:12px"></div></div></div><div class="hls">${['Serviços','Serviços 2','Preços','Preços (novo)','Dúvidas','Antes/depois','Endereço','Horários'].map(t => `<div class="hl"><i></i>${t}</div>`).join('')}</div><div class="grid3">${'<i></i>'.repeat(6)}</div>`,
+    `<div class="barb" style="height:100%"><div class="hero" style="background-image:url(https://images.unsplash.com/photo-1781455793310-8427c96454c7?w=900&q=80&auto=format&fit=crop)"><div class="nav"><div class="bg">Navalha</div><div class="bu"></div></div><div class="hcap"><h3>Serviços <span>&amp; preços</span></h3></div></div><div class="body">${[['Corte','45 min','60'],['Barba','30 min','40'],['Corte + barba','1h15','90'],['Sobrancelha','15 min','20']].map(([a,b,c]) => `<div class="row"><b>${a}</b><small>${b}</small><span class="dots"></span><em>R$ ${c}</em></div>`).join('')}<span class="pill2">Agendar horário</span></div></div>` ],
+  [ `<div class="ig-head"><div class="ig-av"></div><div><div class="ig-name">seunegocio</div><div class="bar" style="width:180px;margin-top:12px"></div></div></div><div class="grid3" style="margin-top:0">${'<i></i>'.repeat(15)}</div>`,
+    `<div class="goog" style="height:100%"><div class="gq">🔍 nutricionista perto de mim</div><div class="gtabs"><b>Todas</b><span>Maps</span><span>Imagens</span><span>Notícias</span></div><div class="gr"><div class="fav">R</div><div><small>Nutrição Raiz<br><span>nutricaoraiz.com.br</span></small><h4>Nutricionista · Consultas presenciais e online</h4><p>Plano alimentar feito pra sua rotina, sem dieta da moda.</p><div class="gimg" style="background-image:url(https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=80&auto=format&fit=crop)"></div><div class="slinks"><span>Agendar consulta</span><span>Planos</span><span>Dúvidas</span></div></div></div></div>` ],
+  [ `<div class="lt"><div class="ig-av"></div><div class="ig-name">@seunegocio</div>${['Instagram','WhatsApp','Catálogo','Catálogo 2','Preços','Localização','Avaliações','Promoção','Formulário','Portfólio'].map(t => `<div class="lb">${t}</div>`).join('')}</div>`,
+    `<div class="arq" style="height:100%"><div class="hero" style="background-image:url(https://images.unsplash.com/photo-1724582586529-62622e50c0b3?w=900&q=80&auto=format&fit=crop)"><div class="nav"><div class="bg">Linha</div><div class="bu"></div></div></div><div class="body"><h3>Casas pensadas pra <i>quem vive nelas.</i></h3><div class="ln"><span>Projetos</span><span>Estúdio</span><span>Contato</span></div></div></div>` ],
+  [ `<div class="wa-top">Cliente</div>${[['Oi, qual o valor?',0],['Oi! Depende, te explico…',1],['Vocês atendem sábado?',0],['Onde fica?',0],['Como funciona?',0],['Oi, qual o valor?',0]].map(([t,m]) => `<div class="msg${m ? ' me' : ''}">${t}</div>`).join('')}`,
+    `<div class="spa" style="height:100%"><div class="hero" style="background-image:url(https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=900&q=80&auto=format&fit=crop)"><div class="nav"><div class="bg">Sálvia</div><div class="bu"></div></div></div><div class="body"><h3>Antes de agendar, <i>tudo o que você precisa saber.</i></h3>${['Quanto custa cada tratamento?','Atendem aos sábados?','Onde fica o espaço?','Como é a primeira sessão?'].map(t => `<div class="faq">${t}<span>+</span></div>`).join('')}</div></div>` ],
+  [ `<div class="blank" style="padding-top:0"><div><div class="q">?</div><div class="p">Por onde eu começo?</div></div></div>`,
+    `<div class="octo6" style="height:100%"><span class="tag">Como a gente trabalha</span><div class="h1" style="font-size:36px;margin-bottom:34px">Do zero ao <em>site no ar</em></div>${[['1','Conversa','Entendemos o seu negócio e o seu diferencial.'],['2','Design','A estrutura e o visual, pra você aprovar.'],['3','Programação','O time coloca o site no ar.'],['4','Manutenção','Seguimos cuidando de ajustes e melhorias.']].map(([n,b,t]) => `<div class="step"><div class="n">${n}</div><div><b>${b}</b><span>${t}</span></div></div>`).join('')}</div>` ],
+];
+SCREENS.forEach(([a, b], i) => { const el = document.createElement('div'); el.className = 'scr'; el.id = 'img' + i; el.innerHTML = `<div class="ma${i === 4 ? ' wa' : ''}${i === 5 ? ' blank' : ''}">${a}</div><div class="mb" id="mb${i}">${b}</div>`; $('screen').appendChild(el); });
+SCREENS.flat().join('').match(/https:[^)]+/g).forEach(u => { const im = new Image(); im.src = u; im.style.display = 'none'; document.body.appendChild(im); });
+
+let cur = -1;
+function render(t) {
+  const i = Math.min(PAIRS.length - 1, Math.floor(t / SEG)), lt = t - i * SEG;
+  if (i !== cur) { cur = i; $('prob').innerHTML = PAIRS[i][0]; $('sol').innerHTML = PAIRS[i][1]; }
+  // phone float + screen slide
+  $('phone').style.transform = `translateY(${Math.sin(t * 1.4) * 10}px) rotate(${Math.sin(t * .9) * 1.2}deg)`;
+  PAIRS.forEach((_, k) => {
+    const im = $('img' + k);
+    if (k === i) { const p = i === 0 ? 1 : prog(lt, 0, .45); im.style.transform = `translateY(${(1 - p) * 100}%)`; im.style.zIndex = 2; im.style.opacity = 1; }
+    else if (k === i - 1) { im.style.transform = `translateY(${-prog(lt, 0, .45) * 30}%)`; im.style.zIndex = 1; im.style.opacity = 1; }
+    else im.style.opacity = 0;
+  });
+  const rv = prog(lt, .75, 1.2); $('mb' + i).style.clipPath = `inset(${(1 - rv) * 100}% 0 0 0)`;
+  // card: problem in, strike, solution in, out
+  const pin = i === 0 ? prog(t, .1, .5) : prog(lt, .05, .4), out = i === PAIRS.length - 1 ? 0 : prog(lt, SEG - .25, SEG);
+  $('prob').parentElement.style.opacity = pin * (1 - out);
+  $('prob').parentElement.style.transform = `translateY(${(1 - pin) * 24}px)`;
+  $('prob').style.setProperty('--s', prog(lt, .55, .85) * 100 + '%');
+  const sin = prog(lt, .8, 1.15);
+  [$('sol'), $('lbls')].forEach(e => { e.style.opacity = sin * (1 - out); e.style.transform = `translateY(${(1 - sin) * 30}px)`; });
+  const cardIn = prog(t, 0, .4);
+  $('card').style.opacity = cardIn; $('card').style.transform = `translateY(${(1 - cardIn) * 60}px)`;
+  // end card
+  const e = prog(t, PAIRS.length * SEG, PAIRS.length * SEG + .5);
+  $('end').style.opacity = e; $('end').style.transform = `scale(${1.04 - e * .04})`;
+}
+window.DUR = DUR; window.render = render; render(0);
+</script>
+</body>
+</html>
