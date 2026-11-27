@@ -57,7 +57,7 @@ return [
   { type: 'list', bg: 'navy', title: 'Seu primeiro|site precisa|[ter isso:]', size: 86, top: 180, check: true, items: ['Botão de WhatsApp', 'Funciona bem no celular', 'Seus serviços explicados', 'Fotos do seu trabalho', 'Endereço e horários'], listTop: 490, body: 'Salva pra quando <strong>for fazer o seu.</strong>', bodyTop: 1240 },
 ]},
 { folder: '09 - Link na bio (post)', slides: [
-  { type: 'photoDark', bg: 'navy', title: 'Lista de links|ou [site próprio?]', size: 80, img: MO('savio') },
+  { type: 'versus', bg: 'navy', title: 'Lista de links|ou [site próprio?]', size: 88, left: MO('linklist'), right: MO('chales'), leftTag: 'Lista de links', rightTag: 'Site próprio ✓' },
 ]},
 { folder: '10 - WhatsApp com mensagem pronta (post)', slides: [
   { type: 'phone', bg: 'navy', title: 'Cada botão|já manda a|*mensagem*|[pronta.]', size: 90, phoneLeft: 580, phoneTop: 620, phoneW: 400, rot: 8,
@@ -76,6 +76,17 @@ return [
   { type: 'text', bg: 'navy', title: 'Quando a sua|presença online|*não acompanha*|o que você|entrega,', size: 84, top: 330, body: 'você perde autoridade e <strong>os clientes que buscam confiança.</strong>', bodyTop: 930, bodyRight: 70, bodySize: 58 },
   { type: 'manifesto', bg: 'navy', body: 'Por isso, cada projeto da OctoMaker começa entendendo <strong>o seu negócio, o seu diferencial e o seu cliente</strong> antes de qualquer layout.', top: 250, lineTop: 700, lineH: 150, box: '<small>O resultado é um site</small>com a <em>sua cara,</em> que mostra o seu valor.' },
   { type: 'cta', bg: 'orange', title: 'Site não é sobre|o que você vê.|É sobre o que|o cliente [sente.]', size: 90, top: 330, body: 'Manda <strong>SITE</strong> no direct e vamos mostrar o nível do seu trabalho.', bodyTop: 860, btnTop: 1060 },
+]},
+{ folder: '14 - Seu cliente pesquisa seu nome (carrossel)', slides: [
+  { type: 'google', bg: 'orange', title: 'Seu cliente|pesquisa o|seu nome|[antes de|te chamar.]', size: 104, top: 200, q: 'seu nome', barTop: 800, res: ['seunegocio.com.br', 'O que aparece aqui?', 'É isso que o seu cliente vê antes de decidir se te chama.'] },
+  { type: 'google', bg: 'navy', title: 'Ele pesquisa|[no Google.]', size: 100, top: 500, lines: 'Antes de marcar uma consulta.<br>Antes de pedir um orçamento.<br>Antes de fechar um serviço.', linesTop: 220, q: 'marina alves psicóloga', barTop: 800, res: ['marinaalves.com.br', 'Marina Alves · Psicóloga clínica', 'Atendimento online e presencial. Agende a sua primeira conversa.'] },
+  { type: 'list', bg: 'light', title: 'E depois|entra no [seu:]', size: 96, check: true, items: ['Site', 'Instagram', 'Perfil no Google', 'Avaliações'], listTop: 500 },
+  { type: 'bubbles', bg: 'navy', title: 'Em poucos segundos,|ele já forma uma|[opinião:]', size: 76, items: ['“Parece confiável?”', '“Entende do assunto?”', '“É referência na área?”'], listTop: 680, gap: 230 },
+  { type: 'arrows', bg: 'light', title: 'Agora imagine|[dois profissionais:]', size: 84, items: ['Mesma especialidade', 'Experiência parecida', 'Serviço parecido'], listTop: 540, box: 'Um tem <strong>um site profissional.</strong> O outro, só um link na bio e um WhatsApp.', boxTop: 900 },
+  { type: 'text', bg: 'orange', title: 'Qual deles|passa mais|[confiança?]', size: 124, top: 420 },
+  { type: 'reveal', bg: 'navy', lines: 'Seu site não substitui<br>a sua experiência.<br>Nem a sua reputação.<br>Nem o seu trabalho.', top: 200, pill: 'Mas ele faz algo importante:', pillTop: 640, title: '*Mostrar*|[tudo isso.]', size: 120, titleTop: 780 },
+  { type: 'list', bg: 'light', title: 'Por isso, um bom|site vai [além|de bonito:]', size: 84, items: ['Posicionamento::deixa claro por que te escolher', 'Texto que convence::fala a língua do seu cliente', 'Aparece no Google::quando ele te pesquisa', '!Funciona no celular::onde ele mais te procura'], listTop: 520 },
+  { type: 'cta', bg: 'orange', title: 'Você já|construiu a sua|[reputação.]', size: 104, top: 360, body: 'Agora o seu site precisa <strong>estar à altura dela.</strong>', bodyTop: 800, btnTop: 980, btn: 'Quero meu site' },
 ]},
 ];
 })()

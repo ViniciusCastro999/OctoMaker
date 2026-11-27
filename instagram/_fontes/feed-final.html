@@ -96,6 +96,18 @@
   .vline { position: absolute; z-index: 6; left: 539px; width: 3px; background: rgba(100,219,232,.5); }
   .mbox { position: absolute; z-index: 6; left: 100px; right: 100px; padding: 70px 56px; border: 3px solid rgba(100,219,232,.5); border-radius: 36px; text-align: center; font: 800 70px/1.12 var(--display); letter-spacing: -.04em; color: var(--paper); }
   .mbox small { display: block; font: 600 36px/1.3 var(--body); letter-spacing: 0; color: var(--soft); margin-bottom: 22px; } .mbox em { font-style: normal; color: var(--turq); }
+
+  .gbar { position: absolute; z-index: 6; left: 80px; right: 80px; height: 120px; border-radius: 60px; background: #fff; box-shadow: 0 30px 70px -20px rgba(0,0,0,.55); display: flex; align-items: center; gap: 24px; padding: 0 44px; font: 600 40px var(--body); color: #202124; }
+  .gbar .gg { font: 700 46px Arial, sans-serif; letter-spacing: -1px; } .gbar .cur { width: 3px; height: 46px; background: #1A73E8; margin-left: -18px; }
+  .gbar .mic { margin-left: auto; width: 34px; height: 34px; border-radius: 50%; border: 5px solid #4285F4; position: relative; } .gbar .mic::after { content: ""; position: absolute; right: -14px; bottom: -12px; width: 16px; height: 5px; background: #4285F4; transform: rotate(45deg); border-radius: 3px; }
+  .gres2 { position: absolute; z-index: 6; left: 80px; right: 80px; padding: 34px 40px; border-radius: 30px; background: #fff; box-shadow: 0 30px 70px -20px rgba(0,0,0,.5); font-family: Arial, sans-serif; }
+  .gres2 small { display: block; font-size: 24px; color: #4d5156; margin-bottom: 10px; } .gres2 b { display: block; font-size: 36px; font-weight: 400; color: #1A0DAB; margin-bottom: 10px; } .gres2 span { font-size: 26px; line-height: 1.4; color: #4d5156; }
+  .bub { position: absolute; z-index: 6; padding: 34px 44px; border-radius: 40px 40px 40px 10px; font: 800 46px/1.2 var(--body); box-shadow: 0 30px 60px -24px rgba(4,20,30,.45); }
+  .lines { position: absolute; z-index: 6; left: 70px; right: 70px; font: 600 46px/1.55 var(--body); color: var(--soft); }
+  .lines b { color: var(--paper); font-weight: 800; } .cream .lines b { color: var(--ink); }
+  .arw { position: absolute; z-index: 6; left: 70px; right: 70px; display: flex; flex-direction: column; gap: 26px; font: 800 56px var(--body); letter-spacing: -.02em; }
+  .arw div::before { content: "→ "; color: var(--line); font-weight: 800; }
+  .pillq { position: absolute; z-index: 6; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 22px 40px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 800 36px var(--body); }
   .btn { position: absolute; z-index: 8; display: inline-flex; align-items: center; gap: 28px; padding: 12px 12px 12px 48px; border-radius: 999px; font: 800 38px var(--body); white-space: nowrap; }
   .btn span { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; }
   .btn svg { width: 40px; height: 40px; }
@@ -307,6 +319,29 @@ const T = {
   manifesto: s => `<p class="mani" style="top:${s.top || 230}px">${s.body}</p>
     <div class="vline" style="top:${s.lineTop || 640}px;height:${s.lineH || 150}px"></div>
     <div class="mbox" style="top:${(s.lineTop || 640) + (s.lineH || 150)}px">${s.box}</div>`,
+  // comparação: lista de links x site próprio
+  versus: s => `<div class="t" style="left:0;right:0;top:${s.top || 190}px;text-align:center;font-size:${s.size || 92}px">${fmt(s.title)}</div>
+    <div class="phone" style="left:90px;top:560px;width:330px;height:714px;transform:rotate(-7deg);filter:grayscale(1) brightness(.75);z-index:2"><img src="${s.left}" alt=""></div>
+    <div class="phone" style="left:470px;top:500px;width:420px;height:909px;transform:rotate(5deg);z-index:3"><img src="${s.right}" alt=""></div>
+    <span class="sticker" style="left:80px;top:500px;background:#2A3A44;color:var(--mute-d);transform:rotate(-7deg);z-index:4">${s.leftTag}</span>
+    <span class="sticker" style="right:50px;top:450px;background:var(--coral);color:var(--ink);transform:rotate(4deg);z-index:4">${s.rightTag}</span>`,
+  // busca no Google
+  google: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 220}px;font-size:${s.size || 96}px">${fmt(s.title)}</div>
+    ${s.lines ? `<div class="lines" style="top:${s.linesTop || 520}px">${s.lines}</div>` : ''}
+    <div class="gbar" style="top:${s.barTop || 760}px"><span class="gg"><span style="color:#4285F4">G</span></span>${s.q}<i class="cur"></i><i class="mic"></i></div>
+    ${s.res ? `<div class="gres2" style="top:${(s.barTop || 760) + 170}px"><small>${s.res[0]}</small><b>${s.res[1]}</b><span>${s.res[2]}</span></div>` : ''}`,
+  // balões de pensamento
+  bubbles: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 220}px;font-size:${s.size || 90}px">${fmt(s.title)}</div>
+    ${s.items.map((q, i) => `<div class="bub" style="left:${[70, 300, 130][i % 3]}px;top:${(s.listTop || 600) + i * (s.gap || 210)}px;transform:rotate(${[-3, 2, -1][i % 3]}deg);background:${i === s.items.length - 1 ? 'var(--coral)' : s.bg === 'navy' ? 'var(--paper)' : 'var(--ink)'};color:${i === s.items.length - 1 || s.bg === 'navy' ? 'var(--ink)' : 'var(--paper)'}">${q}</div>`).join('')}`,
+  // título + lista com setas + caixa
+  arrows: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 220}px;font-size:${s.size || 96}px">${fmt(s.title)}</div>
+    ${s.pre ? `<p class="b" style="left:70px;right:70px;top:${s.preTop || 500}px">${s.pre}</p>` : ''}
+    <div class="arw" style="top:${s.listTop || 560}px">${s.items.map(i => `<div>${i}</div>`).join('')}</div>
+    ${s.box ? `<div class="mbox" style="top:${s.boxTop || 930}px;font:600 48px/1.4 var(--body);letter-spacing:0;color:var(--soft)">${s.box}</div>` : ''}`,
+  // frases + pílula + conclusão
+  reveal: s => `<div class="lines" style="top:${s.top || 240}px;text-align:center;font-size:52px">${s.lines}</div>
+    <span class="pillq" style="top:${s.pillTop || 600}px">${s.pill}</span>
+    <div class="t" style="left:0;right:0;top:${s.titleTop || 730}px;text-align:center;font-size:${s.size || 110}px">${fmt(s.title)}</div>`,
   // chamada final
   cta: s => `<div class="t" style="left:0;right:0;top:${s.top || 260}px;text-align:center;font-size:${s.size || 100}px">${fmt(s.title)}</div>
     <p class="b" style="left:110px;right:110px;top:${s.bodyTop || 720}px;text-align:center">${s.body}</p>
@@ -372,7 +407,7 @@ return [
   { type: 'list', bg: 'navy', title: 'Seu primeiro|site precisa|[ter isso:]', size: 86, top: 180, check: true, items: ['Botão de WhatsApp', 'Funciona bem no celular', 'Seus serviços explicados', 'Fotos do seu trabalho', 'Endereço e horários'], listTop: 490, body: 'Salva pra quando <strong>for fazer o seu.</strong>', bodyTop: 1240 },
 ]},
 { folder: '09 - Link na bio (post)', slides: [
-  { type: 'photoDark', bg: 'navy', title: 'Lista de links|ou [site próprio?]', size: 80, img: MO('savio') },
+  { type: 'versus', bg: 'navy', title: 'Lista de links|ou [site próprio?]', size: 88, left: MO('linklist'), right: MO('chales'), leftTag: 'Lista de links', rightTag: 'Site próprio ✓' },
 ]},
 { folder: '10 - WhatsApp com mensagem pronta (post)', slides: [
   { type: 'phone', bg: 'navy', title: 'Cada botão|já manda a|*mensagem*|[pronta.]', size: 90, phoneLeft: 580, phoneTop: 620, phoneW: 400, rot: 8,
@@ -391,6 +426,17 @@ return [
   { type: 'text', bg: 'navy', title: 'Quando a sua|presença online|*não acompanha*|o que você|entrega,', size: 84, top: 330, body: 'você perde autoridade e <strong>os clientes que buscam confiança.</strong>', bodyTop: 930, bodyRight: 70, bodySize: 58 },
   { type: 'manifesto', bg: 'navy', body: 'Por isso, cada projeto da OctoMaker começa entendendo <strong>o seu negócio, o seu diferencial e o seu cliente</strong> antes de qualquer layout.', top: 250, lineTop: 700, lineH: 150, box: '<small>O resultado é um site</small>com a <em>sua cara,</em> que mostra o seu valor.' },
   { type: 'cta', bg: 'orange', title: 'Site não é sobre|o que você vê.|É sobre o que|o cliente [sente.]', size: 90, top: 330, body: 'Manda <strong>SITE</strong> no direct e vamos mostrar o nível do seu trabalho.', bodyTop: 860, btnTop: 1060 },
+]},
+{ folder: '14 - Seu cliente pesquisa seu nome (carrossel)', slides: [
+  { type: 'google', bg: 'orange', title: 'Seu cliente|pesquisa o|seu nome|[antes de|te chamar.]', size: 104, top: 200, q: 'seu nome', barTop: 800, res: ['seunegocio.com.br', 'O que aparece aqui?', 'É isso que o seu cliente vê antes de decidir se te chama.'] },
+  { type: 'google', bg: 'navy', title: 'Ele pesquisa|[no Google.]', size: 100, top: 500, lines: 'Antes de marcar uma consulta.<br>Antes de pedir um orçamento.<br>Antes de fechar um serviço.', linesTop: 220, q: 'marina alves psicóloga', barTop: 800, res: ['marinaalves.com.br', 'Marina Alves · Psicóloga clínica', 'Atendimento online e presencial. Agende a sua primeira conversa.'] },
+  { type: 'list', bg: 'light', title: 'E depois|entra no [seu:]', size: 96, check: true, items: ['Site', 'Instagram', 'Perfil no Google', 'Avaliações'], listTop: 500 },
+  { type: 'bubbles', bg: 'navy', title: 'Em poucos segundos,|ele já forma uma|[opinião:]', size: 76, items: ['“Parece confiável?”', '“Entende do assunto?”', '“É referência na área?”'], listTop: 680, gap: 230 },
+  { type: 'arrows', bg: 'light', title: 'Agora imagine|[dois profissionais:]', size: 84, items: ['Mesma especialidade', 'Experiência parecida', 'Serviço parecido'], listTop: 540, box: 'Um tem <strong>um site profissional.</strong> O outro, só um link na bio e um WhatsApp.', boxTop: 900 },
+  { type: 'text', bg: 'orange', title: 'Qual deles|passa mais|[confiança?]', size: 124, top: 420 },
+  { type: 'reveal', bg: 'navy', lines: 'Seu site não substitui<br>a sua experiência.<br>Nem a sua reputação.<br>Nem o seu trabalho.', top: 200, pill: 'Mas ele faz algo importante:', pillTop: 640, title: '*Mostrar*|[tudo isso.]', size: 120, titleTop: 780 },
+  { type: 'list', bg: 'light', title: 'Por isso, um bom|site vai [além|de bonito:]', size: 84, items: ['Posicionamento::deixa claro por que te escolher', 'Texto que convence::fala a língua do seu cliente', 'Aparece no Google::quando ele te pesquisa', '!Funciona no celular::onde ele mais te procura'], listTop: 520 },
+  { type: 'cta', bg: 'orange', title: 'Você já|construiu a sua|[reputação.]', size: 104, top: 360, body: 'Agora o seu site precisa <strong>estar à altura dela.</strong>', bodyTop: 800, btnTop: 980, btn: 'Quero meu site' },
 ]},
 ];
 })();
