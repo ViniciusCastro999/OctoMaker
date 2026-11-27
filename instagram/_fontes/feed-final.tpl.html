@@ -286,7 +286,8 @@ const T = {
     ${s.res ? `<div class="gres2" style="top:${(s.barTop || 760) + 170}px"><small>${s.res[0]}</small><b>${s.res[1]}</b><span>${s.res[2]}</span></div>` : ''}`,
   // balões de pensamento
   bubbles: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 220}px;font-size:${s.size || 90}px">${fmt(s.title)}</div>
-    ${s.items.map((q, i) => `<div class="bub" style="left:${[70, 300, 130][i % 3]}px;top:${(s.listTop || 600) + i * (s.gap || 210)}px;transform:rotate(${[-3, 2, -1][i % 3]}deg);background:${i === s.items.length - 1 ? 'var(--coral)' : s.bg === 'navy' ? 'var(--paper)' : 'var(--ink)'};color:${i === s.items.length - 1 || s.bg === 'navy' ? 'var(--ink)' : 'var(--paper)'}">${q}</div>`).join('')}`,
+    ${s.img ? `<div class="phone" style="left:690px;top:${s.phoneTop || 560}px;width:360px;height:738px;transform:rotate(7deg)"><img src="${s.img}" alt=""></div>` : ''}
+    ${s.items.map((q, i) => `<div class="bub" style="left:${(s.img ? [50, 80, 40] : [70, 300, 130])[i % 3]}px;top:${(s.listTop || 600) + i * (s.gap || 210)}px;transform:rotate(${[-3, 2, -1][i % 3]}deg);background:${i === s.items.length - 1 ? 'var(--coral)' : s.bg === 'navy' ? 'var(--paper)' : 'var(--ink)'};color:${i === s.items.length - 1 || s.bg === 'navy' ? 'var(--ink)' : 'var(--paper)'}">${q}</div>`).join('')}`,
   // título + lista com setas + caixa
   arrows: s => `<div class="t" style="left:70px;right:70px;top:${s.top || 220}px;font-size:${s.size || 96}px">${fmt(s.title)}</div>
     ${s.pre ? `<p class="b" style="left:70px;right:70px;top:${s.preTop || 500}px">${s.pre}</p>` : ''}

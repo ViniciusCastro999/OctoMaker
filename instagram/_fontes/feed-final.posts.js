@@ -78,15 +78,12 @@ return [
   { type: 'cta', bg: 'orange', title: 'Site não é sobre|o que você vê.|É sobre o que|o cliente [sente.]', size: 90, top: 330, body: 'Manda <strong>SITE</strong> no direct e vamos mostrar o nível do seu trabalho.', bodyTop: 860, btnTop: 1060 },
 ]},
 { folder: '14 - Seu cliente pesquisa seu nome (carrossel)', slides: [
-  { type: 'google', bg: 'orange', title: 'Seu cliente|pesquisa o|seu nome|[antes de|te chamar.]', size: 104, top: 200, q: 'seu nome', barTop: 800, res: ['seunegocio.com.br', 'O que aparece aqui?', 'É isso que o seu cliente vê antes de decidir se te chama.'] },
-  { type: 'google', bg: 'navy', title: 'Ele pesquisa|[no Google.]', size: 100, top: 500, lines: 'Antes de marcar uma consulta.<br>Antes de pedir um orçamento.<br>Antes de fechar um serviço.', linesTop: 220, q: 'marina alves psicóloga', barTop: 800, res: ['marinaalves.com.br', 'Marina Alves · Psicóloga clínica', 'Atendimento online e presencial. Agende a sua primeira conversa.'] },
-  { type: 'list', bg: 'light', title: 'E depois|entra no [seu:]', size: 96, check: true, items: ['Site', 'Instagram', 'Perfil no Google', 'Avaliações'], listTop: 500 },
-  { type: 'bubbles', bg: 'navy', title: 'Em poucos segundos,|ele já forma uma|[opinião:]', size: 76, items: ['“Parece confiável?”', '“Entende do assunto?”', '“É referência na área?”'], listTop: 680, gap: 230 },
-  { type: 'arrows', bg: 'light', title: 'Agora imagine|[dois profissionais:]', size: 84, items: ['Mesma especialidade', 'Experiência parecida', 'Serviço parecido'], listTop: 540, box: 'Um tem <strong>um site profissional.</strong> O outro, só um link na bio e um WhatsApp.', boxTop: 900 },
-  { type: 'text', bg: 'orange', title: 'Qual deles|passa mais|[confiança?]', size: 124, top: 420 },
-  { type: 'reveal', bg: 'navy', lines: 'Seu site não substitui<br>a sua experiência.<br>Nem a sua reputação.<br>Nem o seu trabalho.', top: 200, pill: 'Mas ele faz algo importante:', pillTop: 640, title: '*Mostrar*|[tudo isso.]', size: 120, titleTop: 780 },
-  { type: 'list', bg: 'light', title: 'Por isso, um bom|site vai [além|de bonito:]', size: 84, items: ['Posicionamento::deixa claro por que te escolher', 'Texto que convence::fala a língua do seu cliente', 'Aparece no Google::quando ele te pesquisa', '!Funciona no celular::onde ele mais te procura'], listTop: 520 },
-  { type: 'cta', bg: 'orange', title: 'Você já|construiu a sua|[reputação.]', size: 104, top: 360, body: 'Agora o seu site precisa <strong>estar à altura dela.</strong>', bodyTop: 800, btnTop: 980, btn: 'Quero meu site' },
+  { type: 'phone', bg: 'orange', title: 'Seu|cliente|*pesquisa*|o seu|nome.', size: 136, img: MO('google-seunome'), sticker: '🔍 antes de te chamar', phoneLeft: 600, phoneTop: 620, phoneW: 400, rot: 8 },
+  { type: 'photoDark', bg: 'navy', title: 'E o que ele|[encontra?]', size: 96, img: MO('google-eixo') },
+  { type: 'bubbles', bg: 'light', title: 'Em poucos segundos,|ele já forma uma|[opinião:]', size: 76, items: ['“Parece confiável?”', '“Entende do assunto?”', '“É referência na área?”'], listTop: 640, gap: 220, img: MO('eixo'), phoneTop: 600 },
+  { type: 'versus', bg: 'navy', title: 'Mesmo serviço.|[Qual você chama?]', size: 84, left: MO('linklist-eixo'), right: MO('eixo'), leftTag: 'Só um link', rightTag: 'Site próprio ✓' },
+  { type: 'strike', bg: 'orange', title: 'Seu site não|substitui:', items: ['a sua experiência', 'a sua reputação', 'o seu trabalho'], strikeColor: '#FFF4E2', listTop: 520, body: 'Mas ele faz uma coisa importante: <strong>mostra tudo isso.</strong>', bodyTop: 960 },
+  { type: 'cta', bg: 'navy', title: 'Você já|construiu a sua|[reputação.]', size: 100, top: 230, body: 'Agora o seu site precisa <strong>estar à altura dela.</strong>', bodyTop: 640, btnTop: 800, peek: { phones: [MO('google-eixo'), MO('eixo'), MO('eixo-servicos')], top: 1000 } },
 ]},
 ];
 })()
